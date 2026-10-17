@@ -6,8 +6,6 @@ import {
   AnimatePresence 
 } from "framer-motion";
 import { 
-  Check, 
-  X, 
   Zap, 
   Undo2, 
   RotateCcw, 
@@ -21,11 +19,15 @@ import {
   Info, 
   Flame,
   CheckCircle2,
-  AlertTriangle
+  AlertTriangle,
+  MoveRight,
+  MoveLeft,
+  MoveUp,
+  Hand
 } from "lucide-react";
 
 /**
- * Individual Draggable Swipe Card
+ * Individual Draggable Swipe Card with Genuine Touch & Mouse Gesture Physics
  */
 function SwipeCard({ 
   event, 
@@ -38,26 +40,54 @@ function SwipeCard({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Card dynamic rotation based on horizontal drag
-  const rotate = useTransform(x, [-250, 250], [-18, 18]);
+  // Card dynamic rotation and scale based on horizontal drag
+  const rotate = useTransform(x, [-260, 260], [-20, 20]);
+  const scale = useTransform(x, [-260, 0, 260], [1.03, 1, 1.03]);
 
   // Color Feedback Overlays:
   // Right drag -> Green SHORTLISTED overlay
-  const rightOverlayOpacity = useTransform(x, [20, 110], [0, 1]);
+  const rightOverlayOpacity = useTransform(x, [25, 115], [0, 1]);
   // Left drag -> Red SKIPPED overlay
-  const leftOverlayOpacity = useTransform(x, [-20, -110], [0, 1]);
+  const leftOverlayOpacity = useTransform(x, [-25, -115], [0, 1]);
   // Up drag -> Electric Indigo SKILL GAP overlay
-  const upOverlayOpacity = useTransform(y, [-20, -90], [0, 1]);
+  const upOverlayOpacity = useTransform(y, [-25, -95], [0, 1]);
+
+  // Dynamic Border & Glow Shadow based on real-time gesture drag position
+  const cardBorderColor = useTransform(
+    x,
+    [-150, -30, 0, 30, 150],
+    [
+      "rgba(244, 63, 94, 0.8)",
+      "rgba(244, 63, 94, 0.3)",
+      "rgba(226, 231, 250, 0.9)",
+      "rgba(16, 185, 129, 0.3)",
+      "rgba(16, 185, 129, 0.8)"
+    ]
+  );
+
+  const cardShadow = useTransform(
+    x,
+    [-180, 0, 180],
+    [
+      "0 24px 60px rgba(244, 63, 94, 0.22)",
+      "0 20px 50px rgba(89, 100, 254, 0.08)",
+      "0 24px 60px rgba(16, 185, 129, 0.22)"
+    ]
+  );
+
+  // Lateral swipe edge guide hints
+  const leftGuideOpacity = useTransform(x, [0, -60], [0.35, 1]);
+  const rightGuideOpacity = useTransform(x, [0, 60], [0.35, 1]);
 
   const handleDragEnd = (_, info) => {
-    const threshold = 95;
-    const verticalThreshold = 85;
+    const threshold = 75;
+    const verticalThreshold = 70;
 
-    if (info.offset.x > threshold || info.velocity.x > 450) {
+    if (info.offset.x > threshold || info.velocity.x > 320) {
       onSwipe("right", event);
-    } else if (info.offset.x < -threshold || info.velocity.x < -450) {
+    } else if (info.offset.x < -threshold || info.velocity.x < -320) {
       onSwipe("left", event);
-    } else if (info.offset.y < -verticalThreshold || info.velocity.y < -350) {
+    } else if (info.offset.y < -verticalThreshold || info.velocity.y < -280) {
       onSwipe("up", event);
     }
   };
@@ -72,28 +102,31 @@ function SwipeCard({
         x: isTop ? x : 0,
         y: isTop ? y : index * 10,
         rotate: isTop ? rotate : 0,
-        scale: 1 - index * 0.04,
+        scale: isTop ? scale : 1 - index * 0.04,
         zIndex: 30 - index,
+        borderColor: isTop ? cardBorderColor : "#E2E7FA",
+        boxShadow: isTop ? cardShadow : "0 10px 30px rgba(89,100,254,0.04)",
+        touchAction: "none"
       }}
       drag={isTop}
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      dragElastic={0.85}
+      dragElastic={0.92}
       onDragEnd={handleDragEnd}
-      initial={{ scale: 0.9, opacity: 0, y: 30 }}
+      initial={{ scale: 0.92, opacity: 0, y: 30 }}
       animate={{ scale: 1 - index * 0.04, opacity: 1, y: index * 10 }}
       exit={(custom) => ({
-        x: custom === "right" ? 600 : custom === "left" ? -600 : 0,
-        y: custom === "up" ? -600 : 0,
-        rotate: custom === "right" ? 25 : custom === "left" ? -25 : 0,
+        x: custom === "right" ? 750 : custom === "left" ? -750 : 0,
+        y: custom === "up" ? -750 : 0,
+        rotate: custom === "right" ? 28 : custom === "left" ? -28 : 0,
         opacity: 0,
-        transition: { duration: 0.35, ease: "easeOut" }
+        transition: { duration: 0.32, ease: "easeOut" }
       })}
-      className={`absolute inset-0 rounded-3xl bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_20px_50px_rgba(89,100,254,0.08)] select-none overflow-hidden flex flex-col justify-between ${
+      className={`absolute inset-0 rounded-3xl bg-white/95 backdrop-blur-xl border-2 select-none overflow-hidden flex flex-col justify-between touch-none ${
         isTop ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
       }`}
     >
       {/* ======================================================== */}
-      {/* DYNAMIC COLOR OVERLAYS (MANDATORY REQUIREMENT)           */}
+      {/* DYNAMIC COLOR OVERLAYS (GENUINE TINDER FEEDBACK)         */}
       {/* ======================================================== */}
 
       {/* 1. GREEN OVERLAY: RIGHT SWIPE (SHORTLISTED) */}
@@ -101,14 +134,14 @@ function SwipeCard({
         style={{ opacity: rightOverlayOpacity }}
         className="absolute inset-0 z-30 pointer-events-none bg-emerald-500/20 border-4 border-emerald-500 rounded-3xl flex flex-col items-center justify-center p-6 backdrop-blur-[2px] transition-all"
       >
-        <div className="w-24 h-24 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl shadow-emerald-500/50 mb-3 animate-bounce">
-          <Check className="w-14 h-14 stroke-[3.5]" />
+        <div className="w-20 h-20 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl shadow-emerald-500/50 mb-3 animate-bounce">
+          <MoveRight className="w-11 h-11 stroke-[3.5]" />
         </div>
-        <span className="font-display font-black text-3xl tracking-widest text-emerald-700 uppercase bg-white/95 px-6 py-2 rounded-2xl shadow-lg border border-emerald-200">
-          SHORTLISTED
+        <span className="font-display font-black text-2xl sm:text-3xl tracking-widest text-emerald-800 uppercase bg-white/95 px-6 py-2 rounded-2xl shadow-lg border border-emerald-300">
+          SHORTLISTED »
         </span>
-        <p className="text-xs font-bold text-emerald-800 mt-2 bg-emerald-50/90 px-3 py-1 rounded-full">
-          Added to your shortlist & boosted in AI feed (+25%)
+        <p className="text-xs font-bold text-emerald-900 mt-2 bg-emerald-100/90 px-3.5 py-1.5 rounded-full border border-emerald-200">
+          +25% Vector Boost in AI Recommendations
         </p>
       </motion.div>
 
@@ -117,14 +150,14 @@ function SwipeCard({
         style={{ opacity: leftOverlayOpacity }}
         className="absolute inset-0 z-30 pointer-events-none bg-rose-500/20 border-4 border-rose-500 rounded-3xl flex flex-col items-center justify-center p-6 backdrop-blur-[2px] transition-all"
       >
-        <div className="w-24 h-24 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-2xl shadow-rose-500/50 mb-3 animate-pulse">
-          <X className="w-14 h-14 stroke-[3.5]" />
+        <div className="w-20 h-20 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-2xl shadow-rose-500/50 mb-3 animate-pulse">
+          <MoveLeft className="w-11 h-11 stroke-[3.5]" />
         </div>
-        <span className="font-display font-black text-3xl tracking-widest text-rose-700 uppercase bg-white/95 px-6 py-2 rounded-2xl shadow-lg border border-rose-200">
-          SKIPPED
+        <span className="font-display font-black text-2xl sm:text-3xl tracking-widest text-rose-800 uppercase bg-white/95 px-6 py-2 rounded-2xl shadow-lg border border-rose-300">
+          « SKIPPED
         </span>
-        <p className="text-xs font-bold text-rose-800 mt-2 bg-rose-50/90 px-3 py-1 rounded-full">
-          Downvoted & deprioritized in recommendations (-20%)
+        <p className="text-xs font-bold text-rose-900 mt-2 bg-rose-100/90 px-3.5 py-1.5 rounded-full border border-rose-200">
+          -20% Category Deprioritization
         </p>
       </motion.div>
 
@@ -133,21 +166,51 @@ function SwipeCard({
         style={{ opacity: upOverlayOpacity }}
         className="absolute inset-0 z-30 pointer-events-none bg-[#5964FE]/20 border-4 border-[#5964FE] rounded-3xl flex flex-col items-center justify-center p-6 backdrop-blur-[2px] transition-all"
       >
-        <div className="w-24 h-24 rounded-full bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white flex items-center justify-center shadow-2xl shadow-[#5964FE]/50 mb-3 animate-pulse">
-          <Zap className="w-14 h-14 fill-white" />
+        <div className="w-20 h-20 rounded-full bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white flex items-center justify-center shadow-2xl shadow-[#5964FE]/50 mb-3 animate-pulse">
+          <MoveUp className="w-11 h-11 stroke-[3.5]" />
         </div>
-        <span className="font-display font-black text-3xl tracking-widest text-[#434EEB] uppercase bg-white/95 px-6 py-2 rounded-2xl shadow-lg border border-[#C7D2FE]">
-          SKILL GAP
+        <span className="font-display font-black text-2xl sm:text-3xl tracking-widest text-[#434EEB] uppercase bg-white/95 px-6 py-2 rounded-2xl shadow-lg border border-[#C7D2FE]">
+          ▲ SKILL GAP
         </span>
-        <p className="text-xs font-bold text-[#434EEB] mt-2 bg-[#DFE3FF] px-3 py-1 rounded-full">
-          Opening prerequisite bridges & prep plan
+        <p className="text-xs font-bold text-[#434EEB] mt-2 bg-[#DFE3FF] px-3.5 py-1.5 rounded-full border border-[#C7D2FE]">
+          Synthesizing Prep Roadmap & Prerequisites
         </p>
       </motion.div>
 
       {/* ======================================================== */}
+      {/* TACTILE GESTURE AFFORDANCE INDICATOR ON TOP CARD         */}
+      {/* ======================================================== */}
+      {isTop && (
+        <div className="absolute top-2.5 inset-x-0 flex items-center justify-center pointer-events-none z-20">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#10174D]/80 backdrop-blur-md text-white text-[10px] font-bold shadow-md border border-white/20 animate-fade-in">
+            <Hand className="w-3 h-3 text-[#7B73FE] animate-pulse" />
+            <span>Drag or flick card to swipe</span>
+          </div>
+        </div>
+      )}
+
+      {/* Lateral gesture cues */}
+      {isTop && (
+        <>
+          <motion.div 
+            style={{ opacity: leftGuideOpacity }}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-16 rounded-r-xl bg-rose-500/10 border-y border-r border-rose-300 flex items-center justify-center pointer-events-none z-10"
+          >
+            <span className="text-xs font-black text-rose-500">‹</span>
+          </motion.div>
+          <motion.div 
+            style={{ opacity: rightGuideOpacity }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-16 rounded-l-xl bg-emerald-500/10 border-y border-l border-emerald-300 flex items-center justify-center pointer-events-none z-10"
+          >
+            <span className="text-xs font-black text-emerald-500">›</span>
+          </motion.div>
+        </>
+      )}
+
+      {/* ======================================================== */}
       {/* CARD CONTENT HEADER                                      */}
       {/* ======================================================== */}
-      <div className="p-6 sm:p-7 space-y-4">
+      <div className="p-6 sm:p-7 pt-9 space-y-4">
         {/* Top Badges Row */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
@@ -272,6 +335,8 @@ function SwipeCard({
 
 /**
  * Main Swipe-to-Discover Deck Component
+ * Emphasizes genuine touch/mouse swipe gestures and replaces tick/cross buttons
+ * with an interactive kinetic swipe rail and keyboard arrow controls.
  */
 export default function SwipeDiscoverDeck({ 
   events = [], 
@@ -318,6 +383,33 @@ export default function SwipeDiscoverDeck({
 
   const currentEvent = deck[0];
 
+  // Keyboard arrow gesture support
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Do not capture if user is in an input field
+      if (["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
+
+      if (!currentEvent) return;
+
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        handleSwipe("right", currentEvent);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        handleSwipe("left", currentEvent);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        handleSwipe("up", currentEvent);
+      } else if ((e.key === "z" && (e.ctrlKey || e.metaKey)) || e.key === "u" || e.key === "U") {
+        e.preventDefault();
+        onUndoSwipe();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentEvent, swipeHistory]);
+
   return (
     <div className="space-y-6 max-w-xl mx-auto">
       
@@ -337,7 +429,7 @@ export default function SwipeDiscoverDeck({
               </span>
             </div>
             <p className="text-[11px] text-[#525A8B] font-medium">
-              Right to Shortlist • Left to Skip • Up for Skill Gap
+              Drag Card or Swipe • Real Gesture Engine
             </p>
           </div>
         </div>
@@ -371,23 +463,23 @@ export default function SwipeDiscoverDeck({
         </div>
       </div>
 
-      {/* Instruction Banner Pill */}
-      <div className="flex items-center justify-center gap-3 text-[11px] font-bold text-[#525A8B] bg-white/80 py-2 px-4 rounded-2xl border border-[#E2E7FA] shadow-xs">
-        <span className="text-emerald-700 flex items-center gap-1">
-          <Check className="w-3.5 h-3.5 stroke-[3]" /> Right = Shortlist
+      {/* Tactile Gesture Instructions Bar */}
+      <div className="flex items-center justify-center gap-3 text-[11px] font-bold text-[#525A8B] bg-white/80 py-2.5 px-4 rounded-2xl border border-[#E2E7FA] shadow-xs">
+        <span className="text-rose-700 flex items-center gap-1.5 font-bold">
+          <MoveLeft className="w-3.5 h-3.5 stroke-[2.5]" /> Swipe Left = Skip
         </span>
         <span className="text-[#8E9BBF]">•</span>
-        <span className="text-rose-700 flex items-center gap-1">
-          <X className="w-3.5 h-3.5 stroke-[3]" /> Left = Skip
+        <span className="text-[#434EEB] flex items-center gap-1.5 font-bold">
+          <MoveUp className="w-3.5 h-3.5 stroke-[2.5]" /> Swipe Up = Skill Gap
         </span>
         <span className="text-[#8E9BBF]">•</span>
-        <span className="text-[#434EEB] flex items-center gap-1">
-          <Zap className="w-3.5 h-3.5 fill-[#5964FE]" /> Up = Skill Gap
+        <span className="text-emerald-700 flex items-center gap-1.5 font-bold">
+          Swipe Right = Shortlist <MoveRight className="w-3.5 h-3.5 stroke-[2.5]" />
         </span>
       </div>
 
       {/* The 3D Interactive Card Deck Container */}
-      <div className="relative w-full h-[520px] sm:h-[540px] flex items-center justify-center">
+      <div className="relative w-full h-[530px] sm:h-[550px] flex items-center justify-center touch-none">
         <AnimatePresence custom={lastSwipeDirection}>
           {deck.length > 0 ? (
             deck.slice(0, 3).map((event, idx) => (
@@ -446,51 +538,69 @@ export default function SwipeDiscoverDeck({
         </AnimatePresence>
       </div>
 
-      {/* Floating Action Buttons Toolbar */}
+      {/* ======================================================== */}
+      {/* TACTILE GESTURE CONTROLS (REPLACES TICK & CROSS BUTTONS) */}
+      {/* ======================================================== */}
       {deck.length > 0 && (
-        <div className="flex items-center justify-center gap-4 pt-2">
-          
-          {/* 1. Undo Button */}
-          <button
-            type="button"
-            onClick={onUndoSwipe}
-            disabled={swipeHistory.length === 0}
-            title="Undo last swipe"
-            className="w-12 h-12 rounded-2xl bg-white hover:bg-[#F8FAFF] text-[#525A8B] hover:text-[#10174D] border border-[#E2E7FA] shadow-sm flex items-center justify-center transition active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-          >
-            <Undo2 className="w-5 h-5" />
-          </button>
+        <div className="space-y-3 pt-1">
+          <div className="flex items-center justify-between gap-2 sm:gap-3 bg-white/95 backdrop-blur-xl p-2.5 sm:p-3 rounded-2xl border border-[#E2E7FA] shadow-[0_10px_30px_rgba(89,100,254,0.06)]">
+            
+            {/* 1. Left Swipe Gesture Trigger */}
+            <button
+              type="button"
+              onClick={() => currentEvent && handleSwipe("left", currentEvent)}
+              className="group flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-3 px-3 rounded-xl bg-slate-50 hover:bg-rose-50 border border-slate-200 hover:border-rose-300 text-slate-700 hover:text-rose-600 transition-all active:scale-95 cursor-pointer font-bold text-xs shadow-xs"
+              title="Swipe Left to Skip (or press ← Arrow)"
+            >
+              <span className="text-base font-black text-rose-500 group-hover:-translate-x-1 transition-transform">←</span>
+              <span className="hidden sm:inline">Swipe Left:</span>
+              <span>Skip</span>
+            </button>
 
-          {/* 2. Left Swipe (Skip) Button */}
-          <button
-            type="button"
-            onClick={() => currentEvent && handleSwipe("left", currentEvent)}
-            title="Skip (Left)"
-            className="w-16 h-16 rounded-3xl bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 shadow-md hover:shadow-lg shadow-rose-500/10 flex items-center justify-center transition active:scale-90 cursor-pointer group"
-          >
-            <X className="w-8 h-8 stroke-[3] group-hover:scale-110 transition-transform" />
-          </button>
+            {/* 2. Undo Last Swipe Button */}
+            <button
+              type="button"
+              onClick={onUndoSwipe}
+              disabled={swipeHistory.length === 0}
+              title="Undo last swipe (Ctrl+Z or U)"
+              className="py-3 px-3.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 hover:text-[#10174D] transition active:scale-90 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-xs flex items-center justify-center"
+            >
+              <Undo2 className="w-4 h-4" />
+            </button>
 
-          {/* 3. Up Swipe (Skill Gap) Button */}
-          <button
-            type="button"
-            onClick={() => currentEvent && handleSwipe("up", currentEvent)}
-            title="Skill Gap Analysis (Up)"
-            className="w-14 h-14 rounded-3xl bg-white hover:bg-[#EEF2FE] text-[#5964FE] border border-[#C7D2FE] shadow-md hover:shadow-lg shadow-[#5964FE]/10 flex items-center justify-center transition active:scale-90 cursor-pointer group"
-          >
-            <Zap className="w-7 h-7 fill-[#5964FE] group-hover:scale-110 transition-transform" />
-          </button>
+            {/* 3. Up Swipe Gesture Trigger */}
+            <button
+              type="button"
+              onClick={() => currentEvent && handleSwipe("up", currentEvent)}
+              className="group flex items-center justify-center gap-1.5 py-3 px-3 sm:px-4 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] border border-[#DCE3F9] text-[#434EEB] transition-all active:scale-95 cursor-pointer font-bold text-xs shadow-xs"
+              title="Swipe Up for Skill Gap (or press ↑ Arrow)"
+            >
+              <Zap className="w-4 h-4 fill-[#5964FE] text-[#5964FE] group-hover:-translate-y-0.5 transition-transform" />
+              <span className="hidden md:inline">Swipe Up:</span>
+              <span>Skill Gap</span>
+            </button>
 
-          {/* 4. Right Swipe (Shortlist) Button */}
-          <button
-            type="button"
-            onClick={() => currentEvent && handleSwipe("right", currentEvent)}
-            title="Shortlist (Right)"
-            className="w-16 h-16 rounded-3xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 text-white shadow-xl shadow-[#5964FE]/30 flex items-center justify-center transition active:scale-90 cursor-pointer group"
-          >
-            <Check className="w-8 h-8 stroke-[3.5] group-hover:scale-110 transition-transform" />
-          </button>
+            {/* 4. Right Swipe Gesture Trigger */}
+            <button
+              type="button"
+              onClick={() => currentEvent && handleSwipe("right", currentEvent)}
+              className="group flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-3 px-3 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 text-white shadow-md shadow-[#5964FE]/25 transition-all active:scale-95 cursor-pointer font-bold text-xs"
+              title="Swipe Right to Shortlist (or press → Arrow)"
+            >
+              <span className="hidden sm:inline">Swipe Right:</span>
+              <span>Shortlist</span>
+              <span className="text-base font-black group-hover:translate-x-1 transition-transform">→</span>
+            </button>
 
+          </div>
+
+          {/* Actual Gesture Guide & Keyboard Affordance */}
+          <div className="flex items-center justify-center gap-2 text-[11px] text-[#525A8B] font-medium py-1 px-4 text-center">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>
+              <strong>Touch/Mouse Gesture Active:</strong> Drag card with finger or mouse, or use <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-300 font-mono text-[10px] text-slate-800 shadow-xs">←</kbd> <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-300 font-mono text-[10px] text-slate-800 shadow-xs">→</kbd> <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-300 font-mono text-[10px] text-slate-800 shadow-xs">↑</kbd> arrow keys
+            </span>
+          </div>
         </div>
       )}
 

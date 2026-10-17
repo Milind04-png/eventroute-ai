@@ -400,6 +400,7 @@ export default function App() {
                 swipeHistory={swipeHistory}
                 onUndoSwipe={handleUndoSwipe}
                 onResetDeck={handleResetDeck}
+                setActiveTab={setActiveTab}
               />
 
               {/* Verified College Logos & Institutional Crests */}
