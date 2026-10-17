@@ -13,11 +13,13 @@ import IdeaValidatorModal from "./components/IdeaValidatorModal";
 import PortfolioView from "./components/PortfolioView";
 import DemoWalkthrough from "./components/DemoWalkthrough";
 import ComparisonModal from "./components/ComparisonModal";
+import VerifyODModal from "./components/VerifyODModal";
+import EventFlyerScannerModal from "./components/EventFlyerScannerModal";
 
 import { INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR } from "./data/initialEvents";
 import { fetchOpportunities, fetchSkillGap, requestODLetter, sendFeedback } from "./services/api";
 import { rankEvents } from "./services/aiEngine";
-import { Search, Filter, Sparkles, AlertTriangle, ShieldCheck, CheckCircle2, RotateCcw } from "lucide-react";
+import { Search, Filter, Sparkles, AlertTriangle, ShieldCheck, CheckCircle2, RotateCcw, Scan } from "lucide-react";
 
 export default function App() {
   const [theme, setTheme] = useState("light");
@@ -39,12 +41,15 @@ export default function App() {
   const [odLetterEvent, setOdLetterEvent] = useState(null);
   const [odLetterPayload, setOdLetterPayload] = useState(null);
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
+  const [verifyLetterData, setVerifyLetterData] = useState(null);
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
   
   // Chatbot & Demo Tour state
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [externalChatPrompt, setExternalChatPrompt] = useState("");
-  const [isDemoTourOpen, setIsDemoTourOpen] = useState(false);
   const [demoStep, setDemoStep] = useState(1);
+  const [isDemoTourOpen, setIsDemoTourOpen] = useState(false);
   const [targetTeammate, setTargetTeammate] = useState(null);
   const [rerankToast, setRerankToast] = useState(null);
 
@@ -153,6 +158,20 @@ export default function App() {
     showToast("Model weights reset to default profile.");
   };
 
+  const handleAcquireSkill = (skill) => {
+    if (!STUDENT_PROFILE.skills.includes(skill)) {
+      STUDENT_PROFILE.skills.push(skill);
+    }
+    const reranked = rankEvents(INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR, feedbackWeights, downvotedEvents, upvotedEvents);
+    setEvents(reranked);
+    showToast(`Skill '${skill}' verified! AI Match scores updated live!`);
+  };
+
+  const handleAddParsedEvent = (newEvent) => {
+    setEvents(prev => [newEvent, ...prev]);
+    showToast(`'${newEvent.title}' ingested into your live feed!`);
+  };
+
   const scrollToFeed = () => {
     feedSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -246,6 +265,15 @@ export default function App() {
                   </div>
 
                   <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setIsScannerOpen(true)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition shadow-xs cursor-pointer"
+                      title="Paste flyer or WhatsApp text to extract opportunity"
+                    >
+                      <Scan className="w-3.5 h-3.5" />
+                      <span>+ Scan Flyer / URL</span>
+                    </button>
+
                     <button
                       onClick={handleResetWeights}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition ${
@@ -438,7 +466,9 @@ export default function App() {
       <SkillGapModal
         gapData={skillGapData}
         isOpen={!!skillGapData}
+        theme={theme}
         onClose={() => setSkillGapData(null)}
+        onAcquireSkill={handleAcquireSkill}
       />
 
       <OdLetterModal
@@ -449,6 +479,22 @@ export default function App() {
           setOdLetterEvent(null);
           setOdLetterPayload(null);
         }}
+        onVerifyClick={(data) => {
+          setVerifyLetterData(data);
+          setIsVerifyModalOpen(true);
+        }}
+      />
+
+      <VerifyODModal
+        isOpen={isVerifyModalOpen}
+        onClose={() => setIsVerifyModalOpen(false)}
+        letterData={verifyLetterData}
+      />
+
+      <EventFlyerScannerModal
+        isOpen={isScannerOpen}
+        onClose={() => setIsScannerOpen(false)}
+        onAddEvent={handleAddParsedEvent}
       />
 
       <ComparisonModal

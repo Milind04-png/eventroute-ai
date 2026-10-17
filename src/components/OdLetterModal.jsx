@@ -16,7 +16,8 @@ export default function OdLetterModal({
   event, 
   letterData, 
   isOpen, 
-  onClose 
+  onClose,
+  onVerifyClick
 }) {
   if (!isOpen || !event) return null;
 
@@ -153,15 +154,22 @@ export default function OdLetterModal({
           <div className="pt-4 border-t border-slate-300 flex flex-row items-center justify-between gap-4 font-sans">
             
             {/* Anti-Tamper QR Verification */}
-            <div className="flex items-center gap-3 bg-slate-50 p-2 rounded border border-slate-200">
-              <div className="w-14 h-14 bg-slate-900 text-white rounded p-1 flex flex-col items-center justify-center text-center">
+            <div 
+              onClick={() => onVerifyClick && onVerifyClick(letter)}
+              className="flex items-center gap-3 bg-slate-50 hover:bg-emerald-50/60 p-2 rounded-xl border border-slate-200 cursor-pointer transition group"
+              title="Click to view live cryptographic verification registry"
+            >
+              <div className="w-14 h-14 bg-slate-900 text-white rounded-lg p-1 flex flex-col items-center justify-center text-center group-hover:scale-105 transition-transform">
                 <QrCode className="w-8 h-8 text-emerald-400" />
                 <span className="text-[7px] text-slate-300 font-mono mt-0.5">VERIFIED</span>
               </div>
               <div className="text-[10px] text-slate-600">
-                <p className="font-bold text-slate-800">Scan to Verify Attendance</p>
-                <p className="font-mono text-[9px] text-indigo-700 font-semibold">{letter.verification.hash}</p>
-                <p className="text-[8px] text-slate-500">Tamper-proof EventRoute AI Protocol</p>
+                <p className="font-bold text-slate-800 flex items-center gap-1">
+                  <span>Scan to Verify</span>
+                  <ExternalLink className="w-3 h-3 text-emerald-600" />
+                </p>
+                <p className="font-mono text-[9px] text-emerald-700 font-semibold">{letter.verification.hash}</p>
+                <p className="text-[8px] text-slate-500">Click to view official registry</p>
               </div>
             </div>
 
