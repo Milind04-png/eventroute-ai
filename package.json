@@ -11,7 +11,9 @@
     "frontend:install": "npm --prefix frontend install",
     "backend:install": "pip install -r backend/requirements.txt",
     "backend:dev": "python backend/main.py",
-    "backend": "python backend/main.py"
+    "backend": "python backend/main.py",
+    "test:backend": "pytest backend",
+    "test": "pytest backend"
   },
   "workspaces": [
     "frontend"
