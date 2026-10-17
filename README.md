@@ -20,45 +20,96 @@ The project is cleanly decoupled into standalone, independent services:
 ```
 eventroute-ai/
 ├── frontend/                     # Dedicated React 19 Client
-│   ├── public/                   # College logos (DTC, IIT Bombay, BITS, COEP, etc.)
+│   ├── public/logos/             # High-res crests (DTC, USICT, MAIT, MSIT, BVCOE, BPIT, GTBIT, VIPS, ADGITM, JIMS, HMRITM, IITB, etc.)
 │   ├── src/
-│   │   ├── components/           # UI components (Swipe Deck, Feed, Chatbot, Modals)
-│   │   ├── data/                 # Client offline cache & initial datasets
+│   │   ├── components/           # UI components (Swipe Deck, Feed, Chatbot, Modals, AttendanceShield, TeamRoster)
+│   │   ├── data/                 # Client offline cache & initial datasets (GGSIPU templates & hackathons)
 │   │   ├── services/             # API client & offline fallback AI engine
+│   │   ├── __tests__/            # Vitest unit test suite (aiEngine.test.js)
 │   │   ├── App.jsx               # Application controller & RLUF reranker
 │   │   ├── index.css             # Tailwind CSS tokens & Neural Universe palette
 │   │   └── main.jsx              # React DOM bootstrap
 │   ├── index.html                # Single Page App HTML shell
 │   ├── vite.config.js            # Vite build & backend proxy (/api -> :8000)
-│   ├── package.json              # Frontend package manifest
-│   ├── package-lock.json         # Frontend locked dependencies
-│   └── README.md                 # Frontend-specific documentation
+│   ├── Dockerfile                # Production multi-stage Docker build with Nginx
+│   ├── nginx.conf                # Production Nginx reverse proxy configuration
+│   ├── package.json              # Frontend package manifest & test scripts
+│   └── package-lock.json         # Frontend locked dependencies
 │
 ├── backend/                      # Dedicated FastAPI Python Server
-│   ├── main.py                   # REST API routes & CORS middleware
+│   ├── main.py                   # REST API routes, OpenAPI tags, & CORS middleware
 │   ├── ai_engine.py              # Semantic matching, collision detection & RLUF
 │   ├── assistant.py              # Agentic tool-calling RAG chatbot
 │   ├── database.py               # SQLite persistence layer (WAL mode)
-│   ├── mock_data.py              # Student profile (Milind, DTC), exams, events
+│   ├── mock_data.py              # Student profile (Milind, DTC), exams, events, GGSIPU templates
 │   ├── od_generator.py           # Institutional OD letter compiler & SHA-256 signer
+│   ├── pytest.ini                # Pytest configuration
+│   ├── tests/                    # Automated backend test suite (test_api.py - 11 tests)
+│   ├── Dockerfile                # Lightweight Python 3.11-slim container
 │   ├── requirements.txt          # Python package requirements
 │   ├── run_backend.bat           # Standalone backend Windows launcher
-│   ├── run_backend.ps1           # Standalone backend PowerShell launcher
-│   └── README.md                 # Backend API documentation & schema guide
+│   └── run_backend.ps1           # Standalone backend PowerShell launcher
 │
-├── package.json                  # Monorepo root workspace & script orchestrator
+├── docker-compose.yml            # Multi-container orchestration (Frontend + Backend)
+├── package.json                  # Monorepo root workspace & unified test runner
 ├── run.bat                       # 1-Click full-stack launcher (Windows)
 ├── run.ps1                       # 1-Click full-stack launcher (PowerShell)
 ├── dev.bat                       # Frontend-only dev launcher
 ├── .gitignore                    # Monorepo git ignore rules
+├── .dockerignore                 # Container build exclusions
 └── README.md                     # Master documentation (this file)
 ```
 
 ---
 
+## 🏫 Verified GGSIPU Partner Colleges & Flagship Hackathons
+
+EventRoute AI provides native institutional letterheads, authentic official crests, and verified hackathons for all prominent colleges affiliated with **Guru Gobind Singh Indraprastha University (GGSIPU / IP University)**:
+
+| Institution | Campus Location | Flagship Hackathon / Fest | OD Status |
+| :--- | :--- | :--- | :--- |
+| **Delhi Technical Campus (DTC)** | Knowledge Park III, Greater Noida | **TechSpark DTC 2026** | **★ Home College (100% Fast-Track OD)** |
+| **USICT (GGSIPU Main Campus)** | Sector 16-C, Dwarka, New Delhi | **InfoXpression 2026** | **University Main Campus OD** |
+| **MAIT** | Sector 22, Rohini, Delhi | **HackMAIT 4.0** | **Fast-Track OD Approved** |
+| **MSIT** | C-4, Janakpuri, New Delhi | **HackMSIT 2026** | **Fast-Track OD Approved** |
+| **BVCOE** | A-4, Paschim Vihar, New Delhi | **BVEST Hack 2026** | **Fast-Track OD Approved** |
+| **BPIT** | PSP-4, Sector 17, Rohini, Delhi | **Corona Hack 2026** | **Fast-Track OD Approved** |
+| **GTBIT** | G-8 Area, Rajouri Garden, New Delhi | **Gates & HackGTBIT 2026** | **Fast-Track OD Approved** |
+| **VIPS - TC** | AU Block, Pitampura, New Delhi | **Init_ Hack VIPS 2026** | **Fast-Track OD Approved** |
+| **ADGITM / ADGIPS** | FC-26, Shastri Park, New Delhi | **InnoBuzz ADGITM 2026** | **Fast-Track OD Approved** |
+| **JIMS EMTC** | 48/4, Knowledge Park III, Greater Noida | **TechnoXian JIMS Hack 2026** | **Fast-Track OD Approved** |
+| **HMRITM** | Plot No. 326, Hamidpur, Delhi | **Emblazon HMRITM 2026** | **Fast-Track OD Approved** |
+
+*National flagships also integrated:* IIT Bombay, DTU Delhi, BITS Pilani, COEP Tech Pune, VJTI Mumbai, RVCE Bengaluru, CEG Anna University, TSEC Mumbai.
+
+---
+
+## 👥 Delhi Technical Campus Hackathon Team Discovery
+
+The **Teammate Discovery & Synergy Engine** matches Milind with complementary classmate profiles from Delhi Technical Campus:
+
+* **Arman Chauhan** (CSE, 2nd Year) — *Frontend & UI/UX Lead* (`React`, `Next.js`, `Tailwind CSS`, `Figma`) $\rightarrow$ **98% Synergy Match**
+* **Anshika Tyagi** (AI & ML, 2nd Year) — *AI & Machine Learning Specialist* (`PyTorch`, `LangChain`, `OpenAI APIs`, `Vector DBs`) $\rightarrow$ **97% Synergy Match**
+* **Dimple** (CSE, 2nd Year) — *Mobile Apps & Cloud Engineer* (`Flutter`, `Firebase`, `Node.js`, `REST APIs`) $\rightarrow$ **95% Synergy Match**
+
+### 📋 Team Roster Exporter (`TeamRosterModal`)
+Students can export their formed DTC hackathon team as:
+1. **Printable Official Team Registration Slip** with Dean/HOD verification stamp.
+2. **One-Click JSON Export** formatted for Devfolio, Unstop, and Hack2Skill application forms.
+
+---
+
+## 🛡️ GGSIPU 75% Attendance Guard & Live OD Simulator
+
+Indian universities enforce strict 75% attendance rules. Milind is currently at **78.4%** attendance (~196/250 hours):
+* **Safe Unexcused Buffer**: Only 8 class hours (~1.3 days) before breaching the 75% cutoff and facing exam debarment.
+* **Live OD Compensation Simulator**: Each 2-day hackathon OD approval credits 12 hours of attendance, boosting projected attendance to **83.2%** rather than penalizing the student.
+
+---
+
 ## ⚡ Quickstart & Running the Application
 
-### Option 1: One-Click Full-Stack (Recommended)
+### Option 1: One-Click Full-Stack Launcher (Windows)
 Double-click `run.bat` or run in PowerShell:
 ```powershell
 .\run.ps1
@@ -66,78 +117,72 @@ Double-click `run.bat` or run in PowerShell:
 This automatically starts:
 - **Frontend App**: [http://localhost:3000](http://localhost:3000)
 - **FastAPI Backend**: [http://localhost:8000](http://localhost:8000)
-- **Interactive API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Interactive Swagger Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc Documentation**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ---
 
-### Option 2: Running via Root Monorepo Commands
+### Option 2: Docker & Docker Compose (Containerized)
+Run the entire decoupled stack with a single command:
+```bash
+# Build and start all containers in background
+docker compose up -d
+
+# Check container health and logs
+docker compose ps
+docker compose logs -f
+
+# Stop all containers
+docker compose down
+```
+
+---
+
+### Option 3: Unified Monorepo CLI Commands
 From the project root:
 ```bash
-# Start frontend client (via npm workspaces)
+# Start frontend client in development mode
 npm run dev
 
-# Start backend server
+# Start FastAPI backend server
 npm run backend
 
-# Production frontend build
+# Build production frontend bundle
 npm run build
+
+# Run full automated test suite across backend and frontend
+npm test
 ```
 
 ---
 
-### Option 3: Running Separately in Dedicated Terminals
+## 🧪 Automated Testing Suite
 
-#### Terminal 1 — Frontend Client:
+EventRoute AI includes comprehensive automated testing:
+
 ```bash
-cd frontend
-npm install
-npm run dev
+# Run both Backend (pytest) and Frontend (vitest) tests
+npm test
+
+# Run backend test suite only (11 tests)
+npm run test:backend
+
+# Run frontend test suite only (5 tests)
+npm run test:frontend
 ```
 
-#### Terminal 2 — FastAPI Backend:
-```bash
-cd backend
-pip install -r requirements.txt
-python main.py
-```
-
----
-
-## 🚀 Priority Build Order Execution
-
-The project strictly follows the **Build Order (Priority)** specification:
-
-```
-Unified calendar + "worth it?" score
-  ↳ Semantic matching + explainable scores
-      ↳ Recommendation feedback loop (RLUF dynamic rerank)
-          ↳ Tinder-style Swipe-to-Discover deck (Physics + Directional Overlays)
-              ↳ Skill-gap analysis (have vs missing + 2-hour crash courses)
-                  ↳ AI chatbot (EventRoute Assistant with RAG + tool calling)
-                      ↳ Teammate matching (cross-college synergy)
-                          ↳ Auto-built portfolio & OD letter generator
-```
-
----
-
-## 🏆 Judge / Investor Pitch Demo Flow (Step-by-Step)
-
-The application includes a built-in **"Judges Demo Tour"** bar that executes the 5-step demo flow requested in Section 14:
-
-1. **Step 1: Exam-Aware AI Assistant**
-   * Ask the chatbot: *"Find me an AI hackathon this weekend that won't clash with my exams"*
-   * Watch the tool-calling loop check Milind's timetable $\rightarrow$ detects internal DBMS lab exam on Oct 24 $\rightarrow$ filters out *Web3 DeFi Sprint* $\rightarrow$ recommends *HackAI Pune* (starts Sunday, 94% fit, zero clash).
-2. **Step 2: Explainable Skill-Gap Breakdown**
-   * Click **"Skill Gap"** on HackAI Pune (or swipe UP on the card).
-   * See verified skills (Python, FastAPI, React) vs missing prerequisites (PyTorch) with a curated 3-hour fast-track learning module.
-3. **Step 3: Dynamic Feedback Reranking**
-   * Swipe LEFT (Skip) or click $\mathbf{\downarrow}$ on *Web3 DeFi Sprint* with tag *"Not interested in Web3"*.
-   * Watch real-time Reinforcement Learning from User Feedback (RLUF) dynamically penalize Web3 tags (-65%) and boost AI/Cloud (+30%) before your eyes!
-4. **Step 4: Instant Academic OD Leave Letter**
-   * Click **"Generate OD Letter"**.
-   * Instant printable, university-formatted formal letterhead for Delhi Technical Campus / GGSIPU / Mumbai University with Dean/HOD salutation and an anti-tamper verification QR code.
-5. **Step 5: Semantic vs. Keyword Comparison Table**
-   * Displays the closing proof comparison table contrasting legacy portals (Unstop/Devfolio) with EventRoute AI.
+### Verified Test Cases:
+* `test_health_check`: Verifies engine liveness & events count (19 total).
+* `test_user_profile`: Validates Milind's profile and Delhi Technical Campus enrollment.
+* `test_get_events_ranked`: Validates explainable hybrid scores, sorting order, and reason tags.
+* `test_events_feedback_reranking`: Validates dynamic weights recalculation on user feedback.
+* `test_shortlist_crud`: Tests swipe-to-discover shortlist persistence.
+* `test_skill_gap_analysis`: Validates prerequisite matching and bridge courses.
+* `test_od_templates`: Verifies all 16 institutional letterhead formats.
+* `test_od_letter_generation_and_verification`: Tests SHA-256 anti-tamper QR code generation.
+* `test_teammates_dtc_members`: Verifies Arman Chauhan, Anshika Tyagi, and Dimple.
+* `test_assistant_chat_teammates_intent`: Tests conversational tool calling.
+* `test_idea_validation`: Verifies heuristic novelty, feasibility, and alignment scoring.
 
 ---
 
@@ -158,18 +203,22 @@ The application includes a built-in **"Judges Demo Tour"** bar that executes the
 
 ## 📡 REST API & Service Contract
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/api/health` | Health check and backend status |
-| `GET` | `/api/events` | Explainable ranked events for Milind |
-| `GET` | `/api/profile` | Student academic profile, skills, attendance |
-| `GET` | `/api/calendar` | Synchronized academic exam schedule & clashes |
-| `GET` | `/api/skill-gap/{event_id}` | Prerequisite have vs missing skills breakdown |
-| `POST` | `/api/feedback` | Ingest swipe / feedback and trigger live reranking |
-| `POST` | `/api/od-letter/generate` | Generate institutional OD leave letter with QR code |
-| `GET` | `/api/od-letter/verify/{hash}` | Public cryptographic verification registry |
-| `POST` | `/api/chat` | Conversational RAG assistant with agentic tool calling |
-| `POST` | `/api/validate-idea` | AI hackathon concept feasibility & rubric scoring |
+| Tag | Method | Endpoint | Description |
+| :--- | :--- | :--- | :--- |
+| **System** | `GET` | `/api/health` | Service health telemetry and events count |
+| **System** | `GET` | `/api/user/profile` | Student academic profile, skills, attendance |
+| **Opportunities** | `GET` | `/api/events` | Explainable ranked events for Milind |
+| **Opportunities** | `POST` | `/api/events/feedback` | Ingest swipe / feedback and trigger live reranking |
+| **Shortlist** | `GET` | `/api/shortlist` | Fetch right-swiped shortlisted opportunities |
+| **Shortlist** | `POST` | `/api/shortlist` | Persist an event into student shortlist |
+| **Shortlist** | `DELETE` | `/api/shortlist/{event_id}` | Remove an event from shortlist |
+| **Skill-Gap** | `GET` | `/api/events/{event_id}/skill-gap` | Prerequisite have vs missing skills breakdown |
+| **OD Automation** | `GET` | `/api/od-letter/templates` | Institutional OD templates (all GGSIPU colleges) |
+| **OD Automation** | `POST` | `/api/od-letter/generate` | Generate institutional OD leave letter with QR code |
+| **OD Automation** | `GET` | `/api/od-letter/verify/{hash}` | Public cryptographic verification registry |
+| **Teammates** | `GET` | `/api/teammates` | High-synergy teammates (Arman, Anshika, Dimple, etc.) |
+| **Assistant** | `POST` | `/api/assistant/chat` | Conversational RAG assistant with agentic tool calling |
+| **Idea Validator** | `POST` | `/api/ideas/validate` | AI hackathon concept feasibility & rubric scoring |
 
 ---
 
