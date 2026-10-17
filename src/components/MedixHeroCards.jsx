@@ -12,7 +12,6 @@ import {
   Send, 
   HelpCircle 
 } from "lucide-react";
-import { STUDENT_PROFILE } from "../data/initialEvents";
 
 export default function MedixHeroCards({ 
   onTriggerOD, 
@@ -37,25 +36,6 @@ export default function MedixHeroCards({
 
   return (
     <div className="space-y-6">
-      
-      {/* Welcome Greeting Row */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4">
-        <div>
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-[#0F172A] tracking-tight">
-            Good morning, {STUDENT_PROFILE.name} 👋
-          </h1>
-          <p className="text-sm text-[#64748B] mt-1 font-medium">
-            Your opportunities, academic calendar, and OD letters ready when you need them.
-          </p>
-        </div>
-
-        {/* Status Pill Badge (Directly from screenshot) */}
-        <div className="flex items-center gap-2 self-start sm:self-auto px-4 py-1.5 rounded-full bg-[#E6F7F0] border border-emerald-200/80 text-emerald-800 text-xs font-bold shadow-xs">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-          <span className="w-2 h-2 rounded-full bg-emerald-500 -ml-4"></span>
-          <span>EVENTROUTE SYSTEMS READY</span>
-        </div>
-      </div>
 
       {/* The Two Dual Hero Cards (Layout from screenshot) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
