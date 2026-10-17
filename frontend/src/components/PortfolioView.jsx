@@ -9,13 +9,17 @@ import {
   Check, 
   ExternalLink, 
   Sparkles, 
-  Calendar 
+  Calendar,
+  Download,
+  HardDrive
 } from "lucide-react";
 import { STUDENT_PROFILE } from "../data/initialEvents";
+import { downloadFileAndSaveLocalStorage } from "../utils/fileDownloader";
 
 export default function PortfolioView() {
   const [copied, setCopied] = useState(false);
   const [recruiterMode, setRecruiterMode] = useState(false);
+  const [downloadToast, setDownloadToast] = useState(false);
 
   const portfolioUrl = `https://eventroute.ai/@${STUDENT_PROFILE.portfolio_slug}`;
 
@@ -23,6 +27,18 @@ export default function PortfolioView() {
     navigator.clipboard.writeText(portfolioUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownloadPortfolio = () => {
+    const payload = {
+      profile: STUDENT_PROFILE,
+      exported_at: new Date().toISOString(),
+      institution: "Delhi Technical Campus (GGSIPU)",
+      verification_status: "CRYPTOGRAPHICALLY_VERIFIED"
+    };
+    downloadFileAndSaveLocalStorage(`student_portfolio_${STUDENT_PROFILE.roll_no}.json`, payload, "application/json", "portfolio");
+    setDownloadToast(true);
+    setTimeout(() => setDownloadToast(false), 3000);
   };
 
   return (
@@ -43,7 +59,16 @@ export default function PortfolioView() {
           <h2 className="font-display font-bold text-xl text-[#10174D]">Public Student Portfolio & Recruiter Vault</h2>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            onClick={handleDownloadPortfolio}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] text-xs font-bold text-[#10174D] transition shadow-xs cursor-pointer"
+            title="Download portfolio file to local storage"
+          >
+            <Download className="w-3.5 h-3.5 text-[#5964FE]" />
+            <span>{downloadToast ? "Downloaded to Storage!" : "Download File (.json)"}</span>
+          </button>
+
           <button
             onClick={() => setRecruiterMode(!recruiterMode)}
             className={`px-3.5 py-2 rounded-xl text-xs font-semibold border transition cursor-pointer ${

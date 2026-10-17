@@ -21,6 +21,7 @@ import EventFlyerScannerModal from "./components/EventFlyerScannerModal";
 import SwipeDiscoverDeck from "./components/SwipeDiscoverDeck";
 import ShortlistView from "./components/ShortlistView";
 import AttendanceShieldWidget from "./components/AttendanceShieldWidget";
+import LocalStorageFileManagerModal from "./components/LocalStorageFileManagerModal";
 
 import { INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR } from "./data/initialEvents";
 import { fetchOpportunities, fetchSkillGap, requestODLetter, sendFeedback, syncShortlistAdd, syncShortlistRemove } from "./services/api";
@@ -84,6 +85,7 @@ export default function App() {
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
   const [verifyLetterData, setVerifyLetterData] = useState(null);
   const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [isLocalStorageFilesOpen, setIsLocalStorageFilesOpen] = useState(false);
   
   // Chatbot & Demo Tour state
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -365,6 +367,7 @@ export default function App() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           shortlistCount={shortlist.length}
+          onOpenLocalStorageFiles={() => setIsLocalStorageFilesOpen(true)}
         />
       </div>
 
@@ -377,6 +380,7 @@ export default function App() {
           setActiveTab={setActiveTab}
           onStartDemoTour={handleStartDemoTour}
           shortlistCount={shortlist.length}
+          onOpenLocalStorageFiles={() => setIsLocalStorageFilesOpen(true)}
         />
 
         {/* Content Container */}
@@ -715,6 +719,11 @@ export default function App() {
       <ComparisonModal
         isOpen={isComparisonOpen}
         onClose={() => setIsComparisonOpen(false)}
+      />
+
+      <LocalStorageFileManagerModal
+        isOpen={isLocalStorageFilesOpen}
+        onClose={() => setIsLocalStorageFilesOpen(false)}
       />
 
     </div>

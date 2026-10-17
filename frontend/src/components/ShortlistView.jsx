@@ -12,8 +12,11 @@ import {
   Flame, 
   Search,
   CheckCircle2,
-  AlertTriangle
+  AlertTriangle,
+  Download,
+  FileCheck
 } from "lucide-react";
+import { downloadFileAndSaveLocalStorage } from "../utils/fileDownloader";
 
 export default function ShortlistView({ 
   shortlist = [], 
@@ -25,6 +28,21 @@ export default function ShortlistView({
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [cityFilter, setCityFilter] = useState("All");
+  const [downloadToast, setDownloadToast] = useState(false);
+
+  const handleDownloadShortlist = () => {
+    if (shortlist.length === 0) return;
+    const exportPayload = {
+      title: "My Shortlisted Opportunities - EventRoute AI",
+      exported_at: new Date().toISOString(),
+      student: "Milind (Delhi Technical Campus)",
+      total_count: shortlist.length,
+      events: shortlist
+    };
+    downloadFileAndSaveLocalStorage("my_shortlisted_opportunities.json", exportPayload, "application/json", "shortlist");
+    setDownloadToast(true);
+    setTimeout(() => setDownloadToast(false), 3000);
+  };
 
   const filtered = shortlist.filter(e => {
     const matchesSearch = e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -66,11 +84,21 @@ export default function ShortlistView({
           </div>
 
           <button
+            onClick={handleDownloadShortlist}
+            disabled={shortlist.length === 0}
+            className="px-4 py-3 rounded-2xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] text-[#10174D] font-bold text-xs flex items-center gap-2 shadow-xs transition active:scale-95 disabled:opacity-40 cursor-pointer"
+            title="Download shortlist file to local disk and mirror into browser localStorage"
+          >
+            <Download className="w-4 h-4 text-[#5964FE]" />
+            <span>{downloadToast ? "Downloaded to Storage!" : "Download File (.json)"}</span>
+          </button>
+
+          <button
             onClick={onGoToSwipeDeck}
             className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 text-white font-bold text-xs flex items-center gap-2 shadow-md shadow-[#5964FE]/25 transition active:scale-95 cursor-pointer"
           >
             <Flame className="w-4 h-4 fill-white" />
-            <span>Discover More in Swipe Deck</span>
+            <span>Discover More</span>
           </button>
         </div>
       </div>

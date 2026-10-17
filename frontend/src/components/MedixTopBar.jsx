@@ -7,7 +7,8 @@ import {
   ShieldCheck,
   Search,
   Flame,
-  BookmarkCheck
+  BookmarkCheck,
+  HardDrive
 } from "lucide-react";
 import { STUDENT_PROFILE } from "../data/initialEvents";
 
@@ -15,7 +16,8 @@ export default function MedixTopBar({
   activeTab, 
   setActiveTab, 
   onStartDemoTour,
-  shortlistCount = 0
+  shortlistCount = 0,
+  onOpenLocalStorageFiles
 }) {
   return (
     <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-[#E2E7FA] px-4 sm:px-8 py-3 flex items-center justify-between select-none shadow-[0_2px_15px_rgba(89,100,254,0.03)]">
@@ -118,6 +120,16 @@ export default function MedixTopBar({
         >
           <PlayCircle className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Judges Demo Tour</span>
+        </button>
+
+        {/* Local Storage Files Button */}
+        <button
+          onClick={onOpenLocalStorageFiles}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] text-xs font-bold text-[#10174D] shadow-xs transition active:scale-95 cursor-pointer"
+          title="View files downloaded and stored in local storage"
+        >
+          <HardDrive className="w-3.5 h-3.5 text-[#5964FE]" />
+          <span className="hidden lg:inline">Local Storage Files</span>
         </button>
 
         {/* Notifications Icon with dot */}

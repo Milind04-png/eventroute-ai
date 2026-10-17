@@ -7,10 +7,52 @@ import {
   Copy, 
   QrCode, 
   Building2, 
-  ExternalLink 
+  ExternalLink,
+  Download,
+  HardDrive,
+  FileCheck
 } from "lucide-react";
 import { COLLEGE_OD_TEMPLATES } from "../data/initialEvents";
 import { generateClientODLetter } from "../services/aiEngine";
+import { downloadFileAndSaveLocalStorage } from "../utils/fileDownloader";
+
+function formatOdLetterText(letter) {
+  return `================================================================================
+${letter.college_name.toUpperCase()}
+(Affiliated to ${letter.university})
+${letter.college_address}
+================================================================================
+
+Ref: ${letter.ref_number}
+Date: ${letter.generated_date}
+
+To,
+${letter.to_recipient.name}
+${letter.to_recipient.designation}
+${letter.to_recipient.institution}
+
+SUBJECT: ${letter.subject}
+
+${letter.body_paragraphs.join("\n\n")}
+
+STUDENT DETAILS:
+--------------------------------------------------------------------------------
+Name:               ${letter.student_details.name}
+Roll Number:        ${letter.student_details.roll_no}
+Branch & Year:      ${letter.student_details.branch} (${letter.student_details.year})
+Current Attendance: ${letter.student_details.current_attendance}
+College:            ${letter.college_name}
+
+CRYPTOGRAPHIC ANTI-TAMPER VERIFICATION:
+--------------------------------------------------------------------------------
+Security Hash:      ${letter.verification.hash}
+Verification URL:   ${letter.verification.url}
+Issued Timestamp:   ${letter.generated_date}
+
+Signatures:
+[ Student Signature: __________________ ]    [ HOD Approval: __________________ ]
+`;
+}
 
 export default function OdLetterModal({ 
   event, 
@@ -23,6 +65,7 @@ export default function OdLetterModal({
 
   const [selectedCollege, setSelectedCollege] = useState("DTC_DELHI");
   const [copied, setCopied] = useState(false);
+  const [downloadStatus, setDownloadStatus] = useState(null);
 
   // Generate or use passed letter data
   const letter = letterData || generateClientODLetter(event, selectedCollege);
@@ -39,6 +82,23 @@ export default function OdLetterModal({
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownload = (format = "txt") => {
+    const safeRoll = (letter.student_details?.roll_no || "2024CS1001").replace(/[^a-zA-Z0-9]/g, "_");
+    const safeCollege = (letter.college_name || "College").split(" ")[0];
+
+    if (format === "json") {
+      const filename = `${safeCollege}_OD_Letter_${safeRoll}.json`;
+      downloadFileAndSaveLocalStorage(filename, letter, "application/json", "od_letter");
+    } else {
+      const filename = `${safeCollege}_OD_Letter_${safeRoll}.txt`;
+      const textContent = formatOdLetterText(letter);
+      downloadFileAndSaveLocalStorage(filename, textContent, "text/plain", "od_letter");
+    }
+
+    setDownloadStatus(format.toUpperCase());
+    setTimeout(() => setDownloadStatus(null), 3000);
   };
 
   return (
@@ -63,12 +123,22 @@ export default function OdLetterModal({
 
           <div className="flex items-center gap-2">
             <button
+              onClick={() => handleDownload("txt")}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] text-xs font-semibold text-[#10174D] transition shadow-xs cursor-pointer"
+              title="Download letter file to local machine and save in localStorage"
+            >
+              <Download className="w-3.5 h-3.5 text-[#5964FE]" />
+              <span>{downloadStatus === "TXT" ? "Downloaded!" : "Download (.txt)"}</span>
+            </button>
+
+            <button
               onClick={handlePrint}
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-xs font-semibold text-white shadow-md shadow-[#5964FE]/20 transition cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>Print / Save PDF</span>
+              <span>Print / PDF</span>
             </button>
+
             <button
               onClick={onClose}
               className="p-1.5 rounded-xl text-[#8E9BBF] hover:text-[#10174D] hover:bg-[#EEF2FE] transition cursor-pointer"
@@ -77,6 +147,19 @@ export default function OdLetterModal({
             </button>
           </div>
         </div>
+
+        {/* Download & Storage Toast Notice */}
+        {downloadStatus && (
+          <div className="mt-3 p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center justify-between gap-2 animate-in fade-in">
+            <div className="flex items-center gap-2">
+              <FileCheck className="w-4 h-4 text-emerald-600" />
+              <span>File successfully downloaded to local disk and saved in browser localStorage!</span>
+            </div>
+            <span className="text-[10px] bg-emerald-100 px-2 py-0.5 rounded-md text-emerald-900 uppercase">
+              Offline Ready
+            </span>
+          </div>
+        )}
 
         {/* College Template Selector */}
         <div className="mt-4 p-3.5 rounded-2xl bg-[#F8FAFF] border border-[#E2E7FA] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
@@ -216,13 +299,33 @@ export default function OdLetterModal({
             </button>
           </div>
 
-          <button
-            onClick={handlePrint}
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 font-bold text-white transition shadow-lg shadow-[#5964FE]/20 cursor-pointer"
-          >
-            <Printer className="w-4 h-4" />
-            <span>Print Official Letter (PDF)</span>
-          </button>
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              onClick={() => handleDownload("txt")}
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] font-bold text-[#10174D] transition shadow-xs cursor-pointer"
+              title="Download letter file directly and save in localStorage"
+            >
+              <Download className="w-4 h-4 text-[#5964FE]" />
+              <span>{downloadStatus === "TXT" ? "Downloaded to Storage!" : "Download File (.txt)"}</span>
+            </button>
+
+            <button
+              onClick={() => handleDownload("json")}
+              className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] font-bold text-[#525A8B] transition shadow-xs cursor-pointer"
+              title="Download JSON verification payload and save in localStorage"
+            >
+              <HardDrive className="w-3.5 h-3.5 text-[#7B73FE]" />
+              <span>{downloadStatus === "JSON" ? "Saved!" : ".JSON"}</span>
+            </button>
+
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 font-bold text-white transition shadow-lg shadow-[#5964FE]/20 cursor-pointer"
+            >
+              <Printer className="w-4 h-4" />
+              <span>Print Official Letter (PDF)</span>
+            </button>
+          </div>
         </div>
 
       </div>

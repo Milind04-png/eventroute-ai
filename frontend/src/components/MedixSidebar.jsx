@@ -14,14 +14,16 @@ import {
   Compass,
   CheckCircle2,
   Flame,
-  BookmarkCheck
+  BookmarkCheck,
+  HardDrive
 } from "lucide-react";
 
-export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount = 0 }) {
+export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount = 0, onOpenLocalStorageFiles }) {
   const navItems = [
     { id: "feed", label: "Dashboard", icon: LayoutDashboard },
     { id: "swipe", label: "Swipe Discover", icon: Flame, badge: "AI" },
     { id: "shortlist", label: "My Shortlist", icon: BookmarkCheck, count: shortlistCount },
+    { id: "local_files", label: "Saved Offline Files", icon: HardDrive, onClick: onOpenLocalStorageFiles },
     { id: "opportunities", label: "Opportunities", icon: Compass },
     { id: "calendar", label: "Exam & Calendar", icon: Calendar },
     { id: "od_letters", label: "OD Leave Letters", icon: FileText },
