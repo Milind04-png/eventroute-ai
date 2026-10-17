@@ -13,7 +13,10 @@
     "backend:dev": "python backend/main.py",
     "backend": "python backend/main.py",
     "test:backend": "pytest backend",
-    "test": "pytest backend"
+    "test": "pytest backend",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
   },
   "workspaces": [
     "frontend"
