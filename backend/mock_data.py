@@ -872,6 +872,45 @@ RAW_EVENTS = [
 
 SAMPLE_TEAMMATES = [
     {
+        "id": "tm_arman_dtc_01",
+        "name": "Arman Chauhan",
+        "college": "Delhi Technical Campus (GGSIPU)",
+        "branch": "Computer Science & Engineering (2nd Year)",
+        "skills": ["React", "Next.js", "Tailwind CSS", "UI/UX Design", "Figma", "TypeScript"],
+        "looking_for": "Backend & Systems Engineer for TechSpark DTC 2026 & InfoXpression",
+        "synergy_score": 98,
+        "synergy_reason": "Arman is your DTC CSE classmate with exceptional frontend craftsmanship and UI systems design. Pairing his Next.js & Figma mastery with your FastAPI & AI backend creates a balanced 24h hackathon powerhouse.",
+        "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150",
+        "isDtcPeer": True,
+        "role": "Frontend & UI/UX Lead"
+    },
+    {
+        "id": "tm_anshika_dtc_02",
+        "name": "Anshika Tyagi",
+        "college": "Delhi Technical Campus (GGSIPU)",
+        "branch": "Artificial Intelligence & Machine Learning (2nd Year)",
+        "skills": ["PyTorch", "LangChain", "OpenAI APIs", "Python", "Data Science", "Vector DBs"],
+        "looking_for": "Fullstack & Cloud Deployment Engineer for AI Hackathons",
+        "synergy_score": 97,
+        "synergy_reason": "Anshika specializes in LLM agent pipelines, prompt evaluation, and vector indexing at DTC. Her AI model fine-tuning directly complements your Docker, PostgreSQL, and FastAPI deployment stack.",
+        "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150",
+        "isDtcPeer": True,
+        "role": "AI & Machine Learning Specialist"
+    },
+    {
+        "id": "tm_dimple_dtc_03",
+        "name": "Dimple",
+        "college": "Delhi Technical Campus (GGSIPU)",
+        "branch": "Computer Science & Engineering (2nd Year)",
+        "skills": ["Flutter", "Firebase", "Node.js", "REST APIs", "Cloud Functions", "Git"],
+        "looking_for": "Python AI Engineer for Mobile + Web Multi-Platform Sprints",
+        "synergy_score": 95,
+        "synergy_reason": "Dimple excels at building snappy cross-platform mobile apps with Flutter and real-time Firebase backends at DTC. With her shipping the mobile client while you build the AI backend, your team aces both web and app judging criteria.",
+        "avatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+        "isDtcPeer": True,
+        "role": "Mobile Apps & Cloud Engineer"
+    },
+    {
         "id": "tm_priya_02",
         "name": "Priya Patel",
         "college": "Veermata Jijabai Technological Institute (VJTI)",
@@ -880,7 +919,9 @@ SAMPLE_TEAMMATES = [
         "looking_for": "FastAPI & Frontend Engineer for HackAI Pune",
         "synergy_score": 96,
         "synergy_reason": "Priya has deep PyTorch and ML model training experience, perfectly complementing your FastAPI & React stack for HackAI Pune 2026.",
-        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+        "isDtcPeer": False,
+        "role": "Computer Vision Researcher"
     },
     {
         "id": "tm_arjun_03",
@@ -891,7 +932,9 @@ SAMPLE_TEAMMATES = [
         "looking_for": "React & UI Designer for Web3 Defi Sprint",
         "synergy_score": 82,
         "synergy_reason": "Arjun specializes in smart contract protocol logic and seeks a frontend developer.",
-        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+        "isDtcPeer": False,
+        "role": "Smart Contract Developer"
     },
     {
         "id": "tm_ananya_04",
@@ -902,6 +945,8 @@ SAMPLE_TEAMMATES = [
         "looking_for": "Cloud Native Backend Developer for IIT-B Challenge",
         "synergy_score": 91,
         "synergy_reason": "High synergy for robotics and hardware hackathons needing Python backend bridging.",
-        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+        "isDtcPeer": False,
+        "role": "Robotics & Edge AI Engineer"
     }
 ]

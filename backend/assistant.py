@@ -117,13 +117,15 @@ class EventRouteAssistant:
                 "detail": "Scored complementary profiles for ML + Frontend stack."
             })
             top_match = SAMPLE_TEAMMATES[0]
+            first_name = top_match['name'].split()[0]
             reply = (
-                f"🤝 Found a high-synergy teammate match for **HackAI Pune 2026**!\n\n"
+                f"🤝 Found a high-synergy teammate match for your upcoming hackathons!\n\n"
                 f"• **Name**: **{top_match['name']}** ({top_match['branch']}, {top_match['college']})\n"
+                f"• **Role**: {top_match.get('role', 'Specialist')}\n"
                 f"• **Skills**: {', '.join(top_match['skills'])}\n"
                 f"• **Synergy Score**: **{top_match['synergy_score']}% Match**\n"
                 f"• **Why Match**: {top_match['synergy_reason']}\n\n"
-                f"Would you like me to send her a collaboration invite to your workspace?"
+                f"Would you like me to send {first_name} a collaboration invite to your team?"
             )
             action_payload = {
                 "action_type": "open_teammates",

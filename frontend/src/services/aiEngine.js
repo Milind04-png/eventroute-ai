@@ -298,7 +298,7 @@ export function processClientAssistant(userMessage, events, student = STUDENT_PR
     });
     const topMatch = INITIAL_TEAMMATES[0];
 
-    reply = `🤝 Found a high-synergy teammate match for **HackAI Pune 2026**!\n\n• **Name**: **${topMatch.name}** (${topMatch.branch}, ${topMatch.college})\n• **Skills**: ${topMatch.skills.join(", ")}\n• **Synergy Score**: **${topMatch.synergy_score}% Match**\n• **Why Match**: ${topMatch.synergy_reason}\n\nWould you like me to send a collaboration invitation to her?`;
+    reply = `🤝 Found a high-synergy teammate match for your upcoming hackathons!\n\n• **Name**: **${topMatch.name}** (${topMatch.branch}, ${topMatch.college})\n• **Role**: ${topMatch.role || "Specialist"}\n• **Skills**: ${topMatch.skills.join(", ")}\n• **Synergy Score**: **${topMatch.synergy_score}% Match**\n• **Why Match**: ${topMatch.synergy_reason}\n\nWould you like me to send a collaboration invitation to ${topMatch.name.split(" ")[0]}?`;
 
     actionPayload = {
       action_type: "open_teammates",
