@@ -5,19 +5,19 @@ Curated Opportunities across India, Skill Gap Learning Vault, and OD Templates.
 """
 
 STUDENT_PROFILE = {
-    "id": "usr_rahul_01",
-    "name": "Rahul Sharma",
-    "email": "rahul.sharma@tsec.edu",
+    "id": "usr_milind_01",
+    "name": "Milind",
+    "email": "milind@tsec.edu",
     "college": "Thadomal Shahani Engineering College (Mumbai University)",
     "branch": "Computer Science & Engineering",
-    "year": "3rd Year (Semester 5)",
-    "roll_no": "2023CS1082",
+    "year": "2nd Year (Semester 3)",
+    "roll_no": "2024CS1042",
     "attendance_rate": 78.4,  # Close to 75% boundary! Makes OD letters urgent
     "skills": ["Python", "FastAPI", "React", "PostgreSQL", "Docker", "Tailwind CSS"],
     "interests": ["Artificial Intelligence", "Machine Learning", "System Design", "Cloud Native"],
-    "github": "https://github.com/rahulsharma-ai",
-    "linkedin": "https://linkedin.com/in/rahul-sharma-cse",
-    "portfolio_slug": "rahulsharma",
+    "github": "https://github.com/Milind04-png",
+    "linkedin": "https://linkedin.com/in/milind-cse",
+    "portfolio_slug": "milind",
     "xp_points": 1420,
     "completed_events_count": 4,
     "badges": [

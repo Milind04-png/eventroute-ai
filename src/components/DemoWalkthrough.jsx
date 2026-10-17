@@ -18,7 +18,7 @@ export default function DemoWalkthrough({
     {
       step: 1,
       title: "1. Exam-Aware AI Assistant",
-      desc: "Ask the co-pilot for weekend AI hackathons. Watch it cross-reference Rahul's DBMS exam and recommend HackAI Pune.",
+      desc: "Ask the co-pilot for weekend AI hackathons. Watch it cross-reference Milind's DBMS exam and recommend HackAI Pune.",
       actionLabel: "Run Step 1 in Chatbot",
       actionIcon: MessageSquare,
       onAction: () => onOpenChatWithPrompt("Find me an AI hackathon this weekend that won't clash with my exams")

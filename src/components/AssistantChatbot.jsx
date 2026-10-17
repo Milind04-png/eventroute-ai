@@ -27,7 +27,7 @@ export default function AssistantChatbot({
     {
       id: "m_welcome",
       role: "assistant",
-      text: "👋 Hi Rahul! I am your **EventRoute AI Co-Pilot**. I'm connected to your academic schedule, verified GitHub skills, and active opportunity streams. How can I help you excel this semester?",
+      text: "👋 Hi Milind! I am your **EventRoute AI Co-Pilot**. I'm connected to your academic schedule, verified GitHub skills, and active opportunity streams. How can I help you excel this semester?",
       toolCalls: []
     }
   ]);
@@ -132,7 +132,7 @@ export default function AssistantChatbot({
                     RAG + Tools
                   </span>
                 </h3>
-                <p className="text-[10px] text-slate-400">Context: Rahul Sharma (3rd Yr CSE) · Exam Synchronized</p>
+                <p className="text-[10px] text-slate-400">Context: Milind (2nd Yr CSE) · Exam Synchronized</p>
               </div>
             </div>
 

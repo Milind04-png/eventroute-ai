@@ -161,14 +161,14 @@ export default function Navbar({
             {/* Profile Avatar */}
             <div className={`flex items-center gap-2.5 pl-2 border-l ${isLight ? "border-slate-200" : "border-slate-800"}`}>
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-xs font-bold ring-2 ring-emerald-500/30">
-                RS
+                ML
               </div>
               <div className="hidden xl:block text-left">
                 <p className={`text-xs font-bold ${isLight ? "text-[#0F172A]" : "text-slate-200"}`}>
                   {STUDENT_PROFILE.name}
                 </p>
                 <p className={`text-[10px] ${isLight ? "text-slate-500" : "text-slate-400"}`}>
-                  3rd Yr CSE · TSEC
+                  2nd Yr CSE · TSEC
                 </p>
               </div>
             </div>

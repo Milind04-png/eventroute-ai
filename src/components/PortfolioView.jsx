@@ -72,8 +72,8 @@ export default function PortfolioView() {
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pb-6 border-b border-slate-800">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-400 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-indigo-500/20 ring-4 ring-slate-800 shrink-0">
-            RS
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-indigo-600 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-emerald-500/20 ring-4 ring-slate-800 shrink-0">
+            ML
           </div>
 
           <div className="space-y-1">
