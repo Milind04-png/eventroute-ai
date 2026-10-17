@@ -388,51 +388,16 @@ export default function App() {
                 onTriggerOD={() => handleGenerateOD("evt_hackai_pune_26")}
                 onStartAssessmentQuery={handleChatWithPrompt}
                 onTriggerDemo={handleStartDemoTour}
+                events={events}
+                onShortlist={handleShortlistEvent}
+                onSkip={handleSkipEvent}
+                onOpenSkillGap={handleOpenSkillGap}
+                onOpenDetails={setSelectedEventDetails}
+                shortlist={shortlist}
+                swipeHistory={swipeHistory}
+                onUndoSwipe={handleUndoSwipe}
+                onResetDeck={handleResetDeck}
               />
-
-              {/* Tinder-Style Swipe-to-Discover Interactive Quick Launcher */}
-              <div className="p-6 rounded-3xl bg-gradient-to-r from-rose-500 via-pink-600 to-indigo-600 text-white shadow-xl shadow-rose-500/15 flex flex-col md:flex-row md:items-center justify-between gap-5 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none group-hover:scale-110 transition-transform"></div>
-
-                <div className="flex items-center gap-4 relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-bold text-white shadow-inner shrink-0">
-                    <Flame className="w-7 h-7 fill-white animate-pulse" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-display font-black text-xl tracking-tight text-white">
-                        Tinder-Style Swipe Discover AI
-                      </span>
-                      <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-white/25 text-white uppercase tracking-wider backdrop-blur-xs">
-                        Gesture Deck
-                      </span>
-                    </div>
-                    <p className="text-xs text-rose-100 mt-1 max-w-xl font-medium">
-                      Drag cards with mouse or touch. Swipe Right to Shortlist • Swipe Left to Skip • Swipe Up for instant AI Skill-Gap Analysis.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 relative z-10 self-start md:self-auto">
-                  <button
-                    onClick={() => setActiveTab("swipe")}
-                    className="px-6 py-3 rounded-2xl bg-white text-rose-600 hover:bg-rose-50 font-extrabold text-xs shadow-lg shadow-black/10 transition active:scale-95 flex items-center gap-2 cursor-pointer"
-                  >
-                    <Flame className="w-4 h-4 fill-rose-600" />
-                    <span>Launch Swipe Deck</span>
-                  </button>
-
-                  {shortlist.length > 0 && (
-                    <button
-                      onClick={() => setActiveTab("shortlist")}
-                      className="px-5 py-3 rounded-2xl bg-white/20 hover:bg-white/30 text-white font-extrabold text-xs backdrop-blur-md transition active:scale-95 flex items-center gap-2 cursor-pointer border border-white/20"
-                    >
-                      <BookmarkCheck className="w-4 h-4" />
-                      <span>Shortlist ({shortlist.length})</span>
-                    </button>
-                  )}
-                </div>
-              </div>
 
               {/* Verified College Logos & Institutional Crests */}
               <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-[0_4px_24px_rgba(15,23,42,0.02)]">
