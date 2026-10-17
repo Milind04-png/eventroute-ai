@@ -29,27 +29,27 @@ export default function PortfolioView() {
     <div className="max-w-4xl mx-auto space-y-6">
       
       {/* Top Banner & Sharing */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-900 border border-slate-800">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-3xl bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_10px_30px_rgba(89,100,254,0.05)]">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 uppercase">
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-lg bg-[#DFE3FF] text-[#434EEB] border border-[#C7D2FE] uppercase">
               Auto-Built Credibility
             </span>
-            <span className="text-xs text-emerald-400 font-semibold flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5" />
+            <span className="text-xs text-emerald-700 font-semibold flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               Verified Institutional Record
             </span>
           </div>
-          <h2 className="font-display font-bold text-lg text-white">Public Student Portfolio & Recruiter Vault</h2>
+          <h2 className="font-display font-bold text-xl text-[#10174D]">Public Student Portfolio & Recruiter Vault</h2>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => setRecruiterMode(!recruiterMode)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-semibold border transition cursor-pointer ${
               recruiterMode 
-                ? "bg-amber-500/20 border-amber-400 text-amber-300" 
-                : "bg-slate-800 border-slate-700 text-slate-300 hover:text-white"
+                ? "bg-[#DFE3FF] border-[#C7D2FE] text-[#434EEB]" 
+                : "bg-[#F8FAFF] border-[#DCE3F9] text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             {recruiterMode ? "👁️ Recruiter View: Active" : "Preview Recruiter Mode"}
@@ -57,7 +57,7 @@ export default function PortfolioView() {
 
           <button
             onClick={handleCopyLink}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white shadow-md transition"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-xs font-semibold text-white shadow-md shadow-[#5964FE]/20 transition cursor-pointer"
           >
             {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copied ? "Copied!" : "Copy URL"}</span>
@@ -66,45 +66,45 @@ export default function PortfolioView() {
       </div>
 
       {/* Profile Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/40 border border-slate-800 shadow-2xl relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_10px_30px_rgba(89,100,254,0.05)] relative overflow-hidden">
         
         {/* Background glow circle */}
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#5964FE]/5 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pb-6 border-b border-slate-800">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-indigo-600 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-emerald-500/20 ring-4 ring-slate-800 shrink-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pb-6 border-b border-[#F0F3FD]">
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#5964FE] via-[#7B73FE] to-[#9B8CFF] flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-[#5964FE]/25 ring-4 ring-white shrink-0">
             ML
           </div>
 
           <div className="space-y-1">
             <div className="flex items-center gap-3">
-              <h1 className="font-display font-bold text-2xl text-white">{STUDENT_PROFILE.name}</h1>
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-semibold">
+              <h1 className="font-display font-bold text-2xl text-[#10174D]">{STUDENT_PROFILE.name}</h1>
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#DFE3FF] text-[#434EEB] border border-[#C7D2FE] font-bold">
                 {STUDENT_PROFILE.xp_points} XP
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-indigo-400 font-medium">
+            <p className="text-xs sm:text-sm text-[#5964FE] font-semibold">
               {STUDENT_PROFILE.branch} · {STUDENT_PROFILE.year}
             </p>
-            <p className="text-xs text-slate-400">{STUDENT_PROFILE.college}</p>
+            <p className="text-xs text-[#525A8B] font-medium">{STUDENT_PROFILE.college}</p>
 
             <div className="flex items-center gap-4 pt-2">
               <a 
                 href={STUDENT_PROFILE.github} 
                 target="_blank" 
                 rel="noreferrer"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition"
+                className="flex items-center gap-1.5 text-xs text-[#525A8B] hover:text-[#10174D] transition"
               >
-                <Code2 className="w-3.5 h-3.5 text-indigo-400" />
+                <Code2 className="w-3.5 h-3.5 text-[#5964FE]" />
                 <span>GitHub</span>
               </a>
               <a 
                 href={STUDENT_PROFILE.linkedin} 
                 target="_blank" 
                 rel="noreferrer"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition"
+                className="flex items-center gap-1.5 text-xs text-[#525A8B] hover:text-[#10174D] transition"
               >
-                <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                <Globe className="w-3.5 h-3.5 text-[#5964FE]" />
                 <span>LinkedIn</span>
               </a>
             </div>
@@ -112,18 +112,18 @@ export default function PortfolioView() {
         </div>
 
         {/* Verified Technical Stack */}
-        <div className="py-6 border-b border-slate-800">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+        <div className="py-6 border-b border-[#F0F3FD]">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[#525A8B] mb-3 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#5964FE]" />
             Verified Technical Competencies
           </h3>
           <div className="flex flex-wrap gap-2">
             {STUDENT_PROFILE.skills.map((skill, idx) => (
               <span 
                 key={idx} 
-                className="px-3 py-1 rounded-xl bg-slate-950 border border-indigo-500/30 text-indigo-200 text-xs font-semibold flex items-center gap-1.5"
+                className="px-3 py-1 rounded-xl bg-[#F8FAFF] border border-[#DCE3F9] text-[#10174D] text-xs font-semibold flex items-center gap-1.5"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#5964FE]"></span>
                 <span>{skill}</span>
               </span>
             ))}
@@ -132,21 +132,21 @@ export default function PortfolioView() {
 
         {/* Badges & Accomplishments */}
         <div className="pt-6">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-1.5">
-            <Award className="w-3.5 h-3.5 text-amber-400" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[#525A8B] mb-4 flex items-center gap-1.5">
+            <Award className="w-3.5 h-3.5 text-amber-500" />
             Cryptographic Participation Badges ({STUDENT_PROFILE.badges.length})
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {STUDENT_PROFILE.badges.map((b, i) => (
-              <div key={i} className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 flex items-start gap-3">
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${b.color} flex items-center justify-center text-white shrink-0 shadow-md`}>
+              <div key={i} className="p-4 rounded-2xl bg-[#F8FAFF] border border-[#DCE3F9] flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] flex items-center justify-center text-white shrink-0 shadow-sm shadow-[#5964FE]/20">
                   <Award className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-xs text-slate-100">{b.title}</h4>
-                  <p className="text-[11px] text-slate-400">{b.event}</p>
-                  <p className="text-[10px] text-indigo-400 mt-0.5">{b.date}</p>
+                  <h4 className="font-semibold text-xs text-[#10174D]">{b.title}</h4>
+                  <p className="text-[11px] text-[#525A8B]">{b.event}</p>
+                  <p className="text-[10px] text-[#5964FE] font-medium mt-0.5">{b.date}</p>
                 </div>
               </div>
             ))}

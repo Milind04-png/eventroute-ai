@@ -33,21 +33,21 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
   ];
 
   return (
-    <aside className="w-64 bg-white border-r border-[#E2E8F0] min-h-screen flex flex-col justify-between shrink-0 select-none">
+    <aside className="w-64 bg-white/95 backdrop-blur-xl border-r border-[#E2E7FA] min-h-screen flex flex-col justify-between shrink-0 select-none shadow-[2px_0_20px_rgba(89,100,254,0.03)]">
       
       {/* Brand Header */}
       <div>
-        <div className="p-5 flex items-center gap-3 border-b border-[#F1F5F9]">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/20">
-            <Compass className="w-5 h-5" />
+        <div className="p-5 flex items-center gap-3 border-b border-[#F0F3FD]">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#5964FE] to-[#7B73FE] text-white flex items-center justify-center shadow-md shadow-[#5964FE]/25">
+            <Compass className="w-5 h-5 stroke-[2.5]" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-display font-extrabold text-xl tracking-tight text-[#0F172A]">
-                EVENT<span className="text-emerald-600">ROUTE</span>
+              <span className="font-display font-extrabold text-xl tracking-tight text-[#10174D]">
+                EVENT<span className="text-[#5964FE]">ROUTE</span>
               </span>
             </div>
-            <p className="text-[11px] text-[#64748B] font-medium -mt-0.5">
+            <p className="text-[11px] text-[#525A8B] font-medium -mt-0.5">
               Your Career, Connected.
             </p>
           </div>
@@ -71,23 +71,23 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
                 }}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? "bg-[#E6F7F0] text-emerald-800 shadow-xs"
-                    : "text-[#475569] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    ? "bg-[#DFE3FF] text-[#434EEB] shadow-xs font-bold"
+                    : "text-[#525A8B] hover:bg-[#F1F4FE] hover:text-[#10174D]"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600" : item.id === "swipe" ? "text-rose-500" : "text-[#64748B]"}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? "text-[#434EEB]" : item.id === "swipe" ? "text-[#8C52FF]" : "text-[#8E9BBF]"}`} />
                   <span>{item.label}</span>
                 </div>
 
                 {item.badge && (
-                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-rose-500 text-white shadow-xs">
+                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-gradient-to-r from-[#5964FE] to-[#8C6DFE] text-white shadow-xs">
                     {item.badge}
                   </span>
                 )}
 
                 {item.count > 0 && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#DFE3FF] text-[#434EEB]">
                     {item.count}
                   </span>
                 )}
@@ -98,20 +98,20 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
       </div>
 
       {/* Bottom Footer Actions */}
-      <div className="p-4 border-t border-[#F1F5F9] space-y-1">
+      <div className="p-4 border-t border-[#F0F3FD] space-y-1">
         <button 
           onClick={() => alert("Settings panel: College ERP & Notification preferences.")}
-          className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] transition cursor-pointer"
+          className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#525A8B] hover:text-[#10174D] hover:bg-[#F1F4FE] transition cursor-pointer"
         >
-          <Settings className="w-4 h-4 text-slate-400" />
+          <Settings className="w-4 h-4 text-[#8E9BBF]" />
           <span>Settings</span>
         </button>
 
         <button 
           onClick={() => alert("Logged in as Milind (2nd Year, Delhi Technical Campus).")}
-          className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#64748B] hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+          className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#525A8B] hover:text-[#434EEB] hover:bg-[#DFE3FF]/50 transition cursor-pointer"
         >
-          <LogOut className="w-4 h-4 text-slate-400" />
+          <LogOut className="w-4 h-4 text-[#8E9BBF]" />
           <span>Profile Info</span>
         </button>
       </div>

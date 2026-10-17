@@ -42,7 +42,7 @@ export default function DemoWalkthrough({
     {
       step: 4,
       title: "4. Instant Academic OD Leave Letter",
-      desc: "One click compiles an official Mumbai University leave letter with anti-tamper QR code and HOD salutation.",
+      desc: "One click compiles an official Delhi Technical Campus / Mumbai Univ leave letter with anti-tamper QR code.",
       actionLabel: "Generate Official OD Letter",
       actionIcon: FileText,
       onAction: () => onOpenODLetterDemo("evt_hackai_pune_26")
@@ -60,34 +60,34 @@ export default function DemoWalkthrough({
   const active = steps[currentStep - 1] || steps[0];
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl bg-slate-900/95 border-2 border-indigo-500/60 backdrop-blur-xl rounded-2xl shadow-2xl p-4 sm:p-5 text-white glow-indigo">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl bg-white/95 border-2 border-[#C7D2FE] backdrop-blur-xl rounded-3xl shadow-[0_20px_60px_rgba(89,100,254,0.2)] p-4 sm:p-5 text-[#10174D]">
+      <div className="flex items-center justify-between border-b border-[#F0F3FD] pb-3 mb-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/40">
-            <Sparkles className="w-4 h-4" />
+          <div className="w-8 h-8 rounded-xl bg-[#DFE3FF] text-[#434EEB] flex items-center justify-center border border-[#C7D2FE]">
+            <Sparkles className="w-4 h-4 text-[#5964FE]" />
           </div>
           <div>
-            <h3 className="font-display font-bold text-sm sm:text-base text-slate-100 flex items-center gap-2">
+            <h3 className="font-display font-bold text-sm sm:text-base text-[#10174D] flex items-center gap-2">
               Judges Demo Playbook Flow
-              <span className="text-[10px] font-normal px-2 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#DFE3FF] text-[#434EEB] border border-[#C7D2FE]">
                 Step {currentStep} of {steps.length}
               </span>
             </h3>
-            <p className="text-xs text-slate-400 hidden sm:block">Fulfills Section 14: Judges ke liye Demo Flow</p>
+            <p className="text-xs text-[#525A8B] hidden sm:block font-medium">Deterministic Showcase for Evaluation</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenComparisonModal}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-medium transition"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#F8FAFF] hover:bg-[#EEF2FE] border border-[#DCE3F9] text-xs text-[#10174D] font-medium transition cursor-pointer"
           >
-            <Scale className="w-3.5 h-3.5 text-indigo-400" />
+            <Scale className="w-3.5 h-3.5 text-[#5964FE]" />
             Comparison Table
           </button>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-1 rounded-lg text-[#8E9BBF] hover:text-[#10174D] hover:bg-[#EEF2FE] transition cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -103,23 +103,23 @@ export default function DemoWalkthrough({
             <button
               key={s.step}
               onClick={() => setCurrentStep(s.step)}
-              className={`p-2 rounded-xl text-left border transition-all ${
+              className={`p-2 rounded-xl text-left border transition-all cursor-pointer ${
                 isCurrent 
-                  ? "bg-indigo-600/30 border-indigo-400 text-white" 
+                  ? "bg-[#DFE3FF] border-[#5964FE] text-[#434EEB] font-bold" 
                   : isDone
-                  ? "bg-emerald-950/30 border-emerald-800 text-slate-300"
-                  : "bg-slate-800/40 border-slate-800 text-slate-500 hover:text-slate-300"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                  : "bg-[#F8FAFF] border-[#DCE3F9] text-[#525A8B] hover:text-[#10174D]"
               }`}
             >
               <div className="flex items-center gap-1.5 mb-1">
                 {isDone ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 ) : (
-                  <span className={`w-3.5 h-3.5 rounded-full text-[9px] flex items-center justify-center font-bold ${isCurrent ? "bg-indigo-500 text-white" : "bg-slate-700 text-slate-400"}`}>
+                  <span className={`w-3.5 h-3.5 rounded-full text-[9px] flex items-center justify-center font-bold ${isCurrent ? "bg-[#5964FE] text-white" : "bg-[#DFE3FF] text-[#434EEB]"}`}>
                     {s.step}
                   </span>
                 )}
-                <span className="text-[11px] font-semibold truncate hidden md:inline">{s.title.split(". ")[1]}</span>
+                <span className="text-[11px] truncate hidden md:inline">{s.title.split(". ")[1]}</span>
               </div>
             </button>
           );
@@ -127,12 +127,12 @@ export default function DemoWalkthrough({
       </div>
 
       {/* Active Step Content & Action CTA */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F8FAFF] p-3.5 rounded-2xl border border-[#DCE3F9]">
         <div>
-          <h4 className="font-semibold text-sm text-indigo-300 flex items-center gap-2">
+          <h4 className="font-semibold text-sm text-[#434EEB] flex items-center gap-2">
             {active.title}
           </h4>
-          <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+          <p className="text-xs text-[#525A8B] mt-0.5 leading-relaxed font-medium">
             {active.desc}
           </p>
         </div>
@@ -140,7 +140,7 @@ export default function DemoWalkthrough({
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={active.onAction}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 text-white font-semibold text-xs shadow-md transition transform active:scale-95"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-white font-semibold text-xs shadow-md shadow-[#5964FE]/20 transition transform active:scale-95 cursor-pointer"
           >
             <active.actionIcon className="w-4 h-4" />
             {active.actionLabel}
@@ -149,7 +149,7 @@ export default function DemoWalkthrough({
           {currentStep < steps.length ? (
             <button
               onClick={() => setCurrentStep(prev => prev + 1)}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
+              className="p-2 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] text-[#10174D] transition cursor-pointer"
               title="Next Step"
             >
               <ArrowRight className="w-4 h-4" />
@@ -157,7 +157,7 @@ export default function DemoWalkthrough({
           ) : (
             <button
               onClick={() => setCurrentStep(1)}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
+              className="p-2 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] text-[#10174D] transition cursor-pointer"
               title="Restart Tour"
             >
               <RefreshCw className="w-4 h-4" />

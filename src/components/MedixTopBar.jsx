@@ -18,25 +18,25 @@ export default function MedixTopBar({
   shortlistCount = 0
 }) {
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] px-4 sm:px-8 py-3 flex items-center justify-between select-none">
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-[#E2E7FA] px-4 sm:px-8 py-3 flex items-center justify-between select-none shadow-[0_2px_15px_rgba(89,100,254,0.03)]">
       
       {/* Left: Mobile Brand & Tagline */}
       <div className="flex items-center gap-3">
         <div className="lg:hidden flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center">
-            <Compass className="w-4 h-4" />
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#5964FE] to-[#7B73FE] text-white flex items-center justify-center">
+            <Compass className="w-4 h-4 stroke-[2.5]" />
           </div>
-          <span className="font-display font-extrabold text-base text-[#0F172A]">EventRoute</span>
+          <span className="font-display font-extrabold text-base text-[#10174D]">EventRoute</span>
         </div>
 
         {/* Center-Left Segmented Pill Tabs */}
-        <div className="hidden sm:flex items-center gap-1 bg-[#F1F5F9] p-1 rounded-2xl border border-[#E2E8F0]">
+        <div className="hidden sm:flex items-center gap-1 bg-[#EEF2FE] p-1 rounded-2xl border border-[#DCE3F9]">
           <button
             onClick={() => setActiveTab("feed")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "feed"
-                ? "bg-white text-[#0F172A] shadow-xs"
-                : "text-[#64748B] hover:text-[#0F172A]"
+                ? "bg-white text-[#10174D] shadow-xs"
+                : "text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             Dashboard
@@ -46,11 +46,11 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("swipe")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
               activeTab === "swipe"
-                ? "bg-rose-500 text-white shadow-xs"
-                : "text-rose-600 hover:bg-rose-50"
+                ? "bg-gradient-to-r from-[#5964FE] to-[#8C6DFE] text-white shadow-xs"
+                : "text-[#5964FE] hover:bg-[#DFE3FF]/50"
             }`}
           >
-            <Flame className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
+            <Flame className="w-3.5 h-3.5 fill-[#5964FE] text-[#5964FE]" />
             <span>Swipe Deck</span>
           </button>
 
@@ -58,15 +58,15 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("shortlist")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
               activeTab === "shortlist"
-                ? "bg-emerald-600 text-white shadow-xs"
-                : "text-emerald-700 hover:bg-emerald-50"
+                ? "bg-[#5964FE] text-white shadow-xs"
+                : "text-[#434EEB] hover:bg-[#DFE3FF]/50"
             }`}
           >
             <BookmarkCheck className="w-3.5 h-3.5" />
             <span>Shortlist</span>
             {shortlistCount > 0 && (
               <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-full ${
-                activeTab === "shortlist" ? "bg-white text-emerald-800" : "bg-emerald-100 text-emerald-800"
+                activeTab === "shortlist" ? "bg-white text-[#434EEB]" : "bg-[#DFE3FF] text-[#434EEB]"
               }`}>
                 {shortlistCount}
               </span>
@@ -77,8 +77,8 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("opportunities")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "opportunities"
-                ? "bg-white text-[#0F172A] shadow-xs"
-                : "text-[#64748B] hover:text-[#0F172A]"
+                ? "bg-white text-[#10174D] shadow-xs"
+                : "text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             Opportunities
@@ -88,8 +88,8 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("calendar")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "calendar"
-                ? "bg-white text-[#0F172A] shadow-xs"
-                : "text-[#64748B] hover:text-[#0F172A]"
+                ? "bg-white text-[#10174D] shadow-xs"
+                : "text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             Exam Guard
@@ -99,8 +99,8 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("od_letters")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "od_letters"
-                ? "bg-white text-[#0F172A] shadow-xs"
-                : "text-[#64748B] hover:text-[#0F172A]"
+                ? "bg-white text-[#10174D] shadow-xs"
+                : "text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             OD Portal
@@ -114,36 +114,36 @@ export default function MedixTopBar({
         {/* Judges Demo Tour Button */}
         <button
           onClick={onStartDemoTour}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm transition active:scale-95 cursor-pointer"
+          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-white font-bold text-xs uppercase tracking-wider shadow-sm shadow-[#5964FE]/20 transition active:scale-95 cursor-pointer"
         >
           <PlayCircle className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Judges Demo Tour</span>
         </button>
 
         {/* Notifications Icon with dot */}
-        <div className="relative cursor-pointer p-2 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition">
+        <div className="relative cursor-pointer p-2 rounded-xl text-[#525A8B] hover:bg-[#EEF2FE] hover:text-[#10174D] transition">
           <Bell className="w-4 h-4" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#5964FE] ring-2 ring-white"></span>
         </div>
 
         {/* Settings Icon */}
         <button 
           onClick={() => alert("Settings & Preferences")}
-          className="p-2 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition cursor-pointer"
+          className="p-2 rounded-xl text-[#525A8B] hover:bg-[#EEF2FE] hover:text-[#10174D] transition cursor-pointer"
         >
           <Settings className="w-4 h-4" />
         </button>
 
-        {/* Milind Profile Badge (From Screenshot: AR Avatar, Name, Demo account) */}
-        <div className="flex items-center gap-2.5 pl-2 border-l border-slate-200">
-          <div className="w-9 h-9 rounded-full bg-[#E6F7F0] text-emerald-800 font-bold text-xs flex items-center justify-center ring-2 ring-emerald-200/60">
+        {/* Milind Profile Badge */}
+        <div className="flex items-center gap-2.5 pl-2 border-l border-[#E2E7FA]">
+          <div className="w-9 h-9 rounded-full bg-[#DFE3FF] text-[#434EEB] font-extrabold text-xs flex items-center justify-center ring-2 ring-[#5964FE]/30 shadow-xs">
             ML
           </div>
           <div className="text-left hidden md:block">
-            <p className="text-xs font-extrabold text-[#0F172A] leading-tight">
+            <p className="text-xs font-extrabold text-[#10174D] leading-tight">
               {STUDENT_PROFILE.name}
             </p>
-            <p className="text-[10px] text-[#64748B] font-medium leading-tight">
+            <p className="text-[10px] text-[#525A8B] font-medium leading-tight">
               {STUDENT_PROFILE.year} · Demo account
             </p>
           </div>

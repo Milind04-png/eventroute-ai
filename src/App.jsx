@@ -346,12 +346,12 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-row selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#F5F7FF] via-[#EEF2FE] to-[#E5EAFC] text-[#10174D] flex flex-row selection:bg-[#5964FE] selection:text-white">
       
       {/* Dynamic Feedback Toast */}
       {rerankToast && (
-        <div className="fixed top-20 right-6 z-50 p-4 rounded-2xl shadow-2xl flex items-center gap-2.5 animate-in slide-in-from-top-2 duration-300 border text-xs font-bold bg-white border-emerald-300 text-emerald-800 shadow-emerald-500/10">
-          <Sparkles className="w-4 h-4 text-emerald-500 animate-spin" />
+        <div className="fixed top-20 right-6 z-50 p-4 rounded-2xl shadow-2xl flex items-center gap-2.5 animate-in slide-in-from-top-2 duration-300 border text-xs font-bold bg-white/95 border-[#DCE3F9] text-[#434EEB] shadow-[0_8px_30px_rgba(89,100,254,0.15)]">
+          <Sparkles className="w-4 h-4 text-[#5964FE] animate-spin" />
           <span>{rerankToast}</span>
         </div>
       )}
@@ -400,7 +400,7 @@ export default function App() {
               />
 
               {/* Verified College Logos & Institutional Crests */}
-              <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-[0_4px_24px_rgba(15,23,42,0.02)]">
+              <div className="p-6 rounded-3xl bg-white/90 backdrop-blur-md border border-[#E2E7FA] shadow-[0_4px_24px_rgba(89,100,254,0.03)]">
                 <CollegeLogosSection
                   onSelectCollege={(col) => setActiveCollegeFilter(col)}
                   activeCollegeFilter={activeCollegeFilter}
@@ -423,15 +423,15 @@ export default function App() {
               <section className="space-y-6">
                 
                 {/* Search & Filters Header Bar */}
-                <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-[0_4px_20px_rgba(15,23,42,0.03)] space-y-4">
+                <div className="p-6 rounded-3xl bg-white/90 backdrop-blur-md border border-[#E2E7FA] shadow-[0_4px_20px_rgba(89,100,254,0.03)] space-y-4">
                   
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#F0F3FD]">
                     <div>
-                      <h2 className="font-display font-bold text-xl text-[#0F172A] flex items-center gap-2">
-                        <Sparkles className="w-5 h-5 text-emerald-600" />
+                      <h2 className="font-display font-bold text-xl text-[#10174D] flex items-center gap-2">
+                        <Sparkles className="w-5 h-5 text-[#5964FE]" />
                         Explore All Opportunities
                       </h2>
-                      <p className="text-xs text-[#64748B] mt-0.5 font-medium">
+                      <p className="text-xs text-[#525A8B] mt-0.5 font-medium">
                         Showing personalized opportunities for Milind (2nd Year CSE, Delhi Technical Campus).
                       </p>
                     </div>
@@ -439,7 +439,7 @@ export default function App() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setIsScannerOpen(true)}
-                        className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 text-xs font-bold transition shadow-xs cursor-pointer"
+                        className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-white text-xs font-bold transition shadow-sm shadow-[#5964FE]/20 cursor-pointer"
                         title="Scan Flyer or WhatsApp text"
                       >
                         <Scan className="w-3.5 h-3.5" />
@@ -448,7 +448,7 @@ export default function App() {
 
                       <button
                         onClick={handleResetWeights}
-                        className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition"
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] text-xs font-semibold transition border border-[#DCE3F9] cursor-pointer"
                         title="Reset AI weights"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
@@ -462,13 +462,13 @@ export default function App() {
                     
                     {/* Search query */}
                     <div className="relative">
-                      <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                      <Search className="w-4 h-4 text-[#8E9BBF] absolute left-3 top-3" />
                       <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search hackathons, topics, colleges..."
-                        className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-9 pr-3 py-2.5 text-[#0F172A] placeholder-slate-400 focus:border-emerald-500 outline-none transition"
+                        className="w-full bg-[#F8FAFF] border border-[#DCE3F9] rounded-xl pl-9 pr-3 py-2.5 text-[#10174D] placeholder-[#8E9BBF] focus:border-[#5964FE] focus:ring-2 focus:ring-[#5964FE]/20 outline-none transition"
                       />
                     </div>
 
@@ -477,7 +477,7 @@ export default function App() {
                       <select
                         value={selectedCity}
                         onChange={(e) => setSelectedCity(e.target.value)}
-                        className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-slate-700 focus:border-emerald-500 outline-none font-medium"
+                        className="w-full bg-[#F8FAFF] border border-[#DCE3F9] rounded-xl px-3 py-2.5 text-[#525A8B] focus:border-[#5964FE] focus:ring-2 focus:ring-[#5964FE]/20 outline-none font-medium cursor-pointer"
                       >
                         <option value="All">All Locations (Pune, Mumbai, BLR)</option>
                         <option value="Pune">Pune</option>
@@ -492,7 +492,7 @@ export default function App() {
                       <select
                         value={selectedFormat}
                         onChange={(e) => setSelectedFormat(e.target.value)}
-                        className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-slate-700 focus:border-emerald-500 outline-none font-medium"
+                        className="w-full bg-[#F8FAFF] border border-[#DCE3F9] rounded-xl px-3 py-2.5 text-[#525A8B] focus:border-[#5964FE] focus:ring-2 focus:ring-[#5964FE]/20 outline-none font-medium cursor-pointer"
                       >
                         <option value="All">All Formats (In-Person / Online)</option>
                         <option value="In-Person">In-Person Only</option>
@@ -502,14 +502,14 @@ export default function App() {
 
                     {/* Exam Clash Filter Toggle */}
                     <div className="flex items-center">
-                      <label className="flex items-center gap-2 cursor-pointer bg-[#F8FAFC] border border-[#E2E8F0] px-3 py-2.5 rounded-xl w-full select-none hover:border-slate-300 transition">
+                      <label className="flex items-center gap-2 cursor-pointer bg-[#F8FAFF] border border-[#DCE3F9] px-3 py-2.5 rounded-xl w-full select-none hover:border-[#5964FE] transition">
                         <input
                           type="checkbox"
                           checked={hideClashes}
                           onChange={(e) => setHideClashes(e.target.checked)}
-                          className="rounded accent-emerald-500 w-4 h-4 cursor-pointer"
+                          className="rounded accent-[#5964FE] w-4 h-4 cursor-pointer"
                         />
-                        <span className="text-slate-700 text-xs font-semibold">Hide Exam Clashes</span>
+                        <span className="text-[#525A8B] text-xs font-semibold">Hide Exam Clashes</span>
                       </label>
                     </div>
 
@@ -597,7 +597,7 @@ export default function App() {
 
           {/* TAB 6: COLLEGES */}
           {activeTab === "colleges" && (
-            <div className="p-8 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-6">
+            <div className="p-8 rounded-3xl bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_10px_30px_rgba(89,100,254,0.05)] space-y-6">
               <CollegeLogosSection
                 onSelectCollege={(col) => {
                   setActiveCollegeFilter(col);
@@ -610,17 +610,17 @@ export default function App() {
 
           {/* TAB 7: OD LETTERS LIST */}
           {activeTab === "od_letters" && (
-            <div className="p-8 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-4">
-              <h2 className="font-display font-extrabold text-2xl text-[#0F172A]">
+            <div className="p-8 rounded-3xl bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_10px_30px_rgba(89,100,254,0.05)] space-y-4">
+              <h2 className="font-display font-extrabold text-2xl text-[#10174D]">
                 On-Duty (OD) Leave Management Node
               </h2>
-              <p className="text-sm text-[#64748B]">
-                Pre-approved official attendance leave letters formatted for Mumbai University and partner autonomous colleges.
+              <p className="text-sm text-[#525A8B] font-medium">
+                Pre-approved official attendance leave letters formatted for Delhi Technical Campus, GGSIPU, and partner autonomous colleges.
               </p>
               <div className="pt-4 flex gap-3">
                 <button
                   onClick={() => handleGenerateOD("evt_hackai_pune_26")}
-                  className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-md transition cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-white font-bold text-xs shadow-md shadow-[#5964FE]/20 transition cursor-pointer"
                 >
                   Generate New OD Letter (HackAI Pune)
                 </button>

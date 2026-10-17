@@ -130,15 +130,15 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="font-display font-extrabold text-xl text-[#0F172A] flex items-center gap-2">
-              <Building2 className="w-5 h-5 text-emerald-600" />
+            <h2 className="font-display font-extrabold text-xl text-[#10174D] flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-[#5964FE]" />
               Verified Partner Colleges & Institutional Crests
             </h2>
-            <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+            <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-[#DFE3FF] text-[#434EEB]">
               9 Campuses
             </span>
           </div>
-          <p className="text-xs text-[#64748B] mt-0.5">
+          <p className="text-xs text-[#525A8B] mt-0.5">
             Partner colleges with pre-approved On-Duty (OD) acceptance and verified hackathon hubs.
           </p>
         </div>
@@ -146,7 +146,7 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
         {activeCollegeFilter && (
           <button
             onClick={() => onSelectCollege(null)}
-            className="text-xs font-bold text-emerald-600 hover:text-emerald-700 transition self-start"
+            className="text-xs font-bold text-[#5964FE] hover:text-[#434EEB] transition self-start cursor-pointer"
           >
             Clear college filter ({activeCollegeFilter})
           </button>
@@ -164,12 +164,12 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
               onClick={() => onSelectCollege && onSelectCollege(col.shortName)}
               className={`p-3.5 rounded-2xl border transition-all duration-200 flex flex-col items-center text-center justify-between cursor-pointer group ${
                 isSelected
-                  ? "bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-400"
-                  : "bg-white border-[#E2E8F0] hover:border-emerald-300 hover:shadow-md hover:-translate-y-0.5"
+                  ? "bg-[#EEF2FE] border-[#5964FE] shadow-sm ring-2 ring-[#5964FE]/30"
+                  : "bg-white/95 border-[#E2E7FA] hover:border-[#5964FE] hover:shadow-md hover:-translate-y-0.5"
               }`}
             >
               {/* College Official Logo / Crest */}
-              <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200/80 shadow-xs p-1.5 flex items-center justify-center mb-2 group-hover:scale-105 group-hover:shadow-md transition-all shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-white border border-[#E2E7FA] shadow-xs p-1.5 flex items-center justify-center mb-2 group-hover:scale-105 group-hover:shadow-md transition-all shrink-0">
                 <img
                   src={col.logoUrl}
                   alt={`${col.shortName} official logo`}
@@ -190,17 +190,21 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
 
               {/* Names */}
               <div className="w-full">
-                <h4 className="font-display font-bold text-xs text-[#0F172A] truncate">
+                <h4 className="font-display font-bold text-xs text-[#10174D] truncate">
                   {col.shortName}
                 </h4>
-                <p className="text-[10px] text-[#64748B] truncate mt-0.5">
+                <p className="text-[10px] text-[#525A8B] truncate mt-0.5">
                   {col.flagshipFest}
                 </p>
               </div>
 
               {/* OD Acceptance Badge */}
               <div className="mt-2 w-full">
-                <span className={`block w-full text-[9px] font-bold py-0.5 px-1 rounded truncate border ${col.bgColor}`}>
+                <span className={`block w-full text-[9px] font-bold py-0.5 px-1 rounded truncate border ${
+                  col.isHomeCollege 
+                    ? "bg-[#DFE3FF] text-[#434EEB] border-[#C7D2FE]" 
+                    : "bg-[#F8FAFF] text-[#525A8B] border-[#DCE3F9]"
+                }`}>
                   {col.isHomeCollege ? "★ Your College" : "OD Verified"}
                 </span>
               </div>

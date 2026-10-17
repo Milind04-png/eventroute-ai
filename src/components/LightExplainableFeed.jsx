@@ -55,19 +55,19 @@ export default function LightExplainableFeed({
   const strokeDashoffset = circumference - (scoreProgress / 100) * circumference;
 
   return (
-    <section className="py-16 lg:py-24 bg-[#F8FAFC] border-t border-[#E2E8F0] relative">
+    <section className="py-12 lg:py-16 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
-          <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <div className="mb-10">
+          <p className="text-xs font-bold text-[#5964FE] uppercase tracking-widest mb-2 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#5964FE]"></span>
             01 EXPLAINABLE RECOMMENDATIONS
           </p>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0F172A] tracking-tight">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#10174D] tracking-tight">
             Your feed, ranked — and justified.
           </h2>
-          <p className="text-sm text-[#475569] mt-2 max-w-xl">
+          <p className="text-sm text-[#525A8B] mt-2 max-w-xl">
             Every match score is synthesized from transparent mathematical vectors, 
             not opaque sponsored promotions.
           </p>
@@ -82,24 +82,24 @@ export default function LightExplainableFeed({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-4 bg-[#0F172A] text-white rounded-3xl p-6 sm:p-7 shadow-2xl shadow-slate-900/10 border border-slate-800 relative overflow-hidden"
+            className="lg:col-span-4 bg-[#10174D] text-white rounded-3xl p-6 sm:p-7 shadow-2xl shadow-[#10174D]/20 border border-[#2A346C] relative overflow-hidden"
           >
             {/* Subtle background glow */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-48 h-48 bg-[#5964FE]/20 rounded-full blur-2xl pointer-events-none"></div>
 
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                <div className="w-8 h-8 rounded-lg bg-[#5964FE]/30 text-white flex items-center justify-center border border-[#5964FE]/40">
                   <Sliders className="w-4 h-4" />
                 </div>
                 <h3 className="font-display font-bold text-base text-white">Hybrid score weights</h3>
               </div>
-              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-white/10 text-white/80">
                 Active Model
               </span>
             </div>
 
-            <p className="text-xs text-slate-400 mb-6 leading-relaxed">
+            <p className="text-xs text-slate-300 mb-6 leading-relaxed">
               Adjust multi-objective ranking preferences. Weights adapt automatically in real-time as you interact with the feed.
             </p>
 
@@ -109,18 +109,18 @@ export default function LightExplainableFeed({
               {/* Semantic Weight */}
               <div>
                 <div className="flex justify-between items-center text-xs mb-2">
-                  <span className="font-medium text-slate-300 flex items-center gap-1.5">
-                    <BrainCircuit className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="font-medium text-slate-200 flex items-center gap-1.5">
+                    <BrainCircuit className="w-3.5 h-3.5 text-[#5964FE]" />
                     Semantic interest fit
                   </span>
-                  <span className="font-mono font-bold text-emerald-400">{weights.semantic}%</span>
+                  <span className="font-mono font-bold text-white">{weights.semantic}%</span>
                 </div>
-                <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${weights.semantic}%` }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="bg-gradient-to-r from-emerald-500 to-teal-400 h-2.5 rounded-full"
+                    className="bg-gradient-to-r from-[#5964FE] to-[#7B73FE] h-2.5 rounded-full"
                   />
                 </div>
                 <input 
@@ -129,25 +129,25 @@ export default function LightExplainableFeed({
                   max="80" 
                   value={weights.semantic} 
                   onChange={(e) => setWeights({ ...weights, semantic: Number(e.target.value) })}
-                  className="w-full mt-2 accent-emerald-500 cursor-pointer h-1 bg-slate-800 rounded-lg appearance-none opacity-50 hover:opacity-100 transition-opacity"
+                  className="w-full mt-2 accent-[#5964FE] cursor-pointer h-1 bg-white/10 rounded-lg appearance-none opacity-60 hover:opacity-100 transition-opacity"
                 />
               </div>
 
               {/* Skill Overlap Weight */}
               <div>
                 <div className="flex justify-between items-center text-xs mb-2">
-                  <span className="font-medium text-slate-300 flex items-center gap-1.5">
-                    <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="font-medium text-slate-200 flex items-center gap-1.5">
+                    <Zap className="w-3.5 h-3.5 text-[#5964FE]" />
                     Verified skill overlap
                   </span>
-                  <span className="font-mono font-bold text-emerald-400">{weights.skill}%</span>
+                  <span className="font-mono font-bold text-white">{weights.skill}%</span>
                 </div>
-                <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${weights.skill}%` }}
                     transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                    className="bg-gradient-to-r from-emerald-500 to-teal-400 h-2.5 rounded-full"
+                    className="bg-gradient-to-r from-[#5964FE] to-[#7B73FE] h-2.5 rounded-full"
                   />
                 </div>
                 <input 
@@ -156,25 +156,25 @@ export default function LightExplainableFeed({
                   max="80" 
                   value={weights.skill} 
                   onChange={(e) => setWeights({ ...weights, skill: Number(e.target.value) })}
-                  className="w-full mt-2 accent-emerald-500 cursor-pointer h-1 bg-slate-800 rounded-lg appearance-none opacity-50 hover:opacity-100 transition-opacity"
+                  className="w-full mt-2 accent-[#5964FE] cursor-pointer h-1 bg-white/10 rounded-lg appearance-none opacity-60 hover:opacity-100 transition-opacity"
                 />
               </div>
 
               {/* Eligibility & Calendar Fit */}
               <div>
                 <div className="flex justify-between items-center text-xs mb-2">
-                  <span className="font-medium text-slate-300 flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="font-medium text-slate-200 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#5964FE]" />
                     Eligibility & exam clash guard
                   </span>
-                  <span className="font-mono font-bold text-emerald-400">{weights.eligibility}%</span>
+                  <span className="font-mono font-bold text-white">{weights.eligibility}%</span>
                 </div>
-                <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${weights.eligibility}%` }}
                     transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-                    className="bg-gradient-to-r from-emerald-500 to-teal-400 h-2.5 rounded-full"
+                    className="bg-gradient-to-r from-[#5964FE] to-[#7B73FE] h-2.5 rounded-full"
                   />
                 </div>
                 <input 
@@ -183,18 +183,18 @@ export default function LightExplainableFeed({
                   max="80" 
                   value={weights.eligibility} 
                   onChange={(e) => setWeights({ ...weights, eligibility: Number(e.target.value) })}
-                  className="w-full mt-2 accent-emerald-500 cursor-pointer h-1 bg-slate-800 rounded-lg appearance-none opacity-50 hover:opacity-100 transition-opacity"
+                  className="w-full mt-2 accent-[#5964FE] cursor-pointer h-1 bg-white/10 rounded-lg appearance-none opacity-60 hover:opacity-100 transition-opacity"
                 />
               </div>
 
             </div>
 
             {/* Reset Weights Action */}
-            <div className="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-400">Total Weight: 100%</span>
+            <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+              <span className="text-slate-300">Total Weight: 100%</span>
               <button 
                 onClick={() => setWeights({ semantic: 50, skill: 30, eligibility: 20 })}
-                className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold transition"
+                className="text-[#5964FE] hover:text-[#7B73FE] flex items-center gap-1 font-semibold transition cursor-pointer"
               >
                 <RefreshCw className="w-3 h-3" />
                 <span>Reset to default</span>
@@ -210,39 +210,39 @@ export default function LightExplainableFeed({
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             whileHover={{ y: -6 }}
-            className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-[#E2E8F0] shadow-[0_15px_40px_rgba(15,23,42,0.06)] hover:shadow-[0_25px_60px_rgba(15,23,42,0.12)] transition-all duration-300 relative group"
+            className="lg:col-span-8 bg-white/95 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-[#E2E7FA] shadow-[0_15px_40px_rgba(89,100,254,0.06)] hover:shadow-[0_25px_60px_rgba(89,100,254,0.12)] transition-all duration-300 relative group"
           >
             
             {/* Top Row: Rank Tag, Title, and 87% Score Ring */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-slate-100">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-[#F0F3FD]">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-lg bg-emerald-500 text-[#0F172A] font-bold text-xs uppercase tracking-wider">
+                  <span className="px-2.5 py-0.5 rounded-lg bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white font-bold text-xs uppercase tracking-wider shadow-xs">
                     #1 Ranked
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 font-semibold text-xs">
+                  <span className="px-2.5 py-0.5 rounded-lg bg-[#EEF2FE] text-[#434EEB] font-semibold text-xs border border-[#DCE3F9]">
                     Worth it 8.7 / 10
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 font-semibold text-xs border border-emerald-200">
+                  <span className="px-2.5 py-0.5 rounded-lg bg-[#DFE3FF] text-[#434EEB] font-semibold text-xs border border-[#C7D2FE]">
                     Verified Tier-1
                   </span>
                 </div>
 
-                <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A]">
+                <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-[#10174D]">
                   HackML Weekend 2026
                 </h3>
 
-                <div className="flex flex-wrap items-center gap-4 text-xs text-[#475569] pt-1">
+                <div className="flex flex-wrap items-center gap-4 text-xs text-[#525A8B] pt-1">
                   <span className="flex items-center gap-1.5 font-medium">
-                    <Calendar className="w-4 h-4 text-emerald-600" />
+                    <Calendar className="w-4 h-4 text-[#5964FE]" />
                     Oct 26 – 27, 2026
                   </span>
                   <span className="flex items-center gap-1.5 font-medium">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <MapPin className="w-4 h-4 text-[#5964FE]" />
                     COEP Tech, Pune (In-Person)
                   </span>
                   <span className="flex items-center gap-1.5 font-medium">
-                    <Award className="w-4 h-4 text-emerald-600" />
+                    <Award className="w-4 h-4 text-[#5964FE]" />
                     ₹2,50,000 Prize Pool
                   </span>
                 </div>
@@ -255,7 +255,7 @@ export default function LightExplainableFeed({
                     cx="50"
                     cy="50"
                     r={radius}
-                    stroke="#F1F5F9"
+                    stroke="#EEF2FE"
                     strokeWidth="8"
                     fill="transparent"
                   />
@@ -263,7 +263,7 @@ export default function LightExplainableFeed({
                     cx="50"
                     cy="50"
                     r={radius}
-                    stroke="#10B981"
+                    stroke="#5964FE"
                     strokeWidth="8"
                     strokeDasharray={circumference}
                     initial={{ strokeDashoffset: circumference }}
@@ -274,10 +274,10 @@ export default function LightExplainableFeed({
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                  <span className="font-display font-extrabold text-2xl text-[#0F172A] leading-none">
+                  <span className="font-display font-extrabold text-2xl text-[#10174D] leading-none">
                     {calculatedScore}%
                   </span>
-                  <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mt-0.5">
+                  <span className="text-[10px] font-bold text-[#5964FE] uppercase tracking-wider mt-0.5">
                     Match
                   </span>
                 </div>
@@ -286,12 +286,12 @@ export default function LightExplainableFeed({
             </div>
 
             {/* Tags Row */}
-            <div className="py-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-100">
+            <div className="py-4 flex flex-wrap items-center justify-between gap-3 border-b border-[#F0F3FD]">
               <div className="flex flex-wrap gap-1.5">
                 {["Generative AI", "FastAPI", "Python", "Healthcare", "Edge Computing"].map((tag, idx) => (
                   <span 
                     key={idx} 
-                    className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-[#334155] border border-slate-200/60"
+                    className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#F8FAFF] text-[#525A8B] border border-[#DCE3F9]"
                   >
                     {tag}
                   </span>
@@ -303,10 +303,10 @@ export default function LightExplainableFeed({
                 <button
                   onClick={() => onFeedback("evt_hackai_pune_26", "upvote")}
                   title="Upvote: Boost similar opportunities"
-                  className={`p-2 rounded-xl border transition-all ${
+                  className={`p-2 rounded-xl border transition-all cursor-pointer ${
                     upvoted 
-                      ? "bg-emerald-500 text-[#0F172A] border-emerald-500 font-bold" 
-                      : "bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border-slate-200"
+                      ? "bg-[#5964FE] text-white border-[#5964FE] font-bold shadow-xs" 
+                      : "bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#525A8B] hover:text-[#434EEB] border-[#DCE3F9]"
                   }`}
                 >
                   <ThumbsUp className="w-4 h-4" />
@@ -315,10 +315,10 @@ export default function LightExplainableFeed({
                 <button
                   onClick={() => onFeedback("evt_hackai_pune_26", "downvote", "Demote for demo")}
                   title="Downvote: Adjust weights"
-                  className={`p-2 rounded-xl border transition-all ${
+                  className={`p-2 rounded-xl border transition-all cursor-pointer ${
                     downvoted 
-                      ? "bg-rose-500 text-white border-rose-500 font-bold" 
-                      : "bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border-slate-200"
+                      ? "bg-rose-500 text-white border-rose-500 font-bold shadow-xs" 
+                      : "bg-[#EEF2FE] hover:bg-rose-50 text-[#525A8B] hover:text-rose-600 border-[#DCE3F9]"
                   }`}
                 >
                   <ThumbsDown className="w-4 h-4" />
@@ -326,50 +326,50 @@ export default function LightExplainableFeed({
 
                 <button
                   onClick={onWhyClick}
-                  className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0F172A] font-bold text-xs flex items-center gap-1.5 transition"
+                  className="px-3.5 py-2 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#10174D] font-bold text-xs flex items-center gap-1.5 transition border border-[#DCE3F9] cursor-pointer"
                 >
-                  <HelpCircle className="w-4 h-4 text-emerald-600" />
+                  <HelpCircle className="w-4 h-4 text-[#5964FE]" />
                   <span>Why?</span>
                 </button>
               </div>
             </div>
 
             {/* Bullet Points with Checkmarks */}
-            <div className="py-5 space-y-2.5 text-xs sm:text-sm text-[#334155]">
+            <div className="py-5 space-y-2.5 text-xs sm:text-sm text-[#525A8B]">
               <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#5964FE] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  Matches your verified <strong className="text-[#0F172A]">NLP & Healthcare AI</strong> projects on GitHub.
+                  Matches your verified <strong className="text-[#10174D]">NLP & Healthcare AI</strong> projects on GitHub.
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#5964FE] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  Only 1 minor prerequisite gap: <strong className="text-[#0F172A]">PyTorch</strong> (curated 3-hour fast-track prep ready).
+                  Only 1 minor prerequisite gap: <strong className="text-[#10174D]">PyTorch</strong> (curated 3-hour fast-track prep ready).
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#5964FE] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  Starts Sunday morning — <strong className="text-emerald-700 font-semibold">zero exam conflict</strong> with your Saturday DBMS Lab Exam.
+                  Starts Sunday morning — <strong className="text-[#434EEB] font-semibold">zero exam conflict</strong> with your Saturday DBMS Lab Exam.
                 </span>
               </div>
             </div>
 
             {/* Bottom Row: Actions & Three Mini-Cards */}
-            <div className="pt-5 border-t border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="pt-5 border-t border-[#F0F3FD] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               
               {/* Quick Actions */}
               <div className="flex items-center gap-2">
                 <button
                   onClick={onSkillGapClick}
-                  className="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200 transition"
+                  className="px-3.5 py-2 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] text-xs font-bold border border-[#DCE3F9] transition cursor-pointer"
                 >
                   View Skill-Gap Bridge
                 </button>
                 <button
                   onClick={onODClick}
-                  className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0F172A] text-xs font-bold transition"
+                  className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-white text-xs font-bold transition shadow-xs cursor-pointer"
                 >
                   1-Click OD Letter
                 </button>
@@ -379,21 +379,21 @@ export default function LightExplainableFeed({
               <div className="flex items-center gap-2.5 self-end md:self-auto">
                 
                 {/* Mini Card 1 */}
-                <div className="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-center min-w-[70px]">
-                  <p className="font-display font-bold text-base text-[#0F172A]">91</p>
-                  <p className="text-[10px] text-slate-500 uppercase font-semibold">Semantic</p>
+                <div className="px-3 py-2 rounded-xl bg-[#F8FAFF] border border-[#DCE3F9] text-center min-w-[70px]">
+                  <p className="font-display font-bold text-base text-[#10174D]">91</p>
+                  <p className="text-[10px] text-[#525A8B] uppercase font-semibold">Semantic</p>
                 </div>
 
                 {/* Mini Card 2 */}
-                <div className="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-center min-w-[70px]">
-                  <p className="font-display font-bold text-base text-[#0F172A]">78</p>
-                  <p className="text-[10px] text-slate-500 uppercase font-semibold">Skills</p>
+                <div className="px-3 py-2 rounded-xl bg-[#F8FAFF] border border-[#DCE3F9] text-center min-w-[70px]">
+                  <p className="font-display font-bold text-base text-[#10174D]">78</p>
+                  <p className="text-[10px] text-[#525A8B] uppercase font-semibold">Skills</p>
                 </div>
 
                 {/* Mini Card 3 */}
-                <div className="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-center min-w-[70px]">
-                  <p className="font-display font-bold text-base text-[#0F172A]">88</p>
-                  <p className="text-[10px] text-slate-500 uppercase font-semibold">Fit</p>
+                <div className="px-3 py-2 rounded-xl bg-[#F8FAFF] border border-[#DCE3F9] text-center min-w-[70px]">
+                  <p className="font-display font-bold text-base text-[#10174D]">88</p>
+                  <p className="text-[10px] text-[#525A8B] uppercase font-semibold">Fit</p>
                 </div>
 
               </div>

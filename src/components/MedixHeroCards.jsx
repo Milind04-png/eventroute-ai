@@ -227,61 +227,61 @@ export default function MedixHeroCards({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         
         {/* CARD 1: ON-DUTY (OD) LEAVE AUTOMATION */}
-        <div className="rounded-3xl p-6 sm:p-7 bg-white border border-indigo-100/90 shadow-[0_12px_36px_rgba(99,102,241,0.06)] flex flex-col justify-between relative overflow-hidden group">
+        <div className="rounded-3xl p-6 sm:p-7 bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_12px_36px_rgba(89,100,254,0.05)] flex flex-col justify-between relative overflow-hidden group">
           
-          {/* Subtle soft indigo gradient halo */}
-          <div className="absolute top-0 right-0 w-56 h-56 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
+          {/* Subtle soft periwinkle gradient halo */}
+          <div className="absolute top-0 right-0 w-56 h-56 bg-[#5964FE]/5 rounded-full blur-3xl pointer-events-none"></div>
 
           <div>
             {/* Top Tag Row */}
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2 text-indigo-700 font-bold text-xs uppercase tracking-wider">
-                <div className="w-6 h-6 rounded-lg bg-indigo-100 flex items-center justify-center">
-                  <FileText className="w-3.5 h-3.5 text-indigo-600" />
+              <div className="flex items-center gap-2 text-[#434EEB] font-bold text-xs uppercase tracking-wider">
+                <div className="w-6 h-6 rounded-lg bg-[#DFE3FF] flex items-center justify-center">
+                  <FileText className="w-3.5 h-3.5 text-[#434EEB]" />
                 </div>
                 <span>ON-DUTY (OD) LEAVE AUTOMATION</span>
               </div>
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200">
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#EEF2FE] text-[#434EEB] border border-[#DCE3F9]">
                 Official Format
               </span>
             </div>
 
             {/* Title & Description */}
-            <h2 className="font-display font-extrabold text-2xl text-[#0F172A] mb-2">
+            <h2 className="font-display font-extrabold text-2xl text-[#10174D] mb-2">
               Official College OD Clearance
             </h2>
-            <p className="text-xs text-[#64748B] leading-relaxed mb-4">
+            <p className="text-xs text-[#525A8B] leading-relaxed mb-4">
               Instantly draft, sign, and export official On-Duty attendance petitions for upcoming hackathons. Automatically pre-fills timetable clearance, department head routing, and cryptographic verification QR codes.
             </p>
 
             {/* Feature Pills */}
-            <div className="flex flex-wrap items-center gap-2 text-[11px] text-[#475569] mb-6">
-              <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
+            <div className="flex flex-wrap items-center gap-2 text-[11px] text-[#525A8B] mb-6">
+              <span className="flex items-center gap-1 bg-[#F8FAFF] px-2.5 py-1 rounded-lg border border-[#DCE3F9] font-medium">
                 📍 Live QR Verification
               </span>
-              <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
+              <span className="flex items-center gap-1 bg-[#F8FAFF] px-2.5 py-1 rounded-lg border border-[#DCE3F9] font-medium">
                 ⚡ 1-Click PDF Generation
               </span>
-              <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
+              <span className="flex items-center gap-1 bg-[#F8FAFF] px-2.5 py-1 rounded-lg border border-[#DCE3F9] font-medium">
                 🏛️ University HOD Routing
               </span>
             </div>
           </div>
 
           {/* Action Button & Clear Information */}
-          <div className="text-center py-3 bg-[#F8FAFC] rounded-2xl border border-slate-200/70 p-4">
+          <div className="text-center py-3 bg-[#F8FAFF] rounded-2xl border border-[#DCE3F9] p-4">
             <button
               onClick={onTriggerOD}
-              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-xs tracking-wide shadow-md shadow-indigo-600/20 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 active:scale-95 text-white font-bold text-xs tracking-wide shadow-md shadow-[#5964FE]/25 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
             >
               <FileText className="w-4 h-4" />
               <span>Generate Official OD Letter</span>
             </button>
 
-            <p className="text-xs font-bold text-[#0F172A] mt-3">
+            <p className="text-xs font-bold text-[#10174D] mt-3">
               Automated Attendance Clearance
             </p>
-            <p className="text-[11px] text-[#64748B] mt-0.5">
+            <p className="text-[11px] text-[#525A8B] mt-0.5">
               Includes pre-filled letterhead with 1-click HOD approval
             </p>
           </div>
@@ -289,38 +289,38 @@ export default function MedixHeroCards({
         </div>
 
         {/* CARD 2: AI OPPORTUNITY ASSESSMENT (WITH SWIPE GESTURE TOOL DIRECTLY EMBEDDED) */}
-        <div className="rounded-3xl p-6 sm:p-7 bg-white border border-emerald-200/80 shadow-[0_12px_36px_rgba(16,185,129,0.06)] flex flex-col justify-between relative overflow-hidden">
+        <div className="rounded-3xl p-6 sm:p-7 bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_12px_36px_rgba(89,100,254,0.05)] flex flex-col justify-between relative overflow-hidden">
           
-          {/* Subtle soft green gradient halo */}
-          <div className="absolute top-0 right-0 w-56 h-56 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+          {/* Subtle soft periwinkle gradient halo */}
+          <div className="absolute top-0 right-0 w-56 h-56 bg-[#5964FE]/5 rounded-full blur-3xl pointer-events-none"></div>
 
           <div>
             {/* Top Header Row with Mode Toggle */}
             <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase tracking-wider">
-                <div className="w-6 h-6 rounded-lg bg-emerald-100 flex items-center justify-center">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <div className="flex items-center gap-2 text-[#434EEB] font-bold text-xs uppercase tracking-wider">
+                <div className="w-6 h-6 rounded-lg bg-[#DFE3FF] flex items-center justify-center">
+                  <Sparkles className="w-3.5 h-3.5 text-[#434EEB]" />
                 </div>
                 <span>AI OPPORTUNITY TOOL</span>
               </div>
 
               {/* Mode Toggle Pills: Swipe Gesture vs Search */}
-              <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-[11px] font-bold">
+              <div className="flex items-center gap-1 bg-[#EEF2FE] p-0.5 rounded-xl border border-[#DCE3F9] text-[11px] font-bold">
                 <button
                   type="button"
                   onClick={() => setToolMode("swipe")}
                   className={`px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer ${
-                    toolMode === "swipe" ? "bg-white text-emerald-800 shadow-xs" : "text-slate-500 hover:text-slate-800"
+                    toolMode === "swipe" ? "bg-white text-[#434EEB] shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
                   }`}
                 >
-                  <Flame className="w-3 h-3 text-rose-500 fill-rose-500" />
+                  <Flame className="w-3 h-3 text-[#5964FE] fill-[#5964FE]" />
                   <span>Swipe Gesture</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setToolMode("query")}
                   className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
-                    toolMode === "query" ? "bg-white text-slate-800 shadow-xs" : "text-slate-500 hover:text-slate-800"
+                    toolMode === "query" ? "bg-white text-[#10174D] shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
                   }`}
                 >
                   <span>Query</span>
@@ -330,17 +330,17 @@ export default function MedixHeroCards({
 
             {/* TITLE & DESCRIPTION */}
             <div className="flex items-center justify-between gap-2 mb-2">
-              <h2 className="font-display font-extrabold text-2xl text-[#0F172A]">
+              <h2 className="font-display font-extrabold text-2xl text-[#10174D]">
                 {toolMode === "swipe" ? "Swipe-to-Discover AI" : "Not sure what to attend?"}
               </h2>
               {toolMode === "swipe" && (
-                <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
+                <span className="text-[10px] font-bold text-[#434EEB] bg-[#DFE3FF] px-2 py-0.5 rounded-full border border-[#C7D2FE]">
                   {availableDeck.length} cards in deck
                 </span>
               )}
             </div>
 
-            <p className="text-xs text-[#64748B] leading-relaxed mb-4">
+            <p className="text-xs text-[#525A8B] leading-relaxed mb-4">
               {toolMode === "swipe"
                 ? "Drag the card with your mouse or finger: Swipe Right to Shortlist, Left to Skip, or Up for instant Skill Gap Analysis."
                 : "Describe your tech stack, hackathon goals, or weekend availability to get preliminary guidance on match scores and clash clearance."}
@@ -382,14 +382,14 @@ export default function MedixHeroCards({
                   </AnimatePresence>
                 </div>
 
-                {/* Gesture Control Buttons Toolbar */}
+                  {/* Gesture Control Buttons Toolbar */}
                 <div className="flex items-center justify-center gap-3 pt-1">
                   <button
                     type="button"
                     onClick={onUndoSwipe}
                     disabled={!swipeHistory || swipeHistory.length === 0}
                     title="Undo last swipe"
-                    className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition disabled:opacity-30 cursor-pointer"
+                    className="w-9 h-9 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#525A8B] flex items-center justify-center transition disabled:opacity-30 cursor-pointer border border-[#DCE3F9]"
                   >
                     <Undo2 className="w-4 h-4" />
                   </button>
@@ -407,16 +407,16 @@ export default function MedixHeroCards({
                     type="button"
                     onClick={() => currentCard && handleSwipeCard("up", currentCard)}
                     title="Skill Gap (Up)"
-                    className="w-10 h-10 rounded-2xl bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200 shadow-xs flex items-center justify-center transition active:scale-95 cursor-pointer"
+                    className="w-10 h-10 rounded-2xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] border border-[#DCE3F9] shadow-xs flex items-center justify-center transition active:scale-95 cursor-pointer"
                   >
-                    <Zap className="w-5 h-5 fill-indigo-600" />
+                    <Zap className="w-5 h-5 fill-[#5964FE] text-[#5964FE]" />
                   </button>
 
                   <button
                     type="button"
                     onClick={() => currentCard && handleSwipeCard("right", currentCard)}
                     title="Shortlist (Right)"
-                    className="w-11 h-11 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white shadow-md shadow-emerald-500/20 flex items-center justify-center transition active:scale-95 cursor-pointer"
+                    className="w-11 h-11 rounded-2xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 text-white shadow-md shadow-[#5964FE]/25 flex items-center justify-center transition active:scale-95 cursor-pointer"
                   >
                     <Check className="w-5 h-5 stroke-[3]" />
                   </button>
@@ -432,24 +432,24 @@ export default function MedixHeroCards({
                       value={assessmentInput}
                       onChange={(e) => setAssessmentInput(e.target.value)}
                       placeholder="Search opportunities (e.g. Generative AI, Web3, FinTech)..."
-                      className="w-full px-4 py-3 rounded-2xl bg-white border border-slate-200 text-xs text-[#0F172A] placeholder-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition shadow-xs"
+                      className="w-full px-4 py-3 rounded-2xl bg-[#F8FAFF] border border-[#DCE3F9] text-xs text-[#10174D] placeholder-[#8E9BBF] focus:border-[#5964FE] focus:ring-2 focus:ring-[#5964FE]/20 outline-none transition shadow-xs"
                     />
                   </div>
                 </form>
 
                 <div className="flex flex-wrap items-center gap-1.5 text-[11px] mb-2">
-                  <span className="text-slate-400 font-medium">Quick start:</span>
+                  <span className="text-[#8E9BBF] font-medium">Quick start:</span>
                   <button
                     type="button"
                     onClick={() => handleChipClick("Find me an AI hackathon this weekend without exam clashes")}
-                    className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 hover:text-emerald-800 text-slate-700 font-medium transition border border-slate-200/60 cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] font-medium transition border border-[#DCE3F9] cursor-pointer"
                   >
                     AI Hackathons this weekend
                   </button>
                   <button
                     type="button"
                     onClick={() => handleChipClick("Zero exam clash hackathons only")}
-                    className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 hover:text-emerald-800 text-slate-700 font-medium transition border border-slate-200/60 cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] font-medium transition border border-[#DCE3F9] cursor-pointer"
                   >
                     Zero exam clash
                   </button>
@@ -459,14 +459,14 @@ export default function MedixHeroCards({
           </div>
 
           {/* Bottom Action / Status Row */}
-          <div className="pt-3 border-t border-slate-100 mt-2">
+          <div className="pt-3 border-t border-[#F0F3FD] mt-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-[11px] font-bold text-emerald-800 flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="text-[11px] font-bold text-[#434EEB] flex items-center gap-1">
+                <Sparkles className="w-3.5 h-3.5 text-[#5964FE]" />
                 <span>Instant vector re-ranking active</span>
               </span>
-              <span className="text-[11px] text-slate-500">
-                Shortlisted: <strong className="text-emerald-700">{(shortlist || []).length}</strong>
+              <span className="text-[11px] text-[#525A8B]">
+                Shortlisted: <strong className="text-[#434EEB]">{(shortlist || []).length}</strong>
               </span>
             </div>
           </div>
