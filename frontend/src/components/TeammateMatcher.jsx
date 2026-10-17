@@ -15,12 +15,14 @@ import {
   Building2
 } from "lucide-react";
 import { INITIAL_TEAMMATES } from "../data/initialEvents";
+import TeamRosterModal from "./TeamRosterModal";
 
 export default function TeammateMatcher({ targetTeammate }) {
   const [teammates, setTeammates] = useState(INITIAL_TEAMMATES);
   const [invited, setInvited] = useState({});
   const [categoryFilter, setCategoryFilter] = useState("all"); // "dtc" | "all" | "cross_campus"
   const [searchQuery, setSearchQuery] = useState("");
+  const [isRosterOpen, setIsRosterOpen] = useState(false);
 
   const handleInvite = (id) => {
     setInvited(prev => ({ ...prev, [id]: true }));
@@ -69,7 +71,14 @@ export default function TeammateMatcher({ targetTeammate }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            onClick={() => setIsRosterOpen(true)}
+            className="text-xs px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white font-bold flex items-center gap-1.5 shadow-sm shadow-[#5964FE]/20 hover:opacity-90 transition cursor-pointer"
+          >
+            <Users className="w-3.5 h-3.5" />
+            <span>Export Official Team Roster</span>
+          </button>
           <span className="text-xs px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
             Verified College IDs & GitHub
@@ -233,6 +242,13 @@ export default function TeammateMatcher({ targetTeammate }) {
           );
         })}
       </div>
+
+      {/* Team Roster Export Modal */}
+      <TeamRosterModal
+        isOpen={isRosterOpen}
+        onClose={() => setIsRosterOpen(false)}
+        teammates={teammates}
+      />
 
     </div>
   );
