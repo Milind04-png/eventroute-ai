@@ -3,7 +3,7 @@
  * Allows full offline and instantaneous demo execution without backend dependencies.
  */
 
-import { STUDENT_PROFILE, EXAM_CALENDAR, SKILL_LEARNING_VAULT, COLLEGE_OD_TEMPLATES, INITIAL_TEAMMATES } from "../data/initialEvents";
+import { STUDENT_PROFILE, EXAM_CALENDAR, SKILL_LEARNING_VAULT, COLLEGE_OD_TEMPLATES, INITIAL_TEAMMATES, INITIAL_EVENTS } from "../data/initialEvents";
 
 function tokenize(text) {
   if (!text) return new Set();
@@ -49,7 +49,10 @@ export function detectExamClash(event, exams = EXAM_CALENDAR) {
   return { hasClash, clashDetails };
 }
 
-export function calculateSkillGap(event, user = STUDENT_PROFILE) {
+export function calculateSkillGap(eventOrId, user = STUDENT_PROFILE) {
+  const event = typeof eventOrId === "string" 
+    ? (INITIAL_EVENTS.find(e => e.id === eventOrId) || { id: eventOrId, required_skills: [] }) 
+    : (eventOrId || {});
   const reqSkills = event.required_skills || [];
   const userSkillsSet = new Set(user.skills.map(s => s.toLowerCase()));
 
