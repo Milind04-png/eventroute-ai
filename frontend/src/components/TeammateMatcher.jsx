@@ -163,10 +163,15 @@ export default function TeammateMatcher({ targetTeammate }) {
               )}
 
               <div>
-                {/* Synergy Score & Avatar Header */}
+                {/* Synergy Score & Initials Monogram Header (Picture Removed) */}
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-[#DFE3FF] bg-[#F8FAFF] shadow-xs">
-                    <img src={tm.avatar} alt={tm.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#DFE3FF] via-[#EEF2FE] to-[#C7D2FE] text-[#434EEB] font-display font-extrabold text-sm sm:text-base flex items-center justify-center border border-[#C7D2FE] shadow-xs select-none">
+                    {tm.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                      .slice(0, 2)
+                      .toUpperCase()}
                   </div>
                   <div className="px-3 py-1 rounded-xl bg-[#DFE3FF] border border-[#C7D2FE] text-[#434EEB] text-xs font-black flex items-center gap-1 shadow-xs">
                     <Sparkles className="w-3.5 h-3.5 text-[#5964FE]" />
