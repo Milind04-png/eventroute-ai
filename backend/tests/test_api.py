@@ -19,6 +19,15 @@ def test_health_check():
     assert data["service"] == "EventRoute AI Engine"
     assert data["events_count"] == len(RAW_EVENTS)
 
+def test_root_and_status_alias():
+    root_res = client.get("/")
+    assert root_res.status_code == 200
+    assert root_res.json()["docs_url"] == "/docs"
+
+    status_res = client.get("/api/status")
+    assert status_res.status_code == 200
+    assert status_res.json()["status"] == "healthy"
+
 def test_user_profile():
     response = client.get("/api/user/profile")
     assert response.status_code == 200

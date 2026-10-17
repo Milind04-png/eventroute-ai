@@ -111,6 +111,23 @@ class IdeaValidateRequest(BaseModel):
 
 # --- System & Health Endpoints ---
 
+@app.get("/", tags=["System & Health"], summary="Root API Index")
+def root_index():
+    """Root entry point returning service metadata and documentation links."""
+    return {
+        "status": "healthy",
+        "service": "EventRoute AI Engine",
+        "version": "1.2.0",
+        "docs_url": "/docs",
+        "health_check": "/api/health",
+        "student_profile": "/api/student/profile"
+    }
+
+@app.get("/api/status", tags=["System & Health"], summary="Status Alias")
+def status_alias():
+    """Alias for /api/health."""
+    return health_check()
+
 @app.get("/api/health", tags=["System & Health"], summary="Health and Telemetry Check")
 def health_check():
     """Returns runtime health status, service identity, and loaded opportunities telemetry."""
