@@ -339,7 +339,9 @@ export default function App() {
     const matchFormat = selectedFormat === "All" || e.format.includes(selectedFormat);
     const matchClash = hideClashes ? !e.ai_match?.has_clash : true;
     const matchCollege = activeCollegeFilter 
-      ? e.organizer.toLowerCase().includes(activeCollegeFilter.toLowerCase()) || e.title.toLowerCase().includes(activeCollegeFilter.toLowerCase())
+      ? e.organizer.toLowerCase().includes(activeCollegeFilter.toLowerCase()) || 
+        e.title.toLowerCase().includes(activeCollegeFilter.toLowerCase()) ||
+        (e.tags && e.tags.some(t => t.toLowerCase().includes(activeCollegeFilter.toLowerCase())))
       : true;
 
     return matchSearch && matchCity && matchFormat && matchClash && matchCollege;

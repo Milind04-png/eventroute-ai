@@ -143,8 +143,8 @@ export default function MedixTopBar({
             <p className="text-xs font-extrabold text-[#10174D] leading-tight">
               {STUDENT_PROFILE.name}
             </p>
-            <p className="text-[10px] text-[#525A8B] font-medium leading-tight">
-              {STUDENT_PROFILE.year} · Demo account
+            <p className="text-[10px] text-[#5964FE] font-bold leading-tight flex items-center gap-1">
+              <span>Delhi Technical Campus (GGSIPU)</span>
             </p>
           </div>
         </div>

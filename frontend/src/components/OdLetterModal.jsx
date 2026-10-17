@@ -79,21 +79,35 @@ export default function OdLetterModal({
         </div>
 
         {/* College Template Selector */}
-        <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-          <span className="text-[#525A8B] font-medium">Select College Format:</span>
-          {Object.entries(COLLEGE_OD_TEMPLATES).map(([key, val]) => (
-            <button
-              key={key}
-              onClick={() => handleCollegeChange(key)}
-              className={`px-3 py-1.5 rounded-xl border transition cursor-pointer ${
-                selectedCollege === key 
-                  ? "bg-[#DFE3FF] border-[#C7D2FE] text-[#434EEB] font-semibold" 
-                  : "bg-[#F8FAFF] border-[#DCE3F9] text-[#525A8B] hover:text-[#10174D]"
-              }`}
-            >
-              {val.college_name.split(" ")[0]} ({val.university.split(" ")[0]})
-            </button>
-          ))}
+        <div className="mt-4 p-3.5 rounded-2xl bg-[#F8FAFF] border border-[#E2E7FA] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-[#525A8B] font-semibold">
+            <Building2 className="w-4 h-4 text-[#5964FE]" />
+            <span>Select Institutional Format ({Object.keys(COLLEGE_OD_TEMPLATES).length} Verified Campuses):</span>
+          </div>
+          <select
+            value={selectedCollege}
+            onChange={(e) => handleCollegeChange(e.target.value)}
+            className="px-3.5 py-2 rounded-xl bg-white border border-[#C7D2FE] text-[#10174D] font-bold text-xs focus:outline-none focus:ring-2 focus:ring-[#5964FE]/30 shadow-xs cursor-pointer"
+          >
+            <optgroup label="── GGSIPU Affiliated Campuses (Delhi NCR) ──">
+              {Object.entries(COLLEGE_OD_TEMPLATES)
+                .filter(([k, v]) => v.university.includes("GGSIPU"))
+                .map(([key, val]) => (
+                  <option key={key} value={key}>
+                    {val.college_name} {key === "DTC_DELHI" ? "★ (Your College)" : ""}
+                  </option>
+                ))}
+            </optgroup>
+            <optgroup label="── National Flagship Partner Campuses ──">
+              {Object.entries(COLLEGE_OD_TEMPLATES)
+                .filter(([k, v]) => !v.university.includes("GGSIPU"))
+                .map(([key, val]) => (
+                  <option key={key} value={key}>
+                    {val.college_name} ({val.university.split(" ")[0]})
+                  </option>
+                ))}
+            </optgroup>
+          </select>
         </div>
 
         {/* Printable Formal Document Preview */}

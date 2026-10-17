@@ -121,6 +121,102 @@ export const COLLEGE_OD_TEMPLATES = {
     hod_title: "Dean & Head of Department, Computer Science & Engineering",
     letter_code_prefix: "DTC/CSE/OD/2026/"
   },
+  "USICT_DWARKA": {
+    college_name: "University School of Information, Communication and Technology (USICT)",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "Sector 16-C, Dwarka, New Delhi 110078",
+    hod_name: "Prof. Pravin Chandra",
+    hod_title: "Dean, School of Information & Communication Technology",
+    letter_code_prefix: "GGSIPU/USICT/OD/2026/"
+  },
+  "MAIT_ROHINI": {
+    college_name: "Maharaja Agrasen Institute of Technology",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "PSP Area, Sector 22, Rohini, New Delhi 110086",
+    hod_name: "Prof. (Dr.) Namita Gupta",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "MAIT/CSE/OD/2026/"
+  },
+  "MSIT_JANAKPURI": {
+    college_name: "Maharaja Surajmal Institute of Technology",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "C-4, Janakpuri, New Delhi 110058",
+    hod_name: "Prof. (Dr.) Koyel Datta Gupta",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "MSIT/CSE/OD/2026/"
+  },
+  "BVCOE_DELHI": {
+    college_name: "Bharati Vidyapeeth's College of Engineering",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "A-4, Paschim Vihar, New Delhi 110063",
+    hod_name: "Dr. Arvind Rehalia",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "BVCOE/CSE/OD/2026/"
+  },
+  "BPIT_ROHINI": {
+    college_name: "Bhagwan Parshuram Institute of Technology",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "PSP-4, Sector 17, Rohini, New Delhi 110089",
+    hod_name: "Prof. (Dr.) Deepali Virmani",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "BPIT/CSE/OD/2026/"
+  },
+  "GTBIT_DELHI": {
+    college_name: "Guru Tegh Bahadur Institute of Technology",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "G-8 Area, Rajouri Garden, New Delhi 110064",
+    hod_name: "Dr. Rominder Kaur",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "GTBIT/CSE/OD/2026/"
+  },
+  "VIPS_DELHI": {
+    college_name: "Vivekananda Institute of Professional Studies - TC",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "AU Block, Outer Ring Road, Pitampura, New Delhi 110034",
+    hod_name: "Dr. Supriya Madan",
+    hod_title: "Dean & Head, School of Engineering & Technology",
+    letter_code_prefix: "VIPS/SET/OD/2026/"
+  },
+  "ADGITM_DELHI": {
+    college_name: "Dr. Akhilesh Das Gupta Institute of Technology & Management",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "FC-26, Shastri Park, New Delhi 110053",
+    hod_name: "Dr. Saurabh Gupta",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "ADGITM/CSE/OD/2026/"
+  },
+  "JIMS_NOIDA": {
+    college_name: "JIMS Engineering Management Technical Campus",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "48/4, Knowledge Park III, Greater Noida, Delhi NCR 201306",
+    hod_name: "Dr. R. K. Raghuwanshi",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "JIMS/CSE/OD/2026/"
+  },
+  "HMRITM_DELHI": {
+    college_name: "HMR Institute of Technology and Management",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    address: "Plot No. 326, Hamidpur, Delhi 110036",
+    hod_name: "Dr. Ravinder Kumar",
+    hod_title: "Head of Department, Computer Science & Engineering",
+    letter_code_prefix: "HMRITM/CSE/OD/2026/"
+  },
+  "DTU_DELHI": {
+    college_name: "Delhi Technological University",
+    university: "State University of Delhi",
+    address: "Shahbad Daulatpur, Bawana Road, Delhi 110042",
+    hod_name: "Prof. Rajeev Kapoor",
+    hod_title: "HOD, Computer Science and Engineering",
+    letter_code_prefix: "DTU/CSE/OD/2026/"
+  },
+  "IITB_MUMBAI": {
+    college_name: "Indian Institute of Technology Bombay",
+    university: "Institute of National Importance",
+    address: "Main Gate Rd, IIT Area, Powai, Mumbai 400076",
+    hod_name: "Prof. Varsha Apte",
+    hod_title: "Head of Department, Computer Science and Engineering",
+    letter_code_prefix: "IITB/CSE/OD/2026/"
+  },
   "TSEC_MUMBAI": {
     college_name: "Thadomal Shahani Engineering College",
     university: "University of Mumbai",
@@ -144,14 +240,6 @@ export const COLLEGE_OD_TEMPLATES = {
     hod_name: "Dr. S. Shanmugavel",
     hod_title: "Dean & Professor, Department of CSE",
     letter_code_prefix: "CEG/CSE/OD/2026/"
-  },
-  "DTU_DELHI": {
-    college_name: "Delhi Technological University",
-    university: "State University of Delhi",
-    address: "Shahbad Daulatpur, Bawana Road, Delhi 110042",
-    hod_name: "Prof. Rajeev Kapoor",
-    hod_title: "HOD, Computer Science and Engineering",
-    letter_code_prefix: "DTU/CSE/OD/2026/"
   }
 };
 
@@ -418,6 +506,369 @@ export const INITIAL_EVENTS = [
       group_pool_count: 0
     },
     verification_status: "Verified",
+    featured: false
+  },
+  {
+    id: "evt_techspark_dtc_26",
+    title: "TechSpark DTC 2026: Inter-College AI Hackathon",
+    organizer: "Delhi Technical Campus (DTC Greater Noida)",
+    type: "Hackathon",
+    format: "In-Person (Greater Noida, Delhi NCR)",
+    city: "Delhi NCR",
+    start_date: "2026-11-10T09:00:00",
+    end_date: "2026-11-11T18:00:00",
+    registration_deadline: "2026-11-06T23:59:00",
+    prize_pool: "₹1,50,000",
+    entry_fee: "Free",
+    worth_it_score: 95,
+    worth_it_breakdown: {
+      prize_effort_ratio: 94,
+      organizer_prestige: 96,
+      career_impact: 95,
+      certificate_value: 95
+    },
+    description: "Home college flagship hackathon at Delhi Technical Campus. 24-hour sprint focused on AI-powered student utility tools, cloud backends, and sustainable engineering.",
+    tags: ["Artificial Intelligence", "FastAPI", "Python", "React", "DTC", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "FastAPI", "React", "Docker"],
+    domains: ["Generative AI", "Fullstack Systems", "Campus Tech"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "DTC Campus",
+      train_bus_cost: "₹0 - ₹20",
+      travel_time: "10 mins",
+      group_pool_count: 50
+    },
+    verification_status: "Home Campus Verified",
+    featured: true
+  },
+  {
+    id: "evt_infoxpression_usict_26",
+    title: "InfoXpression 2026: GGSIPU Flagship AI Hackathon",
+    organizer: "USICT Dwarka (Guru Gobind Singh Indraprastha University)",
+    type: "Hackathon",
+    format: "In-Person (Dwarka, Delhi)",
+    city: "Delhi",
+    start_date: "2026-11-20T09:00:00",
+    end_date: "2026-11-21T18:00:00",
+    registration_deadline: "2026-11-15T23:59:00",
+    prize_pool: "₹3,00,000",
+    entry_fee: "Free",
+    worth_it_score: 96,
+    worth_it_breakdown: {
+      prize_effort_ratio: 95,
+      organizer_prestige: 98,
+      career_impact: 97,
+      certificate_value: 96
+    },
+    description: "The annual technical extravaganza of USICT, GGSIPU Dwarka Main Campus. Build AI, Web3, and IoT solutions with guidance from top alumni at Google, Amazon, and Microsoft.",
+    tags: ["Artificial Intelligence", "Machine Learning", "Cloud Native", "USICT", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "FastAPI", "React", "PyTorch"],
+    domains: ["Multimodal AI", "Decentralized Systems", "FinTech"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Dwarka Sector 14 Metro",
+      train_bus_cost: "₹60 (Metro)",
+      travel_time: "55 mins",
+      group_pool_count: 36
+    },
+    verification_status: "University Main Campus Flagship",
+    featured: true
+  },
+  {
+    id: "evt_hackmait_26",
+    title: "HackMAIT 4.0: Delhi NCR Innovation Challenge",
+    organizer: "MAIT Rohini (Maharaja Agrasen Institute of Technology)",
+    type: "Hackathon",
+    format: "In-Person (Rohini, Delhi)",
+    city: "Delhi",
+    start_date: "2026-11-14T09:00:00",
+    end_date: "2026-11-15T18:00:00",
+    registration_deadline: "2026-11-10T23:59:00",
+    prize_pool: "₹2,00,000",
+    entry_fee: "Free",
+    worth_it_score: 93,
+    worth_it_breakdown: {
+      prize_effort_ratio: 93,
+      organizer_prestige: 94,
+      career_impact: 93,
+      certificate_value: 92
+    },
+    description: "MAIT's premier 36-hour hackathon. Tackle real-world problems in Smart Cities, AI in FinTech, and Decentralized Cloud with premier student developers across Delhi NCR.",
+    tags: ["Artificial Intelligence", "React", "FastAPI", "MAIT", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "React", "FastAPI"],
+    domains: ["Smart Cities", "Autonomous Systems", "Healthcare AI"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Rithala Metro Station",
+      train_bus_cost: "₹60 (Metro)",
+      travel_time: "60 mins",
+      group_pool_count: 28
+    },
+    verification_status: "Verified Tier-1",
+    featured: true
+  },
+  {
+    id: "evt_hackmsit_26",
+    title: "HackMSIT 2026: Flagship AI & Systems Sprint",
+    organizer: "MSIT Janakpuri (Maharaja Surajmal Institute of Technology)",
+    type: "Hackathon",
+    format: "In-Person (Janakpuri, Delhi)",
+    city: "Delhi",
+    start_date: "2026-11-28T09:00:00",
+    end_date: "2026-11-29T18:00:00",
+    registration_deadline: "2026-11-24T23:59:00",
+    prize_pool: "₹1,75,000",
+    entry_fee: "Free",
+    worth_it_score: 91,
+    worth_it_breakdown: {
+      prize_effort_ratio: 90,
+      organizer_prestige: 92,
+      career_impact: 92,
+      certificate_value: 90
+    },
+    description: "Organized by IEEE MSIT & ACM MSIT. High-intensity sprint for building agentic AI, system architectures, and cloud services.",
+    tags: ["Machine Learning", "System Design", "Docker", "MSIT", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "Docker", "System Design"],
+    domains: ["Agentic AI", "High Performance Systems", "Cloud"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Janakpuri East Metro",
+      train_bus_cost: "₹50 (Metro)",
+      travel_time: "50 mins",
+      group_pool_count: 22
+    },
+    verification_status: "Verified Tier-1",
+    featured: true
+  },
+  {
+    id: "evt_bvest_bvcoe_26",
+    title: "BVEST Hack 2026: National Tech Symposium",
+    organizer: "BVCOE New Delhi (Bharati Vidyapeeth's College of Engineering)",
+    type: "Hackathon",
+    format: "In-Person (Paschim Vihar, Delhi)",
+    city: "Delhi",
+    start_date: "2026-12-04T09:00:00",
+    end_date: "2026-12-05T18:00:00",
+    registration_deadline: "2026-11-30T23:59:00",
+    prize_pool: "₹1,50,000",
+    entry_fee: "Free",
+    worth_it_score: 90,
+    worth_it_breakdown: {
+      prize_effort_ratio: 89,
+      organizer_prestige: 91,
+      career_impact: 90,
+      certificate_value: 89
+    },
+    description: "BVCOE New Delhi's flagship hackathon celebrating engineering innovation, embedded edge computing, and modern fullstack AI.",
+    tags: ["Artificial Intelligence", "Python", "BVCOE", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "React", "OpenCV"],
+    domains: ["Computer Vision", "Web Applications", "IoT"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Paschim Vihar East Metro",
+      train_bus_cost: "₹55 (Metro)",
+      travel_time: "52 mins",
+      group_pool_count: 19
+    },
+    verification_status: "Verified Tier-1",
+    featured: false
+  },
+  {
+    id: "evt_corona_bpit_26",
+    title: "Corona Hack 2026: National Level Hackathon",
+    organizer: "BPIT Rohini (Bhagwan Parshuram Institute of Technology)",
+    type: "Hackathon",
+    format: "In-Person (Rohini, Delhi)",
+    city: "Delhi",
+    start_date: "2026-12-12T09:00:00",
+    end_date: "2026-12-13T18:00:00",
+    registration_deadline: "2026-12-08T23:59:00",
+    prize_pool: "₹1,25,000",
+    entry_fee: "Free",
+    worth_it_score: 88,
+    worth_it_breakdown: {
+      prize_effort_ratio: 88,
+      organizer_prestige: 89,
+      career_impact: 88,
+      certificate_value: 87
+    },
+    description: "Flagship national hackathon of BPIT Rohini. Open innovation track featuring prizes for best AI for Good and Web3 protocols.",
+    tags: ["Artificial Intelligence", "Web3", "BPIT", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "React", "PostgreSQL"],
+    domains: ["Social Impact", "Web3 Infrastructure"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Rohini Sector 18 Metro",
+      train_bus_cost: "₹60 (Metro)",
+      travel_time: "58 mins",
+      group_pool_count: 15
+    },
+    verification_status: "Verified Tier-1",
+    featured: false
+  },
+  {
+    id: "evt_gates_gtbit_26",
+    title: "Gates & HackGTBIT 2026: Tech Innovation Sprint",
+    organizer: "GTBIT Rajouri Garden (Guru Tegh Bahadur Institute of Technology)",
+    type: "Hackathon",
+    format: "In-Person (Rajouri Garden, Delhi)",
+    city: "Delhi",
+    start_date: "2026-12-18T09:00:00",
+    end_date: "2026-12-19T18:00:00",
+    registration_deadline: "2026-12-14T23:59:00",
+    prize_pool: "₹1,20,000",
+    entry_fee: "Free",
+    worth_it_score: 87,
+    worth_it_breakdown: {
+      prize_effort_ratio: 86,
+      organizer_prestige: 88,
+      career_impact: 87,
+      certificate_value: 86
+    },
+    description: "Annual tech festival hackathon of GTBIT. Hands-on coding marathon for cybersecurity, AI pipelines, and mobile apps.",
+    tags: ["Cybersecurity", "Python", "GTBIT", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "Linux", "Docker"],
+    domains: ["Cybersecurity", "Applied Machine Learning"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Rajouri Garden Metro",
+      train_bus_cost: "₹50 (Metro)",
+      travel_time: "48 mins",
+      group_pool_count: 17
+    },
+    verification_status: "Verified Tier-1",
+    featured: false
+  },
+  {
+    id: "evt_init_vips_26",
+    title: "Init_ Hack VIPS 2026: National Developer Challenge",
+    organizer: "VIPS Pitampura (Vivekananda Institute of Professional Studies)",
+    type: "Hackathon",
+    format: "In-Person (Pitampura, Delhi)",
+    city: "Delhi",
+    start_date: "2026-12-22T09:00:00",
+    end_date: "2026-12-23T18:00:00",
+    registration_deadline: "2026-12-18T23:59:00",
+    prize_pool: "₹1,40,000",
+    entry_fee: "Free",
+    worth_it_score: 89,
+    worth_it_breakdown: {
+      prize_effort_ratio: 88,
+      organizer_prestige: 90,
+      career_impact: 90,
+      certificate_value: 88
+    },
+    description: "Premier developer challenge hosted by VIPS School of Engineering & Technology. Dedicated track for Generative AI and cross-platform web systems.",
+    tags: ["Generative AI", "React", "VIPS", "GGSIPU", "Hackathon"],
+    required_skills: ["React", "FastAPI", "Tailwind CSS"],
+    domains: ["Generative UI", "Fullstack AI"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Pitampura Metro",
+      train_bus_cost: "₹55 (Metro)",
+      travel_time: "54 mins",
+      group_pool_count: 21
+    },
+    verification_status: "Verified Tier-1",
+    featured: false
+  },
+  {
+    id: "evt_innobuzz_adgitm_26",
+    title: "InnoBuzz ADGITM 2026: Smart Delhi AI Sprint",
+    organizer: "ADGITM Shastri Park (Dr. Akhilesh Das Gupta Institute)",
+    type: "Hackathon",
+    format: "In-Person (Shastri Park, Delhi)",
+    city: "Delhi",
+    start_date: "2027-01-08T09:00:00",
+    end_date: "2027-01-09T18:00:00",
+    registration_deadline: "2027-01-03T23:59:00",
+    prize_pool: "₹1,10,000",
+    entry_fee: "Free",
+    worth_it_score: 86,
+    worth_it_breakdown: {
+      prize_effort_ratio: 85,
+      organizer_prestige: 87,
+      career_impact: 86,
+      certificate_value: 85
+    },
+    description: "ADGITM's flagship annual innovation hackathon solving civic tech, healthcare accessibility, and agentic workflows.",
+    tags: ["Artificial Intelligence", "ADGITM", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "FastAPI", "React"],
+    domains: ["Civic Tech", "Clean Energy AI"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Shastri Park Metro",
+      train_bus_cost: "₹45 (Metro)",
+      travel_time: "42 mins",
+      group_pool_count: 14
+    },
+    verification_status: "Verified Tier-1",
+    featured: false
+  },
+  {
+    id: "evt_technoxian_jims_26",
+    title: "TechnoXian JIMS Hack 2026: Robotics & AI Conclave",
+    organizer: "JIMS Greater Noida (JIMS EMTC)",
+    type: "Hackathon",
+    format: "In-Person (Greater Noida, Delhi NCR)",
+    city: "Delhi NCR",
+    start_date: "2027-01-15T09:00:00",
+    end_date: "2027-01-16T18:00:00",
+    registration_deadline: "2027-01-10T23:59:00",
+    prize_pool: "₹1,00,000",
+    entry_fee: "Free",
+    worth_it_score: 85,
+    worth_it_breakdown: {
+      prize_effort_ratio: 84,
+      organizer_prestige: 86,
+      career_impact: 85,
+      certificate_value: 84
+    },
+    description: "Hardware and AI hackathon in Greater Noida Knowledge Park corridor. Hardware kits and mentors provided.",
+    tags: ["Robotics", "Artificial Intelligence", "JIMS", "GGSIPU", "Hackathon"],
+    required_skills: ["Python", "ROS", "OpenCV"],
+    domains: ["Embedded AI", "Robotics"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Knowledge Park III",
+      train_bus_cost: "₹15",
+      travel_time: "5 mins",
+      group_pool_count: 32
+    },
+    verification_status: "Verified Tier-1",
+    featured: false
+  },
+  {
+    id: "evt_emblazon_hmritm_26",
+    title: "Emblazon HMRITM 2026: Open Innovation Hackathon",
+    organizer: "HMRITM Hamidpur (HMR Institute of Technology & Management)",
+    type: "Hackathon",
+    format: "In-Person (Hamidpur, Delhi)",
+    city: "Delhi",
+    start_date: "2027-01-22T09:00:00",
+    end_date: "2027-01-23T18:00:00",
+    registration_deadline: "2027-01-18T23:59:00",
+    prize_pool: "₹1,00,000",
+    entry_fee: "Free",
+    worth_it_score: 84,
+    worth_it_breakdown: {
+      prize_effort_ratio: 83,
+      organizer_prestige: 85,
+      career_impact: 84,
+      certificate_value: 83
+    },
+    description: "Annual technical symposium and 24h coding sprint by HMRITM Computer Science department.",
+    tags: ["Cloud Native", "React", "HMRITM", "GGSIPU", "Hackathon"],
+    required_skills: ["React", "PostgreSQL", "Docker"],
+    domains: ["Open Innovation", "Cloud"],
+    travel_estimate: {
+      origin: "Greater Noida",
+      destination: "Samaypur Badli / Hamidpur",
+      train_bus_cost: "₹60 (Metro + Bus)",
+      travel_time: "65 mins",
+      group_pool_count: 12
+    },
+    verification_status: "Verified Tier-1",
     featured: false
   }
 ];
