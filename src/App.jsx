@@ -211,7 +211,6 @@ export default function App() {
         <MedixSidebar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-          onOpenEmergencyOD={() => handleGenerateOD("evt_hackai_pune_26")}
         />
       </div>
 
@@ -223,7 +222,6 @@ export default function App() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           onStartDemoTour={handleStartDemoTour}
-          onOpenEmergencyOD={() => handleGenerateOD("evt_hackai_pune_26")}
         />
 
         {/* Content Container */}
@@ -233,9 +231,9 @@ export default function App() {
           {(activeTab === "feed" || activeTab === "opportunities") && (
             <div className="space-y-10">
               
-              {/* Medix Dual Hero Cards (Direct from screenshot: Emergency SOS + AI Triage Card) */}
+              {/* Dual Hero Cards (Official OD Automation + AI Triage Card) */}
               <MedixHeroCards
-                onTriggerEmergencyOD={() => handleGenerateOD("evt_hackai_pune_26")}
+                onTriggerOD={() => handleGenerateOD("evt_hackai_pune_26")}
                 onStartAssessmentQuery={handleChatWithPrompt}
                 onTriggerDemo={handleStartDemoTour}
               />

@@ -2,7 +2,6 @@ import React from "react";
 import { 
   Bell, 
   Settings, 
-  AlertTriangle, 
   PlayCircle, 
   Compass, 
   ShieldCheck,
@@ -13,8 +12,7 @@ import { STUDENT_PROFILE } from "../data/initialEvents";
 export default function MedixTopBar({ 
   activeTab, 
   setActiveTab, 
-  onStartDemoTour, 
-  onOpenEmergencyOD 
+  onStartDemoTour 
 }) {
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] px-4 sm:px-8 py-3 flex items-center justify-between select-none">
@@ -42,11 +40,14 @@ export default function MedixTopBar({
           </button>
 
           <button
-            onClick={onOpenEmergencyOD}
-            className="px-4 py-1.5 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition flex items-center gap-1.5 cursor-pointer"
+            onClick={() => setActiveTab("opportunities")}
+            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+              activeTab === "opportunities"
+                ? "bg-white text-[#0F172A] shadow-xs"
+                : "text-[#64748B] hover:text-[#0F172A]"
+            }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>
-            <span>Emergency OD</span>
+            Opportunities
           </button>
 
           <button
@@ -61,14 +62,14 @@ export default function MedixTopBar({
           </button>
 
           <button
-            onClick={() => setActiveTab("opportunities")}
+            onClick={() => setActiveTab("od_letters")}
             className={`px-4 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
-              activeTab === "opportunities"
+              activeTab === "od_letters"
                 ? "bg-white text-[#0F172A] shadow-xs"
                 : "text-[#64748B] hover:text-[#0F172A]"
             }`}
           >
-            Opportunities
+            OD Portal
           </button>
         </div>
       </div>

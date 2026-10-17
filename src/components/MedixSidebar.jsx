@@ -2,7 +2,6 @@ import React from "react";
 import { 
   LayoutDashboard, 
   Sparkles, 
-  AlertTriangle, 
   Calendar, 
   FileText, 
   BookOpen, 
@@ -16,11 +15,10 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-export default function MedixSidebar({ activeTab, setActiveTab, onOpenEmergencyOD }) {
+export default function MedixSidebar({ activeTab, setActiveTab }) {
   const navItems = [
     { id: "feed", label: "Dashboard", icon: LayoutDashboard },
     { id: "opportunities", label: "Opportunities", icon: Compass },
-    { id: "emergency", label: "Emergency OD", icon: AlertTriangle, isAlert: true, onClick: onOpenEmergencyOD },
     { id: "calendar", label: "Exam & Calendar", icon: Calendar },
     { id: "od_letters", label: "OD Leave Letters", icon: FileText },
     { id: "skills", label: "Skill-Gap Vault", icon: BookOpen },
@@ -74,13 +72,9 @@ export default function MedixSidebar({ activeTab, setActiveTab, onOpenEmergencyO
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600" : item.isAlert ? "text-rose-500" : "text-[#64748B]"}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600" : "text-[#64748B]"}`} />
                   <span>{item.label}</span>
                 </div>
-
-                {item.isAlert && (
-                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                )}
               </button>
             );
           })}

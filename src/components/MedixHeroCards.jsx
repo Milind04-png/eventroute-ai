@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { 
-  ShieldAlert, 
+  FileCheck, 
   Sparkles, 
   ArrowRight, 
   CheckCircle2, 
   Clock, 
   Zap, 
-  AlertTriangle,
-  PlayCircle,
-  FileText,
-  MapPin,
-  Send,
-  Siren,
-  HelpCircle
+  PlayCircle, 
+  FileText, 
+  MapPin, 
+  Send, 
+  HelpCircle 
 } from "lucide-react";
 import { STUDENT_PROFILE } from "../data/initialEvents";
 
 export default function MedixHeroCards({ 
-  onTriggerEmergencyOD, 
+  onTriggerOD, 
   onStartAssessmentQuery, 
   onTriggerDemo 
 }) {
@@ -62,32 +60,32 @@ export default function MedixHeroCards({
       {/* The Two Dual Hero Cards (Layout from screenshot) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         
-        {/* CARD 1: EMERGENCY ASSISTANCE (The Coral/Red Card) */}
-        <div className="rounded-3xl p-6 sm:p-7 bg-white border border-rose-200/80 shadow-[0_12px_36px_rgba(244,63,94,0.06)] flex flex-col justify-between relative overflow-hidden group">
+        {/* CARD 1: ON-DUTY (OD) LEAVE AUTOMATION (Official Institutional Card) */}
+        <div className="rounded-3xl p-6 sm:p-7 bg-white border border-indigo-100/90 shadow-[0_12px_36px_rgba(99,102,241,0.06)] flex flex-col justify-between relative overflow-hidden group">
           
-          {/* Subtle soft red gradient halo */}
-          <div className="absolute top-0 right-0 w-56 h-56 bg-rose-500/5 rounded-full blur-3xl pointer-events-none"></div>
+          {/* Subtle soft indigo gradient halo */}
+          <div className="absolute top-0 right-0 w-56 h-56 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
           <div>
             {/* Top Tag Row */}
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase tracking-wider">
-                <div className="w-6 h-6 rounded-lg bg-rose-100 flex items-center justify-center">
-                  <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
+              <div className="flex items-center gap-2 text-indigo-700 font-bold text-xs uppercase tracking-wider">
+                <div className="w-6 h-6 rounded-lg bg-indigo-100 flex items-center justify-center">
+                  <FileText className="w-3.5 h-3.5 text-indigo-600" />
                 </div>
-                <span>EMERGENCY ASSISTANCE</span>
+                <span>ON-DUTY (OD) LEAVE AUTOMATION</span>
               </div>
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
-                Active Standby
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200">
+                Official Format
               </span>
             </div>
 
             {/* Title & Description */}
             <h2 className="font-display font-extrabold text-2xl text-[#0F172A] mb-2">
-              Need Immediate Help?
+              Official College OD Clearance
             </h2>
             <p className="text-xs text-[#64748B] leading-relaxed mb-4">
-              Get immediate access to verified On-Duty leave support. Broadcasts your official attendance petition, embeds tamper-proof QR verification, and alerts department administrators.
+              Instantly draft, sign, and export official On-Duty attendance petitions for upcoming hackathons. Automatically pre-fills timetable clearance, department head routing, and cryptographic verification QR codes.
             </p>
 
             {/* Feature Pills */}
@@ -96,7 +94,7 @@ export default function MedixHeroCards({
                 📍 Live QR Verification
               </span>
               <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
-                ⚡ Instant PDF Dispatch
+                ⚡ 1-Click PDF Generation
               </span>
               <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
                 🏛️ University HOD Routing
@@ -104,31 +102,22 @@ export default function MedixHeroCards({
             </div>
           </div>
 
-          {/* Central Circular Red SOS Action Button */}
-          <div className="text-center py-2">
+          {/* Action Button & Clear Information */}
+          <div className="text-center py-3 bg-[#F8FAFC] rounded-2xl border border-slate-200/70 p-4">
             <button
-              onClick={onTriggerEmergencyOD}
-              className="w-24 h-24 rounded-full bg-rose-600 hover:bg-rose-500 active:scale-95 text-white flex flex-col items-center justify-center shadow-2xl shadow-rose-600/40 hover:shadow-rose-600/50 transition-all duration-300 mx-auto cursor-pointer group-hover:scale-105"
+              onClick={onTriggerOD}
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-xs tracking-wide shadow-md shadow-indigo-600/20 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
             >
-              <Siren className="w-7 h-7 mb-0.5 text-white animate-pulse" />
-              <span className="font-extrabold text-sm tracking-wider">SOS</span>
+              <FileText className="w-4 h-4" />
+              <span>Generate Official OD Letter</span>
             </button>
 
             <p className="text-xs font-bold text-[#0F172A] mt-3">
-              Press only in an emergency
+              Automated Attendance Clearance
             </p>
             <p className="text-[11px] text-[#64748B] mt-0.5">
               Includes pre-filled letterhead with 1-click HOD approval
             </p>
-
-            {/* Text Trigger Demo Link */}
-            <button
-              onClick={onTriggerEmergencyOD}
-              className="mt-3 inline-flex items-center gap-1.5 text-xs text-indigo-600 hover:text-indigo-700 font-bold cursor-pointer transition"
-            >
-              <PlayCircle className="w-3.5 h-3.5" />
-              <span>Start Emergency OD Demo</span>
-            </button>
           </div>
 
         </div>
