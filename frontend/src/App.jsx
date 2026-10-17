@@ -20,6 +20,7 @@ import VerifyODModal from "./components/VerifyODModal";
 import EventFlyerScannerModal from "./components/EventFlyerScannerModal";
 import SwipeDiscoverDeck from "./components/SwipeDiscoverDeck";
 import ShortlistView from "./components/ShortlistView";
+import AttendanceShieldWidget from "./components/AttendanceShieldWidget";
 
 import { INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR } from "./data/initialEvents";
 import { fetchOpportunities, fetchSkillGap, requestODLetter, sendFeedback, syncShortlistAdd, syncShortlistRemove } from "./services/api";
@@ -408,6 +409,11 @@ export default function App() {
                   activeCollegeFilter={activeCollegeFilter}
                 />
               </div>
+
+              {/* GGSIPU 75% Attendance Guard & OD Simulator */}
+              <AttendanceShieldWidget
+                onOpenODPortal={() => setActiveTab("od_letters")}
+              />
 
               {/* Explainable Feed Section (#1 HackML 87% Card + Hybrid Weights Settings Panel) */}
               <div ref={feedSectionRef} className="rounded-3xl overflow-hidden">
