@@ -3,16 +3,29 @@ import { Building2, ShieldCheck, CheckCircle2, Award, ExternalLink, Sparkles } f
 
 export const COLLEGES_DATA = [
   {
+    id: "dtc",
+    name: "Delhi Technical Campus",
+    shortName: "DTC Greater Noida",
+    university: "Guru Gobind Singh Indraprastha University (GGSIPU)",
+    location: "Greater Noida, Delhi NCR",
+    flagshipFest: "Ignite & TechSpark",
+    color: "from-blue-600 to-indigo-700",
+    bgColor: "bg-blue-50 text-blue-700 border-blue-200",
+    odStatus: "100% Fast-Track OD Approved",
+    isHomeCollege: true,
+    logoLetter: "DTC",
+    logoUrl: "/logos/dtc.png"
+  },
+  {
     id: "tsec",
     name: "Thadomal Shahani Engineering College",
     shortName: "TSEC Mumbai",
     university: "University of Mumbai",
     location: "Bandra, Mumbai",
     flagshipFest: "HackTSEC & Rubix",
-    color: "from-blue-600 to-indigo-700",
-    bgColor: "bg-blue-50 text-blue-700 border-blue-200",
-    odStatus: "100% Fast-Track OD Approved",
-    isHomeCollege: true,
+    color: "from-sky-600 to-blue-700",
+    bgColor: "bg-sky-50 text-sky-700 border-sky-200",
+    odStatus: "OD Verified Partner",
     logoLetter: "TS",
     logoUrl: "/logos/tsec.jpg"
   },
@@ -122,7 +135,7 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
               Verified Partner Colleges & Institutional Crests
             </h2>
             <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-              8 Campuses
+              9 Campuses
             </span>
           </div>
           <p className="text-xs text-[#64748B] mt-0.5">
@@ -141,7 +154,7 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
       </div>
 
       {/* College Logos Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2.5">
         {COLLEGES_DATA.map((col) => {
           const isSelected = activeCollegeFilter === col.shortName;
 

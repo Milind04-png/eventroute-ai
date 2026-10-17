@@ -23,7 +23,7 @@ class ODGeneratorService:
         self.student = STUDENT_PROFILE
         self.templates = COLLEGE_OD_TEMPLATES
 
-    def generate_od_letter(self, event_id: str, college_key: str = "TSEC_MUMBAI") -> Dict[str, Any]:
+    def generate_od_letter(self, event_id: str, college_key: str = "DTC_DELHI") -> Dict[str, Any]:
         """
         Generates a structured, legally sound OD leave request letter with verification hash.
         """
@@ -31,7 +31,7 @@ class ODGeneratorService:
         if not event:
             raise ValueError(f"Event with id '{event_id}' not found.")
 
-        college_config = self.templates.get(college_key, self.templates["TSEC_MUMBAI"])
+        college_config = self.templates.get(college_key, self.templates["DTC_DELHI"])
         
         # Unique reference and verification hash
         doc_uuid = str(uuid.uuid4())[:8].upper()

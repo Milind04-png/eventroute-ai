@@ -7,8 +7,8 @@ Curated Opportunities across India, Skill Gap Learning Vault, and OD Templates.
 STUDENT_PROFILE = {
     "id": "usr_milind_01",
     "name": "Milind",
-    "email": "milind@tsec.edu",
-    "college": "Thadomal Shahani Engineering College (Mumbai University)",
+    "email": "milind@delhitechnicalcampus.ac.in",
+    "college": "Delhi Technical Campus (GGSIPU)",
     "branch": "Computer Science & Engineering",
     "year": "2nd Year (Semester 3)",
     "roll_no": "2024CS1042",
@@ -110,6 +110,14 @@ SKILL_LEARNING_VAULT = {
 }
 
 COLLEGE_OD_TEMPLATES = {
+    "DTC_DELHI": {
+        "college_name": "Delhi Technical Campus",
+        "university": "Guru Gobind Singh Indraprastha University (GGSIPU)",
+        "address": "28/1, Knowledge Park III, Greater Noida, Delhi NCR 201306",
+        "hod_name": "Dr. Pranay Tanwar",
+        "hod_title": "Dean & Head of Department, Computer Science & Engineering",
+        "letter_code_prefix": "DTC/CSE/OD/2026/"
+    },
     "TSEC_MUMBAI": {
         "college_name": "Thadomal Shahani Engineering College",
         "university": "University of Mumbai",

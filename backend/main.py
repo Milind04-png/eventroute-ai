@@ -42,7 +42,7 @@ class FeedbackRequest(BaseModel):
 
 class ODGenerateRequest(BaseModel):
     event_id: str
-    college_key: Optional[str] = "TSEC_MUMBAI"
+    college_key: Optional[str] = "DTC_DELHI"
 
 class ChatRequest(BaseModel):
     message: str
@@ -130,7 +130,7 @@ def verify_od_letter(verification_hash: str):
     letter = db.get_od_letter_by_hash(verification_hash)
     if not letter:
         # Fallback to generating mock verification if tested on the fly
-        letter = od_generator.generate_od_letter("evt_hackai_pune_26", "TSEC_MUMBAI")
+        letter = od_generator.generate_od_letter("evt_hackai_pune_26", "DTC_DELHI")
     return {
         "valid": True,
         "status": "OFFICIALLY_VERIFIED",

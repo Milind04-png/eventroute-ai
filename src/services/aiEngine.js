@@ -169,8 +169,8 @@ export function rankEvents(events, user, exams, feedbackWeights, downvotedEvents
   })).sort((a, b) => b.ai_match.match_percentage - a.ai_match.match_percentage);
 }
 
-export function generateClientODLetter(event, collegeKey = "TSEC_MUMBAI", student = STUDENT_PROFILE) {
-  const collegeConfig = COLLEGE_OD_TEMPLATES[collegeKey] || COLLEGE_OD_TEMPLATES["TSEC_MUMBAI"];
+export function generateClientODLetter(event, collegeKey = "DTC_DELHI", student = STUDENT_PROFILE) {
+  const collegeConfig = COLLEGE_OD_TEMPLATES[collegeKey] || COLLEGE_OD_TEMPLATES["DTC_DELHI"];
   const docUUID = Math.random().toString(36).substring(2, 8).toUpperCase();
   const refNumber = `${collegeConfig.letter_code_prefix}${docUUID}`;
 
@@ -278,10 +278,10 @@ export function processClientAssistant(userMessage, events, student = STUDENT_PR
     toolLogs.push({
       tool: "generate_od_letter",
       status: "success",
-      detail: "Fetched Mumbai University OD template and compiled official PDF data."
+      detail: "Fetched Delhi Technical Campus (GGSIPU) OD template and compiled official PDF data."
     });
     const target = events.find(e => e.id === "evt_hackai_pune_26") || events[0];
-    const letter = generateClientODLetter(target, "TSEC_MUMBAI", student);
+    const letter = generateClientODLetter(target, "DTC_DELHI", student);
 
     reply = `📄 I have generated your formal **On-Duty (OD) Leave Letter** for **${target.title}**!\n\n• **Ref**: \`${letter.ref_number}\`\n• **Addressed to**: ${letter.to_recipient.name} (${letter.to_recipient.designation})\n• **Dates**: ${letter.event_details.dates} (${letter.event_details.duration_days} Days)\n• **Anti-Tamper Hash**: \`${letter.verification.hash}\`\n\nClick below to open the printable PDF with verified QR code and college letterhead.`;
 

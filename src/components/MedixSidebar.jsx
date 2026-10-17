@@ -108,7 +108,7 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
         </button>
 
         <button 
-          onClick={() => alert("Logged in as Milind (2nd Year, TSEC Mumbai).")}
+          onClick={() => alert("Logged in as Milind (2nd Year, Delhi Technical Campus).")}
           className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#64748B] hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
         >
           <LogOut className="w-4 h-4 text-slate-400" />

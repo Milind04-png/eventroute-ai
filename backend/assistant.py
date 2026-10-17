@@ -92,9 +92,9 @@ class EventRouteAssistant:
             tool_logs.append({
                 "tool": "generate_od_letter",
                 "status": "success",
-                "detail": "Fetched Mumbai University OD template and compiled official PDF data."
+                "detail": "Fetched Delhi Technical Campus (GGSIPU) OD template and compiled official PDF data."
             })
-            letter = od_generator.generate_od_letter("evt_hackai_pune_26", "TSEC_MUMBAI")
+            letter = od_generator.generate_od_letter("evt_hackai_pune_26", "DTC_DELHI")
             reply = (
                 f"📄 I have compiled your formal **On-Duty (OD) Leave Letter** for **HackAI Pune 2026**!\n\n"
                 f"• **Ref**: `{letter['ref_number']}`\n"

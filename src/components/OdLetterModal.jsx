@@ -21,7 +21,7 @@ export default function OdLetterModal({
 }) {
   if (!isOpen || !event) return null;
 
-  const [selectedCollege, setSelectedCollege] = useState("TSEC_MUMBAI");
+  const [selectedCollege, setSelectedCollege] = useState("DTC_DELHI");
   const [copied, setCopied] = useState(false);
 
   // Generate or use passed letter data

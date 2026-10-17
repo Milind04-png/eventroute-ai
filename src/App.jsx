@@ -280,7 +280,7 @@ export default function App() {
     if (preloadedLetter) {
       setOdLetterPayload(preloadedLetter);
     } else {
-      const letter = await requestODLetter(eventId, "TSEC_MUMBAI", target);
+      const letter = await requestODLetter(eventId, "DTC_DELHI", target);
       setOdLetterPayload(letter);
     }
     setOdLetterEvent(target);
@@ -432,7 +432,7 @@ export default function App() {
                         Explore All Opportunities
                       </h2>
                       <p className="text-xs text-[#64748B] mt-0.5 font-medium">
-                        Showing personalized opportunities for Milind (2nd Year CSE, TSEC Mumbai).
+                        Showing personalized opportunities for Milind (2nd Year CSE, Delhi Technical Campus).
                       </p>
                     </div>
 

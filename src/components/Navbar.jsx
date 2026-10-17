@@ -168,7 +168,7 @@ export default function Navbar({
                   {STUDENT_PROFILE.name}
                 </p>
                 <p className={`text-[10px] ${isLight ? "text-slate-500" : "text-slate-400"}`}>
-                  2nd Yr CSE · TSEC
+                  2nd Yr CSE · DTC
                 </p>
               </div>
             </div>
