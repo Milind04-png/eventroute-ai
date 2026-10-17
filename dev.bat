@@ -1,13 +1,11 @@
 @echo off
-title EventRoute AI - Dev Launcher
-cd /d "%~dp0"
+title EventRoute AI - Frontend Dev Launcher
+cd /d "%~dp0frontend"
 
 echo =========================================================================
-echo    EVENTROUTE AI - EXPLAINABLE OPPORTUNITY INTELLIGENCE
+echo    EVENTROUTE AI - FRONTEND CLIENT
+echo    Vite Dev Server: http://localhost:3000
 echo =========================================================================
 echo.
 
-echo Starting Vite frontend on http://localhost:3000...
-echo Interactive Web App: http://localhost:3000
-echo.
 npm run dev

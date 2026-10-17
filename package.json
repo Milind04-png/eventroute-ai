@@ -1,26 +1,19 @@
 {
-  "name": "eventroute-ai",
+  "name": "eventroute-ai-monorepo",
   "version": "1.0.0",
-  "description": "EventRoute AI - Explainable Opportunity Intelligence for Students",
-  "type": "module",
+  "private": true,
+  "description": "EventRoute AI - Monorepo root orchestrator for decoupled frontend and backend services",
   "scripts": {
     "start": "run.bat",
-    "dev": "vite",
-    "backend": "python backend/main.py",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "frontend:install": "npm --prefix frontend install",
+    "backend:install": "pip install -r backend/requirements.txt",
+    "backend:dev": "python backend/main.py",
+    "backend": "python backend/main.py"
   },
-  "dependencies": {
-    "canvas-confetti": "^1.9.4",
-    "framer-motion": "^14.3.0",
-    "lucide-react": "^1.49.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "@vitejs/plugin-react": "^6.1.1",
-    "tailwindcss": "^4.3.3",
-    "vite": "^8.3.2"
-  }
+  "workspaces": [
+    "frontend"
+  ]
 }
