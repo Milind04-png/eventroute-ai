@@ -5,14 +5,17 @@ import {
   PlayCircle, 
   Compass, 
   ShieldCheck,
-  Search
+  Search,
+  Flame,
+  BookmarkCheck
 } from "lucide-react";
 import { STUDENT_PROFILE } from "../data/initialEvents";
 
 export default function MedixTopBar({ 
   activeTab, 
   setActiveTab, 
-  onStartDemoTour 
+  onStartDemoTour,
+  shortlistCount = 0
 }) {
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] px-4 sm:px-8 py-3 flex items-center justify-between select-none">
@@ -30,7 +33,7 @@ export default function MedixTopBar({
         <div className="hidden sm:flex items-center gap-1 bg-[#F1F5F9] p-1 rounded-2xl border border-[#E2E8F0]">
           <button
             onClick={() => setActiveTab("feed")}
-            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "feed"
                 ? "bg-white text-[#0F172A] shadow-xs"
                 : "text-[#64748B] hover:text-[#0F172A]"
@@ -40,8 +43,39 @@ export default function MedixTopBar({
           </button>
 
           <button
+            onClick={() => setActiveTab("swipe")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+              activeTab === "swipe"
+                ? "bg-rose-500 text-white shadow-xs"
+                : "text-rose-600 hover:bg-rose-50"
+            }`}
+          >
+            <Flame className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
+            <span>Swipe Deck</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("shortlist")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+              activeTab === "shortlist"
+                ? "bg-emerald-600 text-white shadow-xs"
+                : "text-emerald-700 hover:bg-emerald-50"
+            }`}
+          >
+            <BookmarkCheck className="w-3.5 h-3.5" />
+            <span>Shortlist</span>
+            {shortlistCount > 0 && (
+              <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-full ${
+                activeTab === "shortlist" ? "bg-white text-emerald-800" : "bg-emerald-100 text-emerald-800"
+              }`}>
+                {shortlistCount}
+              </span>
+            )}
+          </button>
+
+          <button
             onClick={() => setActiveTab("opportunities")}
-            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "opportunities"
                 ? "bg-white text-[#0F172A] shadow-xs"
                 : "text-[#64748B] hover:text-[#0F172A]"
@@ -52,7 +86,7 @@ export default function MedixTopBar({
 
           <button
             onClick={() => setActiveTab("calendar")}
-            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "calendar"
                 ? "bg-white text-[#0F172A] shadow-xs"
                 : "text-[#64748B] hover:text-[#0F172A]"
@@ -63,7 +97,7 @@ export default function MedixTopBar({
 
           <button
             onClick={() => setActiveTab("od_letters")}
-            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "od_letters"
                 ? "bg-white text-[#0F172A] shadow-xs"
                 : "text-[#64748B] hover:text-[#0F172A]"

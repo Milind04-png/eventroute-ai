@@ -112,3 +112,47 @@ export async function askAssistant(message, events) {
   }
   return processClientAssistant(message, events, STUDENT_PROFILE);
 }
+
+export async function syncShortlistAdd(event) {
+  const isUp = await checkBackendHealth();
+  if (isUp) {
+    try {
+      await fetch("/api/shortlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(event)
+      });
+    } catch (e) {
+      console.warn("Backend shortlist add error", e);
+    }
+  }
+}
+
+export async function syncShortlistRemove(eventId) {
+  const isUp = await checkBackendHealth();
+  if (isUp) {
+    try {
+      await fetch(`/api/shortlist/${eventId}`, {
+        method: "DELETE"
+      });
+    } catch (e) {
+      console.warn("Backend shortlist remove error", e);
+    }
+  }
+}
+
+export async function syncShortlistGet() {
+  const isUp = await checkBackendHealth();
+  if (isUp) {
+    try {
+      const res = await fetch("/api/shortlist");
+      if (res.ok) {
+        const data = await res.json();
+        return data.shortlist || [];
+      }
+    } catch (e) {
+      console.warn("Backend shortlist get error", e);
+    }
+  }
+  return [];
+}

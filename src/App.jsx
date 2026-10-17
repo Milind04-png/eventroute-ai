@@ -18,11 +18,13 @@ import DemoWalkthrough from "./components/DemoWalkthrough";
 import ComparisonModal from "./components/ComparisonModal";
 import VerifyODModal from "./components/VerifyODModal";
 import EventFlyerScannerModal from "./components/EventFlyerScannerModal";
+import SwipeDiscoverDeck from "./components/SwipeDiscoverDeck";
+import ShortlistView from "./components/ShortlistView";
 
 import { INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR } from "./data/initialEvents";
-import { fetchOpportunities, fetchSkillGap, requestODLetter, sendFeedback } from "./services/api";
+import { fetchOpportunities, fetchSkillGap, requestODLetter, sendFeedback, syncShortlistAdd, syncShortlistRemove } from "./services/api";
 import { rankEvents } from "./services/aiEngine";
-import { Search, Filter, Sparkles, AlertTriangle, ShieldCheck, CheckCircle2, RotateCcw, Scan, Building2 } from "lucide-react";
+import { Search, Filter, Sparkles, AlertTriangle, ShieldCheck, CheckCircle2, RotateCcw, Scan, Building2, Flame, BookmarkCheck } from "lucide-react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("feed");
@@ -36,6 +38,41 @@ export default function App() {
   });
   const [downvotedEvents, setDownvotedEvents] = useState(new Set());
   const [upvotedEvents, setUpvotedEvents] = useState(new Set());
+
+  // Shortlist and Swipe-to-Discover state (with localStorage persistence)
+  const [shortlist, setShortlist] = useState(() => {
+    try {
+      const saved = localStorage.getItem("eventroute_shortlist_v1");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [swipeHistory, setSwipeHistory] = useState(() => {
+    try {
+      const saved = localStorage.getItem("eventroute_swipe_history_v1");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("eventroute_shortlist_v1", JSON.stringify(shortlist));
+    } catch (e) {
+      console.warn("Failed to persist shortlist to localStorage", e);
+    }
+  }, [shortlist]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("eventroute_swipe_history_v1", JSON.stringify(swipeHistory));
+    } catch (e) {
+      console.warn("Failed to persist swipeHistory to localStorage", e);
+    }
+  }, [swipeHistory]);
   
   // Modals state
   const [selectedEventDetails, setSelectedEventDetails] = useState(null);
@@ -105,6 +142,119 @@ export default function App() {
     await sendFeedback(eventId, action, reasonTag);
     const reranked = rankEvents(INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR, newWeights, newDownvoted, newUpvoted);
     setEvents(reranked);
+  };
+
+  // 1. Right Swipe Handler -> Shortlist & Positive AI Signal
+  const handleShortlistEvent = async (event) => {
+    // Add to shortlist if not already present
+    setShortlist(prev => {
+      if (prev.some(e => e.id === event.id)) return prev;
+      return [event, ...prev];
+    });
+
+    // Record swipe history
+    setSwipeHistory(prev => [{
+      eventId: event.id,
+      direction: "right",
+      event,
+      timestamp: Date.now()
+    }, ...prev]);
+
+    // Update feedback weights: Boost tags by +25%
+    let newWeights = { ...feedbackWeights };
+    (event.tags || []).forEach(tag => {
+      newWeights[tag] = Number(((newWeights[tag] || 1.0) * 1.25).toFixed(2));
+    });
+
+    const newUpvoted = new Set(upvotedEvents);
+    newUpvoted.add(event.id);
+    const newDownvoted = new Set(downvotedEvents);
+    newDownvoted.delete(event.id);
+
+    setFeedbackWeights(newWeights);
+    setUpvotedEvents(newUpvoted);
+    setDownvotedEvents(newDownvoted);
+
+    // Call API and re-rank in real time
+    await sendFeedback(event.id, "upvote", event.tags?.[0]);
+    await syncShortlistAdd(event);
+    const reranked = rankEvents(INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR, newWeights, newDownvoted, newUpvoted);
+    setEvents(reranked);
+
+    showToast(`✓ Shortlisted '${event.title}'! AI boosted ${event.tags?.[0] || "relevant"} opportunities (+25%)`);
+  };
+
+  // 2. Left Swipe Handler -> Skip & Negative AI Signal
+  const handleSkipEvent = async (event) => {
+    // Record swipe history
+    setSwipeHistory(prev => [{
+      eventId: event.id,
+      direction: "left",
+      event,
+      timestamp: Date.now()
+    }, ...prev]);
+
+    // Update feedback weights: Deprioritize tags by -20%
+    let newWeights = { ...feedbackWeights };
+    (event.tags || []).forEach(tag => {
+      newWeights[tag] = Number(((newWeights[tag] || 1.0) * 0.80).toFixed(2));
+    });
+
+    const newDownvoted = new Set(downvotedEvents);
+    newDownvoted.add(event.id);
+    const newUpvoted = new Set(upvotedEvents);
+    newUpvoted.delete(event.id);
+
+    setFeedbackWeights(newWeights);
+    setDownvotedEvents(newDownvoted);
+    setUpvotedEvents(newUpvoted);
+
+    // Call API and re-rank in real time
+    await sendFeedback(event.id, "downvote", event.tags?.[0]);
+    const reranked = rankEvents(INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR, newWeights, newDownvoted, newUpvoted);
+    setEvents(reranked);
+
+    showToast(`✕ Skipped '${event.title}'. AI deprioritized ${event.tags?.[0] || "skipped"} category (-20%)`);
+  };
+
+  // 3. Undo Last Swipe Handler
+  const handleUndoSwipe = async () => {
+    if (swipeHistory.length === 0) return;
+    const [lastSwiped, ...remainingHistory] = swipeHistory;
+    setSwipeHistory(remainingHistory);
+
+    // If it was shortlisted, remove from shortlist
+    if (lastSwiped.direction === "right") {
+      setShortlist(prev => prev.filter(e => e.id !== lastSwiped.eventId));
+      await syncShortlistRemove(lastSwiped.eventId);
+    }
+
+    // Revert feedback signals
+    const newUpvoted = new Set(upvotedEvents);
+    newUpvoted.delete(lastSwiped.eventId);
+    const newDownvoted = new Set(downvotedEvents);
+    newDownvoted.delete(lastSwiped.eventId);
+
+    setUpvotedEvents(newUpvoted);
+    setDownvotedEvents(newDownvoted);
+
+    const reranked = rankEvents(INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR, feedbackWeights, newDownvoted, newUpvoted);
+    setEvents(reranked);
+
+    showToast(`↩ Restored '${lastSwiped.event.title}' back to discovery deck.`);
+  };
+
+  // 4. Reset Deck Handler
+  const handleResetDeck = () => {
+    setSwipeHistory([]);
+    showToast(`Deck reshuffled! All opportunities are ready for discovery.`);
+  };
+
+  // 5. Remove from Shortlist Handler
+  const handleRemoveFromShortlist = async (eventId) => {
+    setShortlist(prev => prev.filter(e => e.id !== eventId));
+    await syncShortlistRemove(eventId);
+    showToast(`Removed event from your shortlist.`);
   };
 
   const showToast = (msg) => {
@@ -211,6 +361,7 @@ export default function App() {
         <MedixSidebar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
+          shortlistCount={shortlist.length}
         />
       </div>
 
@@ -222,6 +373,7 @@ export default function App() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           onStartDemoTour={handleStartDemoTour}
+          shortlistCount={shortlist.length}
         />
 
         {/* Content Container */}
@@ -237,6 +389,50 @@ export default function App() {
                 onStartAssessmentQuery={handleChatWithPrompt}
                 onTriggerDemo={handleStartDemoTour}
               />
+
+              {/* Tinder-Style Swipe-to-Discover Interactive Quick Launcher */}
+              <div className="p-6 rounded-3xl bg-gradient-to-r from-rose-500 via-pink-600 to-indigo-600 text-white shadow-xl shadow-rose-500/15 flex flex-col md:flex-row md:items-center justify-between gap-5 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none group-hover:scale-110 transition-transform"></div>
+
+                <div className="flex items-center gap-4 relative z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-bold text-white shadow-inner shrink-0">
+                    <Flame className="w-7 h-7 fill-white animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-display font-black text-xl tracking-tight text-white">
+                        Tinder-Style Swipe Discover AI
+                      </span>
+                      <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-white/25 text-white uppercase tracking-wider backdrop-blur-xs">
+                        Gesture Deck
+                      </span>
+                    </div>
+                    <p className="text-xs text-rose-100 mt-1 max-w-xl font-medium">
+                      Drag cards with mouse or touch. Swipe Right to Shortlist • Swipe Left to Skip • Swipe Up for instant AI Skill-Gap Analysis.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 relative z-10 self-start md:self-auto">
+                  <button
+                    onClick={() => setActiveTab("swipe")}
+                    className="px-6 py-3 rounded-2xl bg-white text-rose-600 hover:bg-rose-50 font-extrabold text-xs shadow-lg shadow-black/10 transition active:scale-95 flex items-center gap-2 cursor-pointer"
+                  >
+                    <Flame className="w-4 h-4 fill-rose-600" />
+                    <span>Launch Swipe Deck</span>
+                  </button>
+
+                  {shortlist.length > 0 && (
+                    <button
+                      onClick={() => setActiveTab("shortlist")}
+                      className="px-5 py-3 rounded-2xl bg-white/20 hover:bg-white/30 text-white font-extrabold text-xs backdrop-blur-md transition active:scale-95 flex items-center gap-2 cursor-pointer border border-white/20"
+                    >
+                      <BookmarkCheck className="w-4 h-4" />
+                      <span>Shortlist ({shortlist.length})</span>
+                    </button>
+                  )}
+                </div>
+              </div>
 
               {/* Verified College Logos & Institutional Crests */}
               <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-[0_4px_24px_rgba(15,23,42,0.02)]">
@@ -383,6 +579,35 @@ export default function App() {
               </section>
 
             </div>
+          )}
+
+          {/* TAB: SWIPE TO DISCOVER DECK */}
+          {activeTab === "swipe" && (
+            <div className="py-2">
+              <SwipeDiscoverDeck
+                events={events}
+                onShortlist={handleShortlistEvent}
+                onSkip={handleSkipEvent}
+                onOpenSkillGap={handleOpenSkillGap}
+                onOpenDetails={(e) => setSelectedEventDetails(e)}
+                shortlist={shortlist}
+                swipeHistory={swipeHistory}
+                onUndoSwipe={handleUndoSwipe}
+                onResetDeck={handleResetDeck}
+              />
+            </div>
+          )}
+
+          {/* TAB: MY SHORTLIST */}
+          {activeTab === "shortlist" && (
+            <ShortlistView
+              shortlist={shortlist}
+              onRemoveFromShortlist={handleRemoveFromShortlist}
+              onGenerateOD={(id) => handleGenerateOD(id)}
+              onOpenSkillGap={(id) => handleOpenSkillGap(id)}
+              onOpenDetails={(e) => setSelectedEventDetails(e)}
+              onGoToSwipeDeck={() => setActiveTab("swipe")}
+            />
           )}
 
           {/* TAB 2: CALENDAR & CLASHES */}

@@ -60,6 +60,15 @@ def init_db():
     )
     """)
 
+    # Shortlist table for Swipe-to-Discover
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS shortlist (
+        event_id TEXT PRIMARY KEY,
+        event_json TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
     conn.commit()
     conn.close()
 
@@ -72,6 +81,31 @@ def log_feedback(event_id: str, action: str, reason_tag: Optional[str] = None):
     )
     conn.commit()
     conn.close()
+
+def save_to_shortlist(event: Dict[str, Any]):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT OR REPLACE INTO shortlist (event_id, event_json)
+    VALUES (?, ?)
+    """, (event["id"], json.dumps(event)))
+    conn.commit()
+    conn.close()
+
+def remove_from_shortlist(event_id: str):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM shortlist WHERE event_id = ?", (event_id,))
+    conn.commit()
+    conn.close()
+
+def get_shortlist() -> List[Dict[str, Any]]:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT event_json FROM shortlist ORDER BY created_at DESC")
+    rows = cursor.fetchall()
+    conn.close()
+    return [json.loads(r["event_json"]) for r in rows]
 
 def save_od_letter(letter_dict: Dict[str, Any], college_key: str):
     conn = get_connection()

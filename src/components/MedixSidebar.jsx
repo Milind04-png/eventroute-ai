@@ -12,12 +12,16 @@ import {
   Settings, 
   LogOut,
   Compass,
-  CheckCircle2
+  CheckCircle2,
+  Flame,
+  BookmarkCheck
 } from "lucide-react";
 
-export default function MedixSidebar({ activeTab, setActiveTab }) {
+export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount = 0 }) {
   const navItems = [
     { id: "feed", label: "Dashboard", icon: LayoutDashboard },
+    { id: "swipe", label: "Swipe Discover", icon: Flame, badge: "AI" },
+    { id: "shortlist", label: "My Shortlist", icon: BookmarkCheck, count: shortlistCount },
     { id: "opportunities", label: "Opportunities", icon: Compass },
     { id: "calendar", label: "Exam & Calendar", icon: Calendar },
     { id: "od_letters", label: "OD Leave Letters", icon: FileText },
@@ -72,9 +76,21 @@ export default function MedixSidebar({ activeTab, setActiveTab }) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600" : "text-[#64748B]"}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600" : item.id === "swipe" ? "text-rose-500" : "text-[#64748B]"}`} />
                   <span>{item.label}</span>
                 </div>
+
+                {item.badge && (
+                  <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-rose-500 text-white shadow-xs">
+                    {item.badge}
+                  </span>
+                )}
+
+                {item.count > 0 && (
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                    {item.count}
+                  </span>
+                )}
               </button>
             );
           })}

@@ -85,6 +85,23 @@ def submit_feedback(req: FeedbackRequest):
     db.log_feedback(req.event_id, req.action, req.reason_tag)
     return res
 
+@app.get("/api/shortlist")
+def get_user_shortlist():
+    """Returns all shortlisted opportunities saved via Swipe-to-Discover"""
+    return {"shortlist": db.get_shortlist()}
+
+@app.post("/api/shortlist")
+def add_to_shortlist(event: Dict[str, Any]):
+    """Persists a right-swiped event into student shortlist"""
+    db.save_to_shortlist(event)
+    return {"status": "saved", "event_id": event.get("id")}
+
+@app.delete("/api/shortlist/{event_id}")
+def delete_from_shortlist(event_id: str):
+    """Removes an event from student shortlist"""
+    db.remove_from_shortlist(event_id)
+    return {"status": "removed", "event_id": event_id}
+
 @app.get("/api/events/{event_id}/skill-gap")
 def get_skill_gap(event_id: str):
     """Calculates prerequisites have vs missing with curated bridge resources"""
