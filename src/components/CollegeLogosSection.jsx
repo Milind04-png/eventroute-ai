@@ -13,7 +13,8 @@ export const COLLEGES_DATA = [
     bgColor: "bg-blue-50 text-blue-700 border-blue-200",
     odStatus: "100% Fast-Track OD Approved",
     isHomeCollege: true,
-    logoLetter: "TS"
+    logoLetter: "TS",
+    logoUrl: "/logos/tsec.jpg"
   },
   {
     id: "iitb",
@@ -25,7 +26,8 @@ export const COLLEGES_DATA = [
     color: "from-amber-600 to-orange-700",
     bgColor: "bg-amber-50 text-amber-800 border-amber-200",
     odStatus: "Flagship National Partner",
-    logoLetter: "IITB"
+    logoLetter: "IITB",
+    logoUrl: "/logos/iitb.svg"
   },
   {
     id: "coep",
@@ -37,7 +39,8 @@ export const COLLEGES_DATA = [
     color: "from-emerald-600 to-teal-700",
     bgColor: "bg-emerald-50 text-emerald-800 border-emerald-200",
     odStatus: "Pre-Approved Inter-City OD",
-    logoLetter: "COEP"
+    logoLetter: "COEP",
+    logoUrl: "/logos/coep.jpg"
   },
   {
     id: "vjti",
@@ -49,7 +52,8 @@ export const COLLEGES_DATA = [
     color: "from-purple-600 to-indigo-800",
     bgColor: "bg-purple-50 text-purple-800 border-purple-200",
     odStatus: "Autonomous Board Verified",
-    logoLetter: "VJTI"
+    logoLetter: "VJTI",
+    logoUrl: "/logos/vjti.png"
   },
   {
     id: "rvce",
@@ -61,7 +65,8 @@ export const COLLEGES_DATA = [
     color: "from-rose-600 to-pink-700",
     bgColor: "bg-rose-50 text-rose-800 border-rose-200",
     odStatus: "VTU Form-B Verified",
-    logoLetter: "RVCE"
+    logoLetter: "RVCE",
+    logoUrl: "/logos/rvce.png"
   },
   {
     id: "ceg",
@@ -73,7 +78,8 @@ export const COLLEGES_DATA = [
     color: "from-cyan-600 to-blue-800",
     bgColor: "bg-cyan-50 text-cyan-800 border-cyan-200",
     odStatus: "Anna Univ Format Verified",
-    logoLetter: "CEG"
+    logoLetter: "CEG",
+    logoUrl: "/logos/ceg.png"
   },
   {
     id: "dtu",
@@ -85,7 +91,8 @@ export const COLLEGES_DATA = [
     color: "from-red-600 to-rose-800",
     bgColor: "bg-red-50 text-red-800 border-red-200",
     odStatus: "Verified Partner Campus",
-    logoLetter: "DTU"
+    logoLetter: "DTU",
+    logoUrl: "/logos/dtu.png"
   },
   {
     id: "bits",
@@ -97,7 +104,8 @@ export const COLLEGES_DATA = [
     color: "from-indigo-600 to-blue-900",
     bgColor: "bg-indigo-50 text-indigo-800 border-indigo-200",
     odStatus: "100% Digital OD Accepted",
-    logoLetter: "BITS"
+    logoLetter: "BITS",
+    logoUrl: "/logos/bits.svg"
   }
 ];
 
@@ -147,9 +155,24 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
                   : "bg-white border-[#E2E8F0] hover:border-emerald-300 hover:shadow-md hover:-translate-y-0.5"
               }`}
             >
-              {/* College Emblem / Crest Logo */}
-              <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${col.color} text-white font-extrabold text-sm flex items-center justify-center shadow-md mb-2 group-hover:scale-105 transition-transform shrink-0`}>
-                {col.logoLetter}
+              {/* College Official Logo / Crest */}
+              <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200/80 shadow-xs p-1.5 flex items-center justify-center mb-2 group-hover:scale-105 group-hover:shadow-md transition-all shrink-0">
+                <img
+                  src={col.logoUrl}
+                  alt={`${col.shortName} official logo`}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    if (e.currentTarget.nextElementSibling) {
+                      e.currentTarget.nextElementSibling.style.display = "flex";
+                    }
+                  }}
+                />
+                <div 
+                  className={`hidden w-full h-full rounded-xl bg-gradient-to-tr ${col.color} text-white font-extrabold text-xs items-center justify-center shadow-xs`}
+                >
+                  {col.logoLetter}
+                </div>
               </div>
 
               {/* Names */}

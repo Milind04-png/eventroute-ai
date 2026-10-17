@@ -139,7 +139,7 @@ export default function MedixHeroCards({
               </div>
               <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1">
                 <Zap className="w-3 h-3 text-emerald-600" />
-                Triage AI
+                Explainable AI
               </span>
             </div>
 
@@ -158,7 +158,7 @@ export default function MedixHeroCards({
                   type="text"
                   value={assessmentInput}
                   onChange={(e) => setAssessmentInput(e.target.value)}
-                  placeholder="How are you feeling? Tell us what you're looking for..."
+                  placeholder="Search opportunities (e.g. Generative AI, Web3, FinTech hackathons)..."
                   className="w-full px-4 py-3 rounded-2xl bg-white border border-slate-200 text-xs text-[#0F172A] placeholder-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition shadow-xs"
                 />
               </div>
@@ -203,20 +203,20 @@ export default function MedixHeroCards({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
               <div className="flex items-center gap-1.5 text-xs text-amber-600 font-bold">
                 <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                <span>Typical assessment time: &lt; 1 min</span>
+                <span>Instant Semantic Match: &lt; 1 sec</span>
               </div>
 
               <button
                 onClick={handleAssessmentSubmit}
                 className="px-5 py-2.5 rounded-2xl bg-emerald-800 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs tracking-wide shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Start Assessment</span>
+                <span>Find My Matches</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             <p className="text-[10px] text-slate-400">
-              🛡️ AI provides preliminary triage and explainable recommendations, not an unverified guarantee.
+              🛡️ EventRoute AI cross-references academic schedules, skill overlap, and university calendar.
             </p>
           </div>
 
