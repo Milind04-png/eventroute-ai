@@ -8,7 +8,8 @@ import {
   Search,
   Flame,
   BookmarkCheck,
-  HardDrive
+  HardDrive,
+  Sparkles
 } from "lucide-react";
 import { STUDENT_PROFILE } from "../data/initialEvents";
 
@@ -17,7 +18,8 @@ export default function MedixTopBar({
   setActiveTab, 
   onStartDemoTour,
   shortlistCount = 0,
-  onOpenLocalStorageFiles
+  onOpenLocalStorageFiles,
+  onOpenChat
 }) {
   return (
     <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-[#E2E7FA] px-4 sm:px-8 py-3 flex items-center justify-between select-none shadow-[0_2px_15px_rgba(89,100,254,0.03)]">
@@ -113,6 +115,16 @@ export default function MedixTopBar({
       {/* Right Actions & Milind Profile Badge */}
       <div className="flex items-center gap-3">
         
+        {/* AI Co-Pilot Chat Launch Button */}
+        <button
+          onClick={onOpenChat}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] border border-[#DCE3F9] text-xs font-bold transition active:scale-95 cursor-pointer shadow-xs"
+          title="Open AI Co-Pilot Chatbot"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#5964FE]" />
+          <span className="hidden sm:inline">AI Co-Pilot</span>
+        </button>
+
         {/* Judges Demo Tour Button */}
         <button
           onClick={onStartDemoTour}

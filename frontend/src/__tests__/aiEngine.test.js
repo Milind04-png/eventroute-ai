@@ -70,10 +70,11 @@ describe("EventRoute AI Frontend Recommendation Engine", () => {
     expect(letter.verification.url).toContain("verify.eventroute.ai/od/");
   });
 
-  it("should include DTC batchmates Arman, Anshika, and Dimple in teammates", () => {
+  it("should include DTC batchmates Naman Khatri, Arman, Anshika, and Dimple in teammates", () => {
     const dtcPeers = INITIAL_TEAMMATES.filter(t => t.isDtcPeer);
-    expect(dtcPeers.length).toBe(3);
+    expect(dtcPeers.length).toBe(4);
     const names = dtcPeers.map(t => t.name);
+    expect(names).toContain("Naman Khatri");
     expect(names).toContain("Arman Chauhan");
     expect(names).toContain("Anshika Tyagi");
     expect(names).toContain("Dimple");

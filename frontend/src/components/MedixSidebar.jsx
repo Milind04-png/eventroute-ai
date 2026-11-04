@@ -1,15 +1,15 @@
 import React from "react";
-import { 
-  LayoutDashboard, 
-  Sparkles, 
-  Calendar, 
-  FileText, 
-  BookOpen, 
-  Briefcase, 
-  Users, 
-  Lightbulb, 
-  Building2, 
-  Settings, 
+import {
+  LayoutDashboard,
+  Sparkles,
+  Calendar,
+  FileText,
+  BookOpen,
+  Briefcase,
+  Users,
+  Lightbulb,
+  Building2,
+  Settings,
   LogOut,
   Compass,
   CheckCircle2,
@@ -18,10 +18,11 @@ import {
   HardDrive
 } from "lucide-react";
 
-export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount = 0, onOpenLocalStorageFiles }) {
+export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount = 0, onOpenLocalStorageFiles, onOpenChat }) {
   const navItems = [
     { id: "feed", label: "Dashboard", icon: LayoutDashboard },
     { id: "swipe", label: "Swipe Discover", icon: Flame, badge: "AI" },
+    { id: "chat_ai", label: "AI Co-Pilot", icon: Sparkles, badge: "Live", onClick: onOpenChat },
     { id: "shortlist", label: "My Shortlist", icon: BookmarkCheck, count: shortlistCount },
     { id: "local_files", label: "Saved Offline Files", icon: HardDrive, onClick: onOpenLocalStorageFiles },
     { id: "opportunities", label: "Opportunities", icon: Compass },
@@ -36,7 +37,7 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
 
   return (
     <aside className="w-64 bg-white/95 backdrop-blur-xl border-r border-[#E2E7FA] min-h-screen flex flex-col justify-between shrink-0 select-none shadow-[2px_0_20px_rgba(89,100,254,0.03)]">
-      
+
       {/* Brand Header */}
       <div>
         <div className="p-5 flex items-center gap-3 border-b border-[#F0F3FD]">
@@ -71,11 +72,10 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
                     setActiveTab(item.id);
                   }
                 }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                  isActive
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${isActive
                     ? "bg-[#DFE3FF] text-[#434EEB] shadow-xs font-bold"
                     : "text-[#525A8B] hover:bg-[#F1F4FE] hover:text-[#10174D]"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <Icon className={`w-4 h-4 ${isActive ? "text-[#434EEB]" : item.id === "swipe" ? "text-[#8C52FF]" : "text-[#8E9BBF]"}`} />
@@ -101,7 +101,7 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
 
       {/* Bottom Footer Actions */}
       <div className="p-4 border-t border-[#F0F3FD] space-y-1">
-        <button 
+        <button
           onClick={() => alert("Settings panel: College ERP & Notification preferences.")}
           className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#525A8B] hover:text-[#10174D] hover:bg-[#F1F4FE] transition cursor-pointer"
         >
@@ -109,7 +109,7 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
           <span>Settings</span>
         </button>
 
-        <button 
+        <button
           onClick={() => alert("Logged in as Milind (2nd Year, Delhi Technical Campus).")}
           className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#525A8B] hover:text-[#434EEB] hover:bg-[#DFE3FF]/50 transition cursor-pointer"
         >

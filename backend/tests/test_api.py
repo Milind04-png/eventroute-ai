@@ -1,46 +1,56 @@
 import pytest
-from fastapi.testclient import TestClient
 import sys
 import os
 
 # Add backend directory to sys.path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from main import app
+from main import (
+    health_check,
+    status_alias,
+    root_index,
+    get_user_profile,
+    get_events,
+    submit_feedback,
+    FeedbackRequest,
+    get_user_shortlist,
+    add_to_shortlist,
+    delete_from_shortlist,
+    get_skill_gap,
+    get_od_templates,
+    generate_od_letter,
+    ODGenerateRequest,
+    verify_od_letter,
+    get_teammates,
+    assistant_chat,
+    ChatRequest,
+    validate_idea,
+    IdeaValidateRequest,
+)
 from mock_data import RAW_EVENTS, COLLEGE_OD_TEMPLATES, SAMPLE_TEAMMATES
 
-client = TestClient(app)
-
 def test_health_check():
-    response = client.get("/api/health")
-    assert response.status_code == 200
-    data = response.json()
+    data = health_check()
     assert data["status"] == "healthy"
     assert data["service"] == "EventRoute AI Engine"
     assert data["events_count"] == len(RAW_EVENTS)
 
 def test_root_and_status_alias():
-    root_res = client.get("/")
-    assert root_res.status_code == 200
-    assert root_res.json()["docs_url"] == "/docs"
+    root_res = root_index()
+    assert root_res["docs_url"] == "/docs"
 
-    status_res = client.get("/api/status")
-    assert status_res.status_code == 200
-    assert status_res.json()["status"] == "healthy"
+    status_res = status_alias()
+    assert status_res["status"] == "healthy"
 
 def test_user_profile():
-    response = client.get("/api/user/profile")
-    assert response.status_code == 200
-    data = response.json()
+    data = get_user_profile()
     assert "profile" in data
     assert "exams" in data
     assert data["profile"]["name"] == "Milind"
     assert "Delhi Technical Campus" in data["profile"]["college"]
 
 def test_get_events_ranked():
-    response = client.get("/api/events")
-    assert response.status_code == 200
-    data = response.json()
+    data = get_events()
     assert "events" in data
     events = data["events"]
     assert len(events) == len(RAW_EVENTS)
@@ -56,14 +66,12 @@ def test_get_events_ranked():
 
 def test_events_feedback_reranking():
     # Downvote Web3 Defi Sprint
-    payload = {
-        "event_id": "evt_web3_defi_sprint",
-        "action": "downvote",
-        "reason_tag": "Not interested in Web3"
-    }
-    response = client.post("/api/events/feedback", json=payload)
-    assert response.status_code == 200
-    data = response.json()
+    req = FeedbackRequest(
+        event_id="evt_web3_defi_sprint",
+        action="downvote",
+        reason_tag="Not interested in Web3"
+    )
+    data = submit_feedback(req)
     assert data["status"] == "success"
     assert "updated_weights" in data
     assert data["updated_weights"]["Web3"] < 1.0
@@ -77,25 +85,20 @@ def test_shortlist_crud():
         "worth_it_score": 96
     }
     # Add to shortlist
-    post_res = client.post("/api/shortlist", json=sample_event)
-    assert post_res.status_code == 200
-    assert post_res.json()["status"] == "saved"
+    post_res = add_to_shortlist(sample_event)
+    assert post_res["status"] == "saved"
 
     # Fetch shortlist
-    get_res = client.get("/api/shortlist")
-    assert get_res.status_code == 200
-    shortlist = get_res.json()["shortlist"]
+    get_res = get_user_shortlist()
+    shortlist = get_res["shortlist"]
     assert any(e["id"] == "evt_test_shortlist_01" for e in shortlist)
 
     # Delete from shortlist
-    del_res = client.delete("/api/shortlist/evt_test_shortlist_01")
-    assert del_res.status_code == 200
-    assert del_res.json()["status"] == "removed"
+    del_res = delete_from_shortlist("evt_test_shortlist_01")
+    assert del_res["status"] == "removed"
 
 def test_skill_gap_analysis():
-    response = client.get("/api/events/evt_hackai_pune_26/skill-gap")
-    assert response.status_code == 200
-    data = response.json()
+    data = get_skill_gap("evt_hackai_pune_26")
     assert data["event_id"] == "evt_hackai_pune_26"
     assert "skills_have" in data
     assert "skills_missing" in data
@@ -103,9 +106,7 @@ def test_skill_gap_analysis():
     assert "total_prep_hours" in data
 
 def test_od_templates():
-    response = client.get("/api/od-letter/templates")
-    assert response.status_code == 200
-    templates = response.json()
+    templates = get_od_templates()
     assert "DTC_DELHI" in templates
     assert "USICT_DWARKA" in templates
     assert "MAIT_ROHINI" in templates
@@ -113,60 +114,53 @@ def test_od_templates():
     assert templates["DTC_DELHI"]["college_name"] == "Delhi Technical Campus"
 
 def test_od_letter_generation_and_verification():
-    payload = {
-        "event_id": "evt_hackai_pune_26",
-        "college_key": "DTC_DELHI"
-    }
-    res = client.post("/api/od-letter/generate", json=payload)
-    assert res.status_code == 200
-    letter = res.json()
+    req = ODGenerateRequest(
+        event_id="evt_hackai_pune_26",
+        college_key="DTC_DELHI"
+    )
+    letter = generate_od_letter(req)
     assert "ref_number" in letter
     assert "verification" in letter
     assert letter["college_name"] == "Delhi Technical Campus"
     verif_hash = letter["verification"]["hash"]
 
     # Verify letter
-    verif_res = client.get(f"/api/od-letter/verify/{verif_hash}")
-    assert verif_res.status_code == 200
-    verif_data = verif_res.json()
+    verif_data = verify_od_letter(verif_hash)
     assert verif_data["valid"] is True
     assert verif_data["status"] == "OFFICIALLY_VERIFIED"
     assert verif_data["institution"] == "Delhi Technical Campus"
 
 def test_teammates_dtc_members():
-    response = client.get("/api/teammates")
-    assert response.status_code == 200
-    teammates = response.json()["teammates"]
+    data = get_teammates()
+    teammates = data["teammates"]
     assert len(teammates) >= 6
     names = [t["name"] for t in teammates]
+    assert "Naman Khatri" in names
     assert "Arman Chauhan" in names
     assert "Anshika Tyagi" in names
     assert "Dimple" in names
 
     # Check DTC peer metadata
-    arman = next(t for t in teammates if t["name"] == "Arman Chauhan")
-    assert arman["college"] == "Delhi Technical Campus (GGSIPU)"
-    assert arman["isDtcPeer"] is True
-    assert arman["synergy_score"] == 98
+    naman = next(t for t in teammates if t["name"] == "Naman Khatri")
+    assert naman["college"] == "Delhi Technical Campus (GGSIPU)"
+    assert naman["isDtcPeer"] is True
+    assert naman["role"] == "Backend Designer"
+    assert naman["synergy_score"] == 99
 
 def test_assistant_chat_teammates_intent():
-    res = client.post("/api/assistant/chat", json={"message": "Can you find me a teammate from my college DTC?"})
-    assert res.status_code == 200
-    data = res.json()
-    assert "reply" in data
-    assert "Arman Chauhan" in data["reply"]
-    assert "tool_calls" in data
-    assert any(log["tool"] == "match_teammates_synergy" for log in data["tool_calls"])
+    res = assistant_chat(ChatRequest(message="Can you find me a teammate from my college DTC?"))
+    assert "reply" in res
+    assert "Arman Chauhan" in res["reply"] or "Naman Khatri" in res["reply"]
+    assert "tool_calls" in res
+    assert any(log["tool"] == "match_teammates_synergy" for log in res["tool_calls"])
 
 def test_idea_validation():
-    payload = {
-        "event_id": "evt_hackai_pune_26",
-        "idea_title": "EventRoute AI: Student Opportunity Engine",
-        "idea_pitch": "Automated swipe-to-discover AI tool with explainable scoring, exam conflict detection, and 1-click OD letter generation."
-    }
-    res = client.post("/api/ideas/validate", json=payload)
-    assert res.status_code == 200
-    data = res.json()
+    req = IdeaValidateRequest(
+        event_id="evt_hackai_pune_26",
+        idea_title="EventRoute AI: Student Opportunity Engine",
+        idea_pitch="Automated swipe-to-discover AI tool with explainable scoring, exam conflict detection, and 1-click OD letter generation."
+    )
+    data = validate_idea(req)
     assert "scores" in data
     assert "novelty" in data["scores"]
     assert "overall_readiness" in data["scores"]

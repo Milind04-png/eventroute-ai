@@ -7,19 +7,33 @@ import { INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR } from "../data/initialE
 import { rankEvents, calculateSkillGap, generateClientODLetter, processClientAssistant } from "./aiEngine";
 
 let backendAvailable = null;
+let lastHealthCheck = 0;
+const HEALTH_CACHE_MS = 6000;
 
-export async function checkBackendHealth() {
-  if (backendAvailable !== null) return backendAvailable;
+export async function checkBackendHealth(force = false) {
+  const now = Date.now();
+  if (!force && backendAvailable !== null && (now - lastHealthCheck < HEALTH_CACHE_MS)) {
+    return backendAvailable;
+  }
   try {
-    const res = await fetch("/api/health", { method: "GET", headers: { "Accept": "application/json" } });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch("/api/health", { 
+      method: "GET", 
+      headers: { "Accept": "application/json" },
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
     if (res.ok) {
       backendAvailable = true;
+      lastHealthCheck = now;
       return true;
     }
   } catch (err) {
     backendAvailable = false;
   }
   backendAvailable = false;
+  lastHealthCheck = now;
   return false;
 }
 
@@ -95,20 +109,32 @@ export async function requestODLetter(eventId, collegeKey, eventObj) {
 }
 
 export async function askAssistant(message, events) {
-  const isUp = await checkBackendHealth();
-  if (isUp) {
-    try {
-      const res = await fetch("/api/assistant/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-      if (res.ok) {
-        return await res.json();
+  try {
+    const isUp = await checkBackendHealth();
+    if (isUp) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+        const res = await fetch("/api/assistant/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message, query: message, prompt: message }),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.reply) {
+            return data;
+          }
+        }
+      } catch (e) {
+        console.warn("Backend assistant error, falling back to client AI:", e);
+        backendAvailable = false;
       }
-    } catch (e) {
-      console.warn("Backend assistant error", e);
     }
+  } catch (err) {
+    console.warn("Health check exception in askAssistant:", err);
   }
   return processClientAssistant(message, events, STUDENT_PROFILE);
 }

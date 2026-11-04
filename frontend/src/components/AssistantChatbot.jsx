@@ -13,6 +13,7 @@ import {
   Wrench 
 } from "lucide-react";
 import { askAssistant } from "../services/api";
+import { processClientAssistant } from "../services/aiEngine";
 
 export default function AssistantChatbot({ 
   events, 
@@ -73,19 +74,30 @@ export default function AssistantChatbot({
         id: `bot_${Date.now()}`,
         role: "assistant",
         text: response.reply,
-        toolCalls: response.tool_calls || [],
-        actionPayload: response.action_payload
+        toolCalls: response.tool_calls || response.toolCalls || [],
+        actionPayload: response.action_payload || response.actionPayload
       };
 
       setMessages(prev => [...prev, botMsg]);
     } catch (e) {
-      console.error(e);
-      setMessages(prev => [...prev, {
-        id: `err_${Date.now()}`,
-        role: "assistant",
-        text: "Sorry, I encountered an issue processing that query.",
-        toolCalls: []
-      }]);
+      console.error("Chatbot processing error:", e);
+      try {
+        const fallback = processClientAssistant(text, events);
+        setMessages(prev => [...prev, {
+          id: `bot_${Date.now()}`,
+          role: "assistant",
+          text: fallback.reply,
+          toolCalls: fallback.tool_calls || [],
+          actionPayload: fallback.action_payload
+        }]);
+      } catch (innerErr) {
+        setMessages(prev => [...prev, {
+          id: `err_${Date.now()}`,
+          role: "assistant",
+          text: "I am ready to help! Ask me about no-clash hackathons (HackAI Pune 2026), OD leave letters, or DTC teammates like Naman Khatri (Backend Designer), Arman Chauhan, Anshika Tyagi, and Dimple.",
+          toolCalls: []
+        }]);
+      }
     } finally {
       setLoading(false);
     }
@@ -151,6 +163,12 @@ export default function AssistantChatbot({
 
           {/* Quick Suggested Prompt Chips (Matching the exact pills in screenshot) */}
           <div className="p-2.5 bg-[#F8FAFF] border-b border-[#F0F3FD] flex items-center gap-1.5 overflow-x-auto text-[11px] whitespace-nowrap">
+            <button
+              onClick={() => handleSendMessage("Tell me about Naman Khatri and our DTC hackathon squad")}
+              className="px-2.5 py-1 rounded-xl bg-[#DFE3FF] hover:bg-[#D5DBFE] text-[#434EEB] border border-[#C7D2FE] transition shrink-0 font-bold shadow-xs cursor-pointer"
+            >
+              🤝 Naman Khatri (DTC)
+            </button>
             <button
               onClick={() => handleSendMessage("Find me an AI hackathon this weekend that won't clash with my exams")}
               className="px-2.5 py-1 rounded-xl bg-white hover:bg-[#DFE3FF] text-[#434EEB] border border-[#DCE3F9] transition shrink-0 font-medium shadow-xs cursor-pointer"

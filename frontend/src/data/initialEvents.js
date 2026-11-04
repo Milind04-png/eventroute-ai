@@ -875,6 +875,19 @@ export const INITIAL_EVENTS = [
 
 export const INITIAL_TEAMMATES = [
   {
+    id: "tm_naman_dtc_00",
+    name: "Naman Khatri",
+    college: "Delhi Technical Campus (GGSIPU)",
+    branch: "Computer Science & Engineering (2nd Year)",
+    skills: ["FastAPI", "Python", "PostgreSQL", "System Architecture", "Docker", "Database Design", "REST APIs", "Redis"],
+    looking_for: "Frontend & Fullstack Developers for TechSpark DTC & GGSIPU Hackathons",
+    synergy_score: 99,
+    synergy_reason: "Naman is your DTC 2nd-year classmate specializing in backend architecture, database schema design, and microservices. Pairing his robust backend design patterns with your AI pipeline creates an unbeatable end-to-end hackathon squad.",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+    isDtcPeer: true,
+    role: "Backend Designer"
+  },
+  {
     id: "tm_arman_dtc_01",
     name: "Arman Chauhan",
     college: "Delhi Technical Campus (GGSIPU)",

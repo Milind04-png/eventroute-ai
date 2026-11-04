@@ -233,10 +233,13 @@ export function generateClientODLetter(event, collegeKey = "DTC_DELHI", student 
 }
 
 export function processClientAssistant(userMessage, events, student = STUDENT_PROFILE) {
-  const q = userMessage.toLowerCase();
+  const q = (userMessage || "").toLowerCase();
+  const eventList = (events && Array.isArray(events) && events.length > 0) ? events : INITIAL_EVENTS;
   const toolLogs = [];
   let actionPayload = null;
   let reply = "";
+
+  const target = eventList.find(e => e.id === "evt_hackai_pune_26") || eventList[0] || INITIAL_EVENTS[0];
 
   if ((q.includes("hackathon") || q.includes("event") || q.includes("weekend")) && (q.includes("exam") || q.includes("clash") || q.includes("ai"))) {
     toolLogs.push({
@@ -261,13 +264,12 @@ export function processClientAssistant(userMessage, events, student = STUDENT_PR
       recommended_event_id: "evt_hackai_pune_26",
       suggested_actions: ["Inspect Skill Gap", "Generate OD Letter", "Find Teammates"]
     };
-  } else if (q.includes("skill") || q.includes("learn") || q.includes("gap") || q.includes("prepare")) {
+  } else if (q.includes("skill") || q.includes("learn") || q.includes("gap") || q.includes("prepare") || q.includes("prereq")) {
     toolLogs.push({
       tool: "calculate_skill_gap",
       status: "success",
-      detail: "Analyzed prerequisites for HackAI Pune 2026 against verified student profile."
+      detail: `Analyzed prerequisites for ${target.title} against verified student profile.`
     });
-    const target = events.find(e => e.id === "evt_hackai_pune_26") || events[0];
     const gap = calculateSkillGap(target, student);
 
     reply = `Here is your AI Skill-Gap breakdown for **${gap.event_title}**:\n\n✅ **Skills You Have (${gap.skills_have.length}/4)**: ${gap.skills_have.join(", ")}\n⚠️ **Missing Prerequisite**: **${gap.skills_missing.join(", ")}**\n\n💡 **Action Plan** (~${gap.total_prep_hours} hours total prep):\n` +
@@ -275,7 +277,8 @@ export function processClientAssistant(userMessage, events, student = STUDENT_PR
 
     actionPayload = {
       action_type: "open_skill_gap",
-      event_id: target.id
+      event_id: target.id,
+      suggested_actions: ["Inspect Skill Gap", "Generate OD Letter", "Find Teammates"]
     };
   } else if (q.includes("od") || q.includes("leave") || q.includes("letter") || q.includes("attendance")) {
     toolLogs.push({
@@ -283,7 +286,6 @@ export function processClientAssistant(userMessage, events, student = STUDENT_PR
       status: "success",
       detail: "Fetched Delhi Technical Campus (GGSIPU) OD template and compiled official PDF data."
     });
-    const target = events.find(e => e.id === "evt_hackai_pune_26") || events[0];
     const letter = generateClientODLetter(target, "DTC_DELHI", student);
 
     reply = `📄 I have generated your formal **On-Duty (OD) Leave Letter** for **${target.title}**!\n\n• **Ref**: \`${letter.ref_number}\`\n• **Addressed to**: ${letter.to_recipient.name} (${letter.to_recipient.designation})\n• **Dates**: ${letter.event_details.dates} (${letter.event_details.duration_days} Days)\n• **Anti-Tamper Hash**: \`${letter.verification.hash}\`\n\nClick below to open the printable PDF with verified QR code and college letterhead.`;
@@ -291,30 +293,80 @@ export function processClientAssistant(userMessage, events, student = STUDENT_PR
     actionPayload = {
       action_type: "open_od_letter",
       event_id: target.id,
-      letter_data: letter
+      letter_data: letter,
+      suggested_actions: ["Generate OD Letter", "Find Teammates", "Inspect Skill Gap"]
     };
-  } else if (q.includes("team") || q.includes("teammate") || q.includes("partner")) {
+  } else if (
+    q.includes("team") || q.includes("teammate") || q.includes("partner") || 
+    q.includes("naman") || q.includes("khatri") || q.includes("backend") || 
+    q.includes("designer") || q.includes("arman") || q.includes("anshika") || 
+    q.includes("dimple") || q.includes("dtc") || q.includes("batchmate") ||
+    q.includes("classmate") || q.includes("match")
+  ) {
+    const isNamanOrBackend = q.includes("naman") || q.includes("khatri") || q.includes("backend") || q.includes("designer");
+    const naman = INITIAL_TEAMMATES.find(t => t.id === "tm_naman_dtc_00") || INITIAL_TEAMMATES[0];
+    const topMatch = isNamanOrBackend ? naman : INITIAL_TEAMMATES[0];
+
     toolLogs.push({
       tool: "match_teammates_synergy",
       status: "success",
-      detail: "Scored complementary student profiles for ML + Frontend stack."
+      detail: `Scored complementary student profiles for ML + Frontend + Backend stack. Identified ${topMatch.name}.`
     });
-    const topMatch = INITIAL_TEAMMATES[0];
 
-    reply = `🤝 Found a high-synergy teammate match for your upcoming hackathons!\n\n• **Name**: **${topMatch.name}** (${topMatch.branch}, ${topMatch.college})\n• **Role**: ${topMatch.role || "Specialist"}\n• **Skills**: ${topMatch.skills.join(", ")}\n• **Synergy Score**: **${topMatch.synergy_score}% Match**\n• **Why Match**: ${topMatch.synergy_reason}\n\nWould you like me to send a collaboration invitation to ${topMatch.name.split(" ")[0]}?`;
+    if (isNamanOrBackend) {
+      toolLogs.push({
+        tool: "verify_college_enrollment",
+        status: "success",
+        detail: "Verified DTC 2nd Year CSE status and backend engineering track."
+      });
+
+      reply = `🤝 **Naman Khatri** is your **2nd-Year DTC Classmate** and verified **Backend Designer**!\n\n` +
+        `• **Role**: ${naman.role || "Backend Designer"}\n` +
+        `• **College**: ${naman.college}\n` +
+        `• **Branch**: ${naman.branch}\n` +
+        `• **Skills**: ${naman.skills.join(", ")}\n` +
+        `• **Synergy Score**: **${naman.synergy_score}% Match** (Highest complementary pairing for your AI & Fullstack stack)\n` +
+        `• **Why Match**: ${naman.synergy_reason}\n\n` +
+        `👥 **Other DTC Classmates Ready to Team Up**:\n` +
+        `• **Arman Chauhan** (Frontend & UI/UX — 98% Match)\n` +
+        `• **Anshika Tyagi** (ML & Python — 96% Match)\n` +
+        `• **Dimple** (Full Stack & Cloud — 95% Match)\n\n` +
+        `Would you like to open the Teammate Match section to view his card or send a collaboration invite?`;
+    } else {
+      reply = `🤝 Found high-synergy teammate matches from your college **Delhi Technical Campus**!\n\n` +
+        `• **Naman Khatri** (2nd Year CSE, Backend Designer — **99% Synergy Match**)\n` +
+        `  *Skills*: FastAPI, Python, PostgreSQL, System Architecture, Docker, Redis\n` +
+        `• **Arman Chauhan** (2nd Year CSE, Frontend & UI/UX — **98% Synergy Match**)\n` +
+        `  *Skills*: React, Tailwind CSS, TypeScript, Figma, Next.js\n` +
+        `• **Anshika Tyagi** (2nd Year CSE, AI/ML Researcher — **96% Synergy Match**)\n` +
+        `  *Skills*: PyTorch, Computer Vision, Scikit-Learn, Pandas\n` +
+        `• **Dimple** (2nd Year CSE, Full Stack & Cloud — **95% Synergy Match**)\n` +
+        `  *Skills*: Node.js, Express, MongoDB, AWS Cloud, Git\n\n` +
+        `All 4 classmates are verified DTC peers enrolled in GGSIPU. Click below to explore their profiles!`;
+    }
 
     actionPayload = {
       action_type: "open_teammates",
-      recommended_teammate: topMatch
+      recommended_teammate: topMatch,
+      suggested_actions: ["Find Teammates", "Inspect Skill Gap", "Generate OD Letter"]
     };
   } else {
     toolLogs.push({
       tool: "general_intent_parser",
       status: "success",
-      detail: "Retrieved guidance categories."
+      detail: "Retrieved guidance categories for EventRoute AI."
     });
 
-    reply = `I am your **EventRoute AI Co-Pilot**. Try asking me:\n\n1. *"Find me an AI hackathon this weekend that won't clash with my exams"*\n2. *"What skills am I missing for HackAI Pune?"*\n3. *"Draft my college OD leave letter for my HOD"*\n4. *"Find me a teammate with PyTorch skills"*`;
+    reply = `I am your **EventRoute AI Co-Pilot** for Delhi Technical Campus. Try asking me:\n\n` +
+      `1. *"Tell me about Naman Khatri (our DTC backend designer)"*\n` +
+      `2. *"Find me an AI hackathon this weekend that won't clash with my exams"*\n` +
+      `3. *"What skills am I missing for HackAI Pune?"*\n` +
+      `4. *"Draft my college OD leave letter for my HOD"*\n` +
+      `5. *"Show me DTC teammates like Arman, Anshika, and Dimple"*`;
+
+    actionPayload = {
+      suggested_actions: ["Find Teammates", "Inspect Skill Gap", "Generate OD Letter"]
+    };
   }
 
   return { reply, tool_calls: toolLogs, action_payload: actionPayload };

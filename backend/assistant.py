@@ -109,23 +109,27 @@ class EventRouteAssistant:
                 "letter_data": letter
             }
 
-        # Scenario 4: Teammate matching query
-        elif "team" in q or "teammate" in q or "partner" in q:
+        # Scenario 4: Teammate matching query / DTC classmates
+        elif any(k in q for k in ["team", "teammate", "partner", "naman", "arman", "anshika", "dimple", "dtc", "backend designer", "designer"]):
             tool_logs.append({
                 "tool": "match_teammates_synergy",
                 "status": "success",
-                "detail": "Scored complementary profiles for ML + Frontend stack."
+                "detail": "Scored complementary DTC 2nd-year engineering profiles for backend, AI, and frontend synergy."
             })
-            top_match = SAMPLE_TEAMMATES[0]
+            dtc_peers = [t for t in SAMPLE_TEAMMATES if t.get("isDtcPeer")]
+            top_match = dtc_peers[0] if dtc_peers else SAMPLE_TEAMMATES[0]
+            peer_names = [f"**{t['name']}** ({t.get('role', 'Engineer')})" for t in dtc_peers]
             first_name = top_match['name'].split()[0]
             reply = (
-                f"🤝 Found a high-synergy teammate match for your upcoming hackathons!\n\n"
-                f"• **Name**: **{top_match['name']}** ({top_match['branch']}, {top_match['college']})\n"
-                f"• **Role**: {top_match.get('role', 'Specialist')}\n"
+                f"🤝 Found high-synergy Delhi Technical Campus (DTC) teammates for your hackathons!\n\n"
+                f"• **Top Synergy Match**: **{top_match['name']}** ({top_match['branch']}, {top_match['college']})\n"
+                f"• **Role**: {top_match.get('role', 'Backend Designer')}\n"
                 f"• **Skills**: {', '.join(top_match['skills'])}\n"
                 f"• **Synergy Score**: **{top_match['synergy_score']}% Match**\n"
                 f"• **Why Match**: {top_match['synergy_reason']}\n\n"
-                f"Would you like me to send {first_name} a collaboration invite to your team?"
+                f"👥 **All Available DTC 2nd-Year Batchmates**:\n"
+                f"{chr(10).join(['• ' + p for p in peer_names])}\n\n"
+                f"Would you like me to send {first_name} or another DTC classmate a collaboration invite?"
             )
             action_payload = {
                 "action_type": "open_teammates",
@@ -144,7 +148,7 @@ class EventRouteAssistant:
                 f"1. **Finding events without exam clashes** (e.g., 'Find me a hackathon this weekend')\n"
                 f"2. **Analyzing skill gaps** (e.g., 'What skills am I missing for HackAI Pune?')\n"
                 f"3. **Generating official college OD leave letters** (e.g., 'Draft my OD letter')\n"
-                f"4. **Finding complementary teammates** across Mumbai & Pune colleges."
+                f"4. **Finding complementary teammates** across Delhi Technical Campus (DTC) and partner campuses."
             )
 
         return {

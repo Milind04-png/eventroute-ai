@@ -368,6 +368,7 @@ export default function App() {
           setActiveTab={setActiveTab}
           shortlistCount={shortlist.length}
           onOpenLocalStorageFiles={() => setIsLocalStorageFilesOpen(true)}
+          onOpenChat={() => setIsChatOpen(true)}
         />
       </div>
 
@@ -381,6 +382,7 @@ export default function App() {
           onStartDemoTour={handleStartDemoTour}
           shortlistCount={shortlist.length}
           onOpenLocalStorageFiles={() => setIsLocalStorageFilesOpen(true)}
+          onOpenChat={() => setIsChatOpen(true)}
         />
 
         {/* Content Container */}

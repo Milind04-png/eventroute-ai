@@ -101,7 +101,9 @@ class ODGenerateRequest(BaseModel):
     college_key: Optional[str] = Field("DTC_DELHI", description="Institutional template code (e.g. DTC_DELHI, USICT_DWARKA, MAIT_ROHINI)")
 
 class ChatRequest(BaseModel):
-    message: str = Field(..., description="Student query for the AI Co-Pilot")
+    message: Optional[str] = Field(None, description="Student query for the AI Co-Pilot")
+    query: Optional[str] = Field(None, description="Alternative query field")
+    prompt: Optional[str] = Field(None, description="Alternative prompt field")
 
 class IdeaValidateRequest(BaseModel):
     event_id: str = Field(..., description="Event ID targeting the pitch")
@@ -245,9 +247,11 @@ def get_teammates(event_id: Optional[str] = Query(None, description="Optional ev
 # --- AI Co-Pilot & Assistant ---
 
 @app.post("/api/assistant/chat", tags=["AI Co-Pilot & Assistant"], summary="Interact with Explainable Assistant")
+@app.post("/api/chat", tags=["AI Co-Pilot & Assistant"], summary="Interact with Explainable Assistant (Alias)")
 def assistant_chat(req: ChatRequest):
     """Conversational assistant with tool calling loop for timetable clash checking, OD generation, and skill gaps."""
-    return assistant_bot.process_query(req.message)
+    msg = req.message or req.query or req.prompt or ""
+    return assistant_bot.process_query(msg)
 
 
 # --- Idea Validator ---

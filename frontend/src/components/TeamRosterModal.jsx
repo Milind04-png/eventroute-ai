@@ -39,6 +39,16 @@ export default function TeamRosterModal({ isOpen, onClose, teammates = [] }) {
       email: STUDENT_PROFILE.email
     },
     {
+      name: "Naman Khatri",
+      roll_no: "2024CS1045",
+      branch: "Computer Science & Engineering (2nd Year)",
+      college: "Delhi Technical Campus (GGSIPU)",
+      role: "Backend Designer",
+      skills: ["FastAPI", "Python", "PostgreSQL", "Docker", "Database Design", "Redis"],
+      github: "https://github.com/naman-khatri-dtc",
+      email: "namankhatri@delhitechnicalcampus.ac.in"
+    },
+    {
       name: "Arman Chauhan",
       roll_no: "2024CS1018",
       branch: "Computer Science & Engineering",
