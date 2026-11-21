@@ -1,5 +1,12 @@
 # EventRoute AI: Explainable Opportunity Intelligence for Students
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-5964FE?style=for-the-badge&logo=github)](https://milind04-png.github.io/eventroute-ai/)
+[![Backend](https://img.shields.io/badge/Backend-FastAPI_Python_3.12-009688?style=for-the-badge&logo=fastapi)](https://github.com/Milind04-png/eventroute-ai/tree/main/backend)
+[![Frontend](https://img.shields.io/badge/Frontend-React_19_Vite_Tailwind-61DAFB?style=for-the-badge&logo=react)](https://github.com/Milind04-png/eventroute-ai/tree/main/frontend)
+[![Tests](https://img.shields.io/badge/Tests-24_Passed-success?style=for-the-badge&logo=pytest)](https://github.com/Milind04-png/eventroute-ai)
+
+> **Live Web Application**: 👉 **[https://milind04-png.github.io/eventroute-ai/](https://milind04-png.github.io/eventroute-ai/)**
+> 
 > **Tagline**: The Intelligent Co-Pilot that matches Indian college students with hackathons, workshops, and career opportunities using explainable AI, collision-aware calendar sync, and automated academic On-Duty (OD) leave approvals.
 
 ---
@@ -116,9 +123,9 @@ Double-click `run.bat` or run in PowerShell:
 ```
 This automatically starts:
 - **Frontend App**: [http://localhost:3000](http://localhost:3000)
-- **FastAPI Backend**: [http://localhost:8000](http://localhost:8000)
-- **Interactive Swagger Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **ReDoc Documentation**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+- **FastAPI Backend**: [http://localhost:8001](http://localhost:8001)
+- **Interactive Swagger Docs**: [http://localhost:8001/docs](http://localhost:8001/docs)
+- **ReDoc Documentation**: [http://localhost:8001/redoc](http://localhost:8001/redoc)
 
 ---
 
@@ -161,13 +168,13 @@ npm test
 EventRoute AI includes comprehensive automated testing:
 
 ```bash
-# Run both Backend (pytest) and Frontend (vitest) tests
+# Run both Backend (pytest) and Frontend (vitest) tests (24 total passed)
 npm test
 
-# Run backend test suite only (11 tests)
+# Run backend test suite only (12 tests)
 npm run test:backend
 
-# Run frontend test suite only (5 tests)
+# Run frontend test suite only (12 tests)
 npm run test:frontend
 ```
 
@@ -180,8 +187,8 @@ npm run test:frontend
 * `test_skill_gap_analysis`: Validates prerequisite matching and bridge courses.
 * `test_od_templates`: Verifies all 16 institutional letterhead formats.
 * `test_od_letter_generation_and_verification`: Tests SHA-256 anti-tamper QR code generation.
-* `test_teammates_dtc_members`: Verifies Arman Chauhan, Anshika Tyagi, and Dimple.
-* `test_assistant_chat_teammates_intent`: Tests conversational tool calling.
+* `test_teammates_dtc_members`: Verifies **Naman Khatri** (Backend Designer, 99% Synergy), Arman Chauhan, Anshika Tyagi, and Dimple.
+* `test_assistant_chat_teammates_intent`: Tests conversational tool calling and DTC teammate matching.
 * `test_idea_validation`: Verifies heuristic novelty, feasibility, and alignment scoring.
 
 ---
@@ -216,7 +223,7 @@ npm run test:frontend
 | **OD Automation** | `GET` | `/api/od-letter/templates` | Institutional OD templates (all GGSIPU colleges) |
 | **OD Automation** | `POST` | `/api/od-letter/generate` | Generate institutional OD leave letter with QR code |
 | **OD Automation** | `GET` | `/api/od-letter/verify/{hash}` | Public cryptographic verification registry |
-| **Teammates** | `GET` | `/api/teammates` | High-synergy teammates (Arman, Anshika, Dimple, etc.) |
+| **Teammates** | `GET` | `/api/teammates` | High-synergy teammates (Naman Khatri, Arman Chauhan, Anshika Tyagi, Dimple) |
 | **Assistant** | `POST` | `/api/assistant/chat` | Conversational RAG assistant with agentic tool calling |
 | **Idea Validator** | `POST` | `/api/ideas/validate` | AI hackathon concept feasibility & rubric scoring |
 
@@ -224,4 +231,4 @@ npm run test:frontend
 
 ## 🔒 Zero-Dependency Resilience
 
-The frontend features automatic backend detection. If the FastAPI backend is running on `:8000`, the frontend leverages server-side vector scoring and SQLite persistence. If running standalone via `npm run dev`, it seamlessly falls back to the client-side AI engine with zero downtime or broken states.
+The frontend features automatic backend detection. If the FastAPI backend is running on `:8001` (or proxied via Vite), the frontend leverages server-side vector scoring and SQLite persistence. If running standalone on GitHub Pages or offline, it seamlessly runs the explainable AI engine on the client with zero downtime or broken states.

@@ -31,12 +31,13 @@ pip install -r requirements.txt
 python main.py
 
 # Or via Uvicorn CLI
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn main:app --host 127.0.0.1 --port 8001 --reload
 ```
 
 Interactive OpenAPI Documentation will be live at:
-- **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+- **Swagger UI**: [http://localhost:8001/docs](http://localhost:8001/docs)
+- **ReDoc**: [http://localhost:8001/redoc](http://localhost:8001/redoc)
+- **Health Check**: [http://localhost:8001/api/health](http://localhost:8001/api/health)
 
 ---
 
@@ -44,16 +45,20 @@ Interactive OpenAPI Documentation will be live at:
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/health` | Service health status and version info |
+| `GET` | `/api/health` | Service health status, engine identity, and 19 loaded opportunities |
+| `GET` | `/api/user/profile` | Student academic profile (Milind, DTC 2nd Year) and exam schedule |
 | `GET` | `/api/events` | Retrieve explainable ranked events for active student profile |
-| `GET` | `/api/profile` | Student academic profile, skills, and attendance rate |
-| `GET` | `/api/calendar` | Synchronized academic exam schedule & collision states |
-| `GET` | `/api/skill-gap/{event_id}` | Have vs Missing skills analysis + learning fast-tracks |
-| `POST` | `/api/feedback` | Ingest right swipe (shortlist), left swipe (skip), or manual votes |
-| `POST` | `/api/od-letter/generate` | Generate official university-formatted OD leave letter |
+| `POST` | `/api/events/feedback` | Ingest right swipe (shortlist), left swipe (skip), or manual votes |
+| `GET` | `/api/events/{event_id}/skill-gap` | Have vs Missing skills analysis + learning fast-tracks |
+| `GET` | `/api/shortlist` | Fetch right-swiped shortlisted opportunities |
+| `POST` | `/api/shortlist` | Persist an event into student shortlist |
+| `DELETE` | `/api/shortlist/{event_id}` | Remove an event from shortlist |
+| `GET` | `/api/od-letter/templates` | Institutional OD templates (all GGSIPU colleges) |
+| `POST` | `/api/od-letter/generate` | Generate official university-formatted OD leave letter with QR code |
 | `GET` | `/api/od-letter/verify/{hash}` | Public anti-tamper cryptographic verification node |
-| `POST` | `/api/chat` | Conversational RAG assistant with agentic tool calling |
-| `POST` | `/api/validate-idea` | AI hackathon concept novelty & feasibility evaluation |
+| `GET` | `/api/teammates` | High-synergy teammates (Naman Khatri, Arman, Anshika, Dimple) |
+| `POST` | `/api/assistant/chat` | Conversational RAG assistant with agentic tool calling |
+| `POST` | `/api/ideas/validate` | AI hackathon concept novelty & feasibility evaluation |
 
 ---
 

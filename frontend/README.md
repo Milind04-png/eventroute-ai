@@ -29,10 +29,13 @@ npm run dev
 
 The frontend will run at **[http://localhost:3000](http://localhost:3000)**.
 
-### 3. Production Build
+### 3. Production Build & GitHub Pages Deployment
 ```bash
+# Build production bundle with relative base paths
 npm run build
 ```
+
+Live GitHub Pages URL: **[https://milind04-png.github.io/eventroute-ai/](https://milind04-png.github.io/eventroute-ai/)**
 
 ---
 
@@ -49,7 +52,7 @@ frontend/
 │   ├── main.jsx           # Application entrypoint
 │   └── index.css          # Global styling, Tailwind tokens, print styles
 ├── index.html             # HTML entrypoint
-├── vite.config.js         # Vite configuration with proxy to FastAPI (port 8000)
+├── vite.config.js         # Vite configuration with proxy to FastAPI (port 8001)
 ├── package.json           # Frontend package manifests
 └── package-lock.json      # Dependency lockfile
 ```
