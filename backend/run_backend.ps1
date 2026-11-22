@@ -1,7 +1,7 @@
 # PowerShell Launcher for FastAPI Backend
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "   EVENTROUTE AI - FASTAPI BACKEND SERVICE" -ForegroundColor Green
-Write-Host "   Interactive API Documentation: http://localhost:8000/docs" -ForegroundColor Yellow
+Write-Host "   Interactive API Documentation: http://localhost:8001/docs" -ForegroundColor Yellow
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -18,5 +18,5 @@ if (-not $python) {
     exit 1
 }
 
-Write-Host "Launching Uvicorn server on http://localhost:8000..." -ForegroundColor Green
-Start-Process -FilePath $python.Source -ArgumentList "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload" -WorkingDirectory $CurrentDir
+Write-Host "Launching Uvicorn server on http://localhost:8001..." -ForegroundColor Green
+Start-Process -FilePath $python.Source -ArgumentList "-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8001", "--reload" -WorkingDirectory $CurrentDir

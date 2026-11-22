@@ -21,9 +21,9 @@ if %errorlevel% neq 0 (
 echo [1/2] Launching React 19 frontend development server on http://localhost:3000...
 start cmd /k "cd /d %~dp0frontend && npm run dev"
 
-echo [2/2] Launching FastAPI backend server on http://localhost:8000...
-echo       Interactive API Documentation: http://localhost:8000/docs
+echo [2/2] Launching FastAPI backend server on http://localhost:8001...
+echo       Interactive API Documentation: http://localhost:8001/docs
 echo.
 cd /d "%~dp0backend"
-%PYTHON_CMD% -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+%PYTHON_CMD% -m uvicorn main:app --host 127.0.0.1 --port 8001 --reload
 pause

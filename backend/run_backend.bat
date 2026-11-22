@@ -4,7 +4,7 @@ cd /d "%~dp0"
 
 echo =========================================================================
 echo    EVENTROUTE AI - FASTAPI BACKEND SERVICE
-echo    API Docs: http://localhost:8000/docs
+echo    API Docs: http://localhost:8001/docs
 echo =========================================================================
 echo.
 
@@ -17,6 +17,6 @@ if %errorlevel% neq 0 (
     )
 )
 
-echo Starting Uvicorn server on http://localhost:8000...
-%PYTHON_CMD% -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+echo Starting Uvicorn server on http://localhost:8001...
+%PYTHON_CMD% -m uvicorn main:app --host 127.0.0.1 --port 8001 --reload
 pause

@@ -1,7 +1,7 @@
 # PowerShell Launcher for EventRoute AI Monorepo
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host "   EVENTROUTE AI - FULL-STACK MONOREPO ORCHESTRATOR" -ForegroundColor Green
-Write-Host "   Frontend (Port 3000) + FastAPI Backend (Port 8000)" -ForegroundColor Yellow
+Write-Host "   Frontend (Port 3000) + FastAPI Backend (Port 8001)" -ForegroundColor Yellow
 Write-Host "=========================================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -23,8 +23,8 @@ if (-not $python) {
 
 # 3. Launch Backend
 if ($python) {
-    Write-Host "[2/3] Launching FastAPI Backend on http://localhost:8000 (Docs: /docs)..." -ForegroundColor Green
-    Start-Process -FilePath $python.Source -ArgumentList "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload" -WorkingDirectory $BackendDir
+    Write-Host "[2/3] Launching FastAPI Backend on http://localhost:8001 (Docs: /docs)..." -ForegroundColor Green
+    Start-Process -FilePath $python.Source -ArgumentList "-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8001", "--reload" -WorkingDirectory $BackendDir
 } else {
     Write-Host "[2/3] Python not found; frontend will use zero-dependency fallback AI engine." -ForegroundColor Yellow
 }
