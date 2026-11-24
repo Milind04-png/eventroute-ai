@@ -377,12 +377,9 @@ export default function App() {
         
         {/* Top Header Bar */}
         <MedixTopBar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           onStartDemoTour={handleStartDemoTour}
-          shortlistCount={shortlist.length}
-          onOpenLocalStorageFiles={() => setIsLocalStorageFilesOpen(true)}
-          onOpenChat={() => setIsChatOpen(true)}
         />
 
         {/* Content Container */}

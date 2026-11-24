@@ -115,15 +115,15 @@ export default function AssistantChatbot({
 
   return (
     <>
-      {/* Floating Toggle Button (Warm Amber Accent as in screenshot) */}
+      {/* Floating Toggle Button: Compact Circular Floating Icon (Does not overlap college cards) */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#C27803] hover:bg-[#A16207] text-white font-bold text-xs shadow-2xl shadow-amber-900/30 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          title="Ask EventRoute AI Co-Pilot"
+          className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C27803] hover:bg-[#A16207] text-white shadow-2xl shadow-amber-900/40 hover:scale-110 active:scale-95 transition-all cursor-pointer flex items-center justify-center group relative border-2 border-white/20"
         >
-          <Sparkles className="w-4 h-4 animate-pulse" />
-          <span>Ask EventRoute AI</span>
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute top-1 right-1 ring-2 ring-white animate-pulse"></span>
         </button>
       )}
 

@@ -313,85 +313,54 @@ export const COLLEGES_DATA = [
 ];
 
 export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilter }) {
-  const [selectedCategory, setSelectedCategory] = useState("ggsipu");
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const filteredColleges = COLLEGES_DATA.filter((col) => {
-    if (selectedCategory === "all") return true;
-    return col.category === selectedCategory;
-  });
-
-  const ggsipuCount = COLLEGES_DATA.filter(c => c.category === "ggsipu").length;
-  const flagshipCount = COLLEGES_DATA.filter(c => c.category === "flagship").length;
+  // Default to 7 generously spaced college cards, or all 19 when expanded
+  const visibleColleges = isExpanded ? COLLEGES_DATA : COLLEGES_DATA.slice(0, 7);
 
   return (
     <div className="space-y-4">
-      {/* Section Header & Category Selector */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      {/* Section Header & Simplified "View all 19 →" Link */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap">
             <h2 className="font-display font-extrabold text-xl text-[#10174D] flex items-center gap-2">
               <Building2 className="w-5 h-5 text-slate-800" />
               Verified Partner Colleges & Institutional Crests
             </h2>
-            <span className="text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#1E293B] text-white border border-slate-700">
-              {COLLEGES_DATA.length} Verified Institutions
-            </span>
           </div>
-          <p className="text-xs text-[#525A8B] mt-1">
+          <p className="text-xs text-[#525A8B] mt-0.5">
             Tap any institution to filter campus hackathons & generate official On-Duty (OD) approval letters.
           </p>
         </div>
 
-        {/* Category Filter Pills & Reset */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <button
-            onClick={() => setSelectedCategory("ggsipu")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-              selectedCategory === "ggsipu"
-                ? "bg-[#1E293B] text-white shadow-sm border border-slate-800"
-                : "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200"
-            }`}
-          >
-            <School className="w-3.5 h-3.5 text-slate-400" />
-            <span>GGSIPU Campuses ({ggsipuCount})</span>
-          </button>
-
-          <button
-            onClick={() => setSelectedCategory("all")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              selectedCategory === "all"
-                ? "bg-[#1E293B] text-white shadow-sm border border-slate-800"
-                : "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200"
-            }`}
-          >
-            <span>All Campuses ({COLLEGES_DATA.length})</span>
-          </button>
-
-          <button
-            onClick={() => setSelectedCategory("flagship")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              selectedCategory === "flagship"
-                ? "bg-[#1E293B] text-white shadow-sm border border-slate-800"
-                : "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200"
-            }`}
-          >
-            <span>National Flagships ({flagshipCount})</span>
-          </button>
-
+        {/* Clean View All Toggle & Clear Filter */}
+        <div className="flex items-center gap-2 shrink-0">
           {activeCollegeFilter && (
             <button
               onClick={() => onSelectCollege(null)}
-              className="ml-2 px-2.5 py-1 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition cursor-pointer flex items-center gap-1"
+              className="px-2.5 py-1.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition cursor-pointer flex items-center gap-1"
             >
-              <span>✕ Clear Filter ({activeCollegeFilter})</span>
+              <span>✕ Clear ({activeCollegeFilter})</span>
             </button>
           )}
+
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-xs font-bold text-slate-800 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/90 px-3.5 py-1.5 rounded-xl border border-slate-200 transition cursor-pointer flex items-center gap-1 shadow-xs"
+          >
+            <span>{isExpanded ? "Show fewer ←" : `View all ${COLLEGES_DATA.length} →`}</span>
+          </button>
         </div>
       </div>
 
-      {/* College Logos Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11 gap-3">
-        {filteredColleges.map((col) => {
+      {/* 6-7 Generously Spaced College Cards */}
+      <div className={`grid gap-3.5 ${
+        isExpanded 
+          ? "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7" 
+          : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7"
+      }`}>
+        {visibleColleges.map((col) => {
           const isSelected = activeCollegeFilter === col.filterKey || activeCollegeFilter === col.shortName;
 
           return (
@@ -404,23 +373,23 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
                   onSelectCollege && onSelectCollege(col.filterKey);
                 }
               }}
-              className={`p-3 rounded-2xl border transition-all duration-200 flex flex-col items-center text-center justify-between cursor-pointer group relative ${
+              className={`p-3.5 rounded-2xl border transition-all duration-200 flex flex-col items-center text-center justify-between cursor-pointer group relative ${
                 isSelected
-                  ? "bg-[#EEF2FE] border-[#5964FE] shadow-md ring-2 ring-[#5964FE]/40 -translate-y-0.5"
+                  ? "bg-[#EEF2FE] border-slate-900 shadow-md ring-2 ring-slate-900/30 -translate-y-0.5"
                   : col.isHomeCollege
-                  ? "bg-gradient-to-b from-blue-50/70 to-white border-blue-300 hover:border-[#5964FE] shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                  : "bg-white/95 border-[#E2E7FA] hover:border-[#5964FE] hover:shadow-md hover:-translate-y-0.5"
+                  ? "bg-gradient-to-b from-blue-50/70 to-white border-blue-300 hover:border-slate-800 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                  : "bg-white border-slate-200/90 hover:border-slate-800 shadow-xs hover:shadow-md hover:-translate-y-0.5"
               }`}
             >
               {/* Home College Corner Star Badge */}
               {col.isHomeCollege && (
-                <div className="absolute -top-1.5 -right-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs flex items-center gap-0.5">
+                <div className="absolute -top-1.5 -right-1.5 bg-[#C27803] text-white text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs flex items-center gap-0.5">
                   ★ Home
                 </div>
               )}
 
               {/* College Official Logo / Crest */}
-              <div className="w-14 h-14 rounded-2xl bg-white border border-[#E2E7FA] shadow-xs p-1.5 flex items-center justify-center mb-2 group-hover:scale-105 group-hover:shadow-md transition-all shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200/80 shadow-xs p-1.5 flex items-center justify-center mb-2 group-hover:scale-105 transition-all shrink-0">
                 <img
                   src={col.logoUrl}
                   alt={`${col.shortName} official logo`}
@@ -441,7 +410,7 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
 
               {/* Names */}
               <div className="w-full">
-                <h4 className="font-display font-bold text-xs text-[#10174D] truncate group-hover:text-[#5964FE] transition-colors" title={col.name}>
+                <h4 className="font-display font-bold text-xs text-[#10174D] truncate group-hover:text-indigo-600 transition-colors" title={col.name}>
                   {col.shortName}
                 </h4>
                 <p className="text-[10px] text-[#525A8B] truncate mt-0.5" title={col.flagshipFest}>
@@ -450,15 +419,15 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
               </div>
 
               {/* OD Acceptance Badge */}
-              <div className="mt-2 w-full">
-                <span className={`block w-full text-[9px] font-bold py-0.5 px-1 rounded truncate border ${
+              <div className="mt-2.5 w-full">
+                <span className={`block w-full text-[9px] font-bold py-0.5 px-1.5 rounded-lg truncate border ${
                   isSelected
-                    ? "bg-[#5964FE] text-white border-[#5964FE]"
+                    ? "bg-[#0F172A] text-white border-[#0F172A]"
                     : col.isHomeCollege 
                     ? "bg-[#DFE3FF] text-[#434EEB] border-[#C7D2FE]" 
                     : col.category === "ggsipu"
                     ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                    : "bg-[#F8FAFF] text-[#525A8B] border-[#DCE3F9]"
+                    : "bg-slate-50 text-slate-700 border-slate-200"
                 }`}>
                   {isSelected ? "✓ Active Filter" : col.isHomeCollege ? "★ Your College" : col.category === "ggsipu" ? "GGSIPU OD" : "OD Verified"}
                 </span>

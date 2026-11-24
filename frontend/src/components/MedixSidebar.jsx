@@ -1,38 +1,30 @@
 import React from "react";
 import {
   LayoutDashboard,
-  Sparkles,
   Calendar,
   FileText,
-  BookOpen,
-  Briefcase,
-  Users,
-  Lightbulb,
-  Building2,
-  Settings,
-  LogOut,
   Compass,
-  CheckCircle2,
   Flame,
   BookmarkCheck,
+  Settings,
+  LogOut,
   HardDrive
 } from "lucide-react";
 
-export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount = 0, onOpenLocalStorageFiles, onOpenChat }) {
-  const navItems = [
+export default function MedixSidebar({ 
+  activeTab, 
+  setActiveTab, 
+  shortlistCount = 0, 
+  onOpenLocalStorageFiles 
+}) {
+  // Trimmed to 6 core navigation items as requested
+  const coreNavItems = [
     { id: "feed", label: "Dashboard", icon: LayoutDashboard },
     { id: "swipe", label: "Swipe Discover", icon: Flame, badge: "AI" },
-    { id: "chat_ai", label: "AI Co-Pilot", icon: Sparkles, badge: "Live", onClick: onOpenChat },
     { id: "shortlist", label: "My Shortlist", icon: BookmarkCheck, count: shortlistCount },
-    { id: "local_files", label: "Saved Offline Files", icon: HardDrive, onClick: onOpenLocalStorageFiles },
     { id: "opportunities", label: "Opportunities", icon: Compass },
-    { id: "calendar", label: "Exam & Calendar", icon: Calendar },
-    { id: "od_letters", label: "OD Leave Letters", icon: FileText },
-    { id: "skills", label: "Skill-Gap Vault", icon: BookOpen },
-    { id: "colleges", label: "Partner Colleges", icon: Building2 },
-    { id: "teammates", label: "Teammate Match", icon: Users },
-    { id: "portfolio", label: "Verified Portfolio", icon: Briefcase },
-    { id: "validator", label: "Idea Validator", icon: Lightbulb }
+    { id: "calendar", label: "Exam Guard", icon: Calendar },
+    { id: "od_letters", label: "OD Leave Letters", icon: FileText }
   ];
 
   return (
@@ -56,26 +48,21 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
           </div>
         </div>
 
-        {/* Navigation List */}
-        <nav className="p-3 space-y-1">
-          {navItems.map((item) => {
+        {/* 6 Core Navigation Items */}
+        <nav className="p-3 space-y-1.5">
+          {coreNavItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id || (item.id === "feed" && activeTab === "feed");
 
             return (
               <button
                 key={item.id}
-                onClick={() => {
-                  if (item.onClick) {
-                    item.onClick();
-                  } else {
-                    setActiveTab(item.id);
-                  }
-                }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${isActive
+                onClick={() => setActiveTab(item.id)}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  isActive
                     ? "bg-white/10 text-white shadow-xs font-bold border border-white/10"
                     : "text-slate-400 hover:bg-white/5 hover:text-white"
-                  }`}
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <Icon className={`w-4 h-4 ${isActive ? "text-white" : item.id === "swipe" ? "text-indigo-400" : "text-slate-500"}`} />
@@ -101,6 +88,14 @@ export default function MedixSidebar({ activeTab, setActiveTab, shortlistCount =
 
       {/* Bottom Footer Actions */}
       <div className="p-4 border-t border-[#1E293B] space-y-1">
+        <button
+          onClick={onOpenLocalStorageFiles}
+          className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition cursor-pointer"
+        >
+          <HardDrive className="w-4 h-4 text-slate-500" />
+          <span>Saved Offline Files</span>
+        </button>
+
         <button
           onClick={() => alert("Settings panel: College ERP & Notification preferences.")}
           className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition cursor-pointer"
