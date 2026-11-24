@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Building2, ShieldCheck, CheckCircle2, Award, ExternalLink, Sparkles, Filter, Check, School } from "lucide-react";
 
+const baseAssetUrl = import.meta.env?.BASE_URL || "./";
+const getLogo = (filename) => `${baseAssetUrl.endsWith('/') ? baseAssetUrl : baseAssetUrl + '/'}logos/${filename}`;
+
 export const COLLEGES_DATA = [
   // --- GGSIPU Affiliated & University Schools ---
   {
@@ -17,7 +20,7 @@ export const COLLEGES_DATA = [
     odStatus: "100% Fast-Track OD Approved",
     isHomeCollege: true,
     logoLetter: "DTC",
-    logoUrl: "/logos/dtc.png",
+    logoUrl: getLogo("dtc.png"),
     description: "Milind's home college. Direct automated OD issuance with Dean & HOD digital signatures."
   },
   {
@@ -33,7 +36,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-amber-50 text-amber-800 border-amber-200",
     odStatus: "University Main Campus OD",
     logoLetter: "IPU",
-    logoUrl: "/logos/ggsipu.png",
+    logoUrl: getLogo("ggsipu.png"),
     description: "Apex technology school of GGSIPU. Organizers of North India's premier InfoXpression hackathon."
   },
   {
@@ -49,7 +52,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-emerald-50 text-emerald-800 border-emerald-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "MAIT",
-    logoUrl: "/logos/mait.svg",
+    logoUrl: getLogo("mait.svg"),
     description: "Premier engineering institution of GGSIPU, host to 36-hour HackMAIT innovation sprints."
   },
   {
@@ -65,7 +68,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-blue-50 text-blue-800 border-blue-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "MSIT",
-    logoUrl: "/logos/msit.png",
+    logoUrl: getLogo("msit.png"),
     description: "Top-tier GGSIPU campus renowned for IEEE MSIT hackathons and competitive programming."
   },
   {
@@ -81,7 +84,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-red-50 text-red-800 border-red-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "BVCOE",
-    logoUrl: "/logos/bvcoe.png",
+    logoUrl: getLogo("bvcoe.png"),
     description: "Premier west Delhi tech campus hosting BVEST national hackathons and robotics cups."
   },
   {
@@ -97,7 +100,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-yellow-50 text-yellow-800 border-yellow-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "BPIT",
-    logoUrl: "/logos/bpit.jpg",
+    logoUrl: getLogo("bpit.jpg"),
     description: "Established GGSIPU institute hosting Corona annual national hackathon and Web3 sprints."
   },
   {
@@ -113,7 +116,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-sky-50 text-sky-800 border-sky-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "GTBIT",
-    logoUrl: "/logos/gtbit.png",
+    logoUrl: getLogo("gtbit.png"),
     description: "Prominent GGSIPU college in Central Delhi hosting Gates tech fest and cybersecurity marathons."
   },
   {
@@ -129,7 +132,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-purple-50 text-purple-800 border-purple-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "VIPS",
-    logoUrl: "/logos/vips.png",
+    logoUrl: getLogo("vips.png"),
     description: "School of Engineering & Technology known for Init_ AI hackathons and modern design sprints."
   },
   {
@@ -145,7 +148,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-indigo-50 text-indigo-800 border-indigo-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "ADG",
-    logoUrl: "/logos/adgitm.png",
+    logoUrl: getLogo("adgitm.png"),
     description: "ADGIPS / ADGITM campus hosting InnoBuzz annual AI & smart city solution challenges."
   },
   {
@@ -161,7 +164,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-teal-50 text-teal-800 border-teal-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "JIMS",
-    logoUrl: "/logos/jims.png",
+    logoUrl: getLogo("jims.png"),
     description: "Knowledge Park campus partner hosting TechnoXian hardware and robotics hackathons."
   },
   {
@@ -177,7 +180,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-slate-50 text-slate-800 border-slate-200",
     odStatus: "Fast-Track OD Approved",
     logoLetter: "HMR",
-    logoUrl: "/logos/hmritm.png",
+    logoUrl: getLogo("hmritm.png"),
     description: "North Delhi GGSIPU campus conducting Emblazon hackathon and open innovation leagues."
   },
 
@@ -195,7 +198,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-amber-50 text-amber-800 border-amber-200",
     odStatus: "Flagship National Partner",
     logoLetter: "IITB",
-    logoUrl: "/logos/iitb.svg",
+    logoUrl: getLogo("iitb.svg"),
     description: "Asia's largest science and tech festival hackathon with top recruiters and research labs."
   },
   {
@@ -211,7 +214,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-red-50 text-red-800 border-red-200",
     odStatus: "Verified Partner Campus",
     logoLetter: "DTU",
-    logoUrl: "/logos/dtu.png",
+    logoUrl: getLogo("dtu.png"),
     description: "Delhi's flagship technological university hosting Vihaan hackathon and Invictus conclave."
   },
   {
@@ -227,7 +230,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-indigo-50 text-indigo-800 border-indigo-200",
     odStatus: "100% Digital OD Accepted",
     logoLetter: "BITS",
-    logoUrl: "/logos/bits.svg",
+    logoUrl: getLogo("bits.svg"),
     description: "Premier private technical university hosting APOGEE and Conquest startup challenge."
   },
   {
@@ -243,7 +246,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-emerald-50 text-emerald-800 border-emerald-200",
     odStatus: "Pre-Approved Inter-City OD",
     logoLetter: "COEP",
-    logoUrl: "/logos/coep.jpg",
+    logoUrl: getLogo("coep.jpg"),
     description: "One of India's oldest engineering institutions, home to HackAI Pune 2026."
   },
   {
@@ -259,7 +262,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-purple-50 text-purple-800 border-purple-200",
     odStatus: "Autonomous Board Verified",
     logoLetter: "VJTI",
-    logoUrl: "/logos/vjti.png",
+    logoUrl: getLogo("vjti.png"),
     description: "Host of National Autonomous Rover Challenge and Technovanza engineering fest."
   },
   {
@@ -275,7 +278,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-rose-50 text-rose-800 border-rose-200",
     odStatus: "VTU Form-B Verified",
     logoLetter: "RVCE",
-    logoUrl: "/logos/rvce.png",
+    logoUrl: getLogo("rvce.png"),
     description: "Silicon Valley of India tech hub hosting 8th Mile hackathon with Bengaluru startups."
   },
   {
@@ -291,7 +294,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-cyan-50 text-cyan-800 border-cyan-200",
     odStatus: "Anna Univ Format Verified",
     logoLetter: "CEG",
-    logoUrl: "/logos/ceg.png",
+    logoUrl: getLogo("ceg.png"),
     description: "Pioneering technical institute hosting Kurukshetra under UNESCO patronage."
   },
   {
@@ -307,7 +310,7 @@ export const COLLEGES_DATA = [
     bgColor: "bg-sky-50 text-sky-700 border-sky-200",
     odStatus: "OD Verified Partner",
     logoLetter: "TS",
-    logoUrl: "/logos/tsec.jpg",
+    logoUrl: getLogo("tsec.jpg"),
     description: "Premier Mumbai institute hosting HackTSEC and Web3 developer sprints."
   }
 ];

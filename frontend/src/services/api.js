@@ -15,6 +15,12 @@ export async function checkBackendHealth(force = false) {
   if (!force && backendAvailable !== null && (now - lastHealthCheck < HEALTH_CACHE_MS)) {
     return backendAvailable;
   }
+  // If hosted on GitHub Pages static hosting, instantly use robust client-side AI engine
+  if (typeof window !== "undefined" && window.location.hostname.includes("github.io")) {
+    backendAvailable = false;
+    lastHealthCheck = now;
+    return false;
+  }
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 2000);

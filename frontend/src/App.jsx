@@ -30,7 +30,7 @@ import { Search, Filter, Sparkles, AlertTriangle, ShieldCheck, CheckCircle2, Rot
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("feed");
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(() => rankEvents(INITIAL_EVENTS, STUDENT_PROFILE, EXAM_CALENDAR));
   const [feedbackWeights, setFeedbackWeights] = useState({
     "Artificial Intelligence": 1.15,
     "Machine Learning": 1.10,

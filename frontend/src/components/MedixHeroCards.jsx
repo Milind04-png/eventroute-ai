@@ -29,7 +29,8 @@ import {
   MoveLeft,
   MoveUp,
   Hand,
-  Maximize2
+  Maximize2,
+  ShieldCheck
 } from "lucide-react";
 
 /**
