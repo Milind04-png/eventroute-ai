@@ -12,7 +12,7 @@ $BackendDir = Join-Path $RootDir "backend"
 # 1. Check frontend dependencies
 if (-not (Test-Path "$FrontendDir\node_modules")) {
     Write-Host "[1/3] Installing frontend dependencies in /frontend..." -ForegroundColor Yellow
-    Start-Process -FilePath "npm" -ArgumentList "install" -WorkingDirectory $FrontendDir -Wait -NoNewWindow
+    Start-Process -FilePath "npm.cmd" -ArgumentList "install" -WorkingDirectory $FrontendDir -Wait -NoNewWindow
 }
 
 # 2. Detect Python
@@ -31,4 +31,4 @@ if ($python) {
 
 # 4. Launch Frontend
 Write-Host "[3/3] Launching React 19 Frontend at http://localhost:3000..." -ForegroundColor Cyan
-Start-Process -FilePath "npm" -ArgumentList "run", "dev" -WorkingDirectory $FrontendDir
+Start-Process -FilePath "npm.cmd" -ArgumentList "run", "dev" -WorkingDirectory $FrontendDir
