@@ -34,13 +34,13 @@ export default function MedixTopBar({
         </div>
 
         {/* Center-Left Segmented Pill Tabs */}
-        <div className="hidden sm:flex items-center gap-1 bg-[#EEF2FE] p-1 rounded-2xl border border-[#DCE3F9]">
+        <div className="hidden sm:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/90">
           <button
             onClick={() => setActiveTab("feed")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "feed"
-                ? "bg-white text-[#10174D] shadow-xs"
-                : "text-[#525A8B] hover:text-[#10174D]"
+                ? "bg-white text-slate-900 shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             Dashboard
@@ -50,11 +50,11 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("swipe")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
               activeTab === "swipe"
-                ? "bg-gradient-to-r from-[#5964FE] to-[#8C6DFE] text-white shadow-xs"
-                : "text-[#5964FE] hover:bg-[#DFE3FF]/50"
+                ? "bg-white text-slate-900 shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            <Flame className="w-3.5 h-3.5 fill-[#5964FE] text-[#5964FE]" />
+            <Flame className="w-3.5 h-3.5 text-indigo-600 fill-indigo-600" />
             <span>Swipe Deck</span>
           </button>
 
@@ -62,15 +62,15 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("shortlist")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
               activeTab === "shortlist"
-                ? "bg-[#5964FE] text-white shadow-xs"
-                : "text-[#434EEB] hover:bg-[#DFE3FF]/50"
+                ? "bg-white text-slate-900 shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            <BookmarkCheck className="w-3.5 h-3.5" />
+            <BookmarkCheck className="w-3.5 h-3.5 text-slate-700" />
             <span>Shortlist</span>
             {shortlistCount > 0 && (
               <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-full ${
-                activeTab === "shortlist" ? "bg-white text-[#434EEB]" : "bg-[#DFE3FF] text-[#434EEB]"
+                activeTab === "shortlist" ? "bg-slate-900 text-white" : "bg-slate-200 text-slate-800"
               }`}>
                 {shortlistCount}
               </span>
@@ -81,8 +81,8 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("opportunities")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "opportunities"
-                ? "bg-white text-[#10174D] shadow-xs"
-                : "text-[#525A8B] hover:text-[#10174D]"
+                ? "bg-white text-slate-900 shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             Opportunities
@@ -92,8 +92,8 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("calendar")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "calendar"
-                ? "bg-white text-[#10174D] shadow-xs"
-                : "text-[#525A8B] hover:text-[#10174D]"
+                ? "bg-white text-slate-900 shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             Exam Guard
@@ -103,32 +103,30 @@ export default function MedixTopBar({
             onClick={() => setActiveTab("od_letters")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
               activeTab === "od_letters"
-                ? "bg-white text-[#10174D] shadow-xs"
-                : "text-[#525A8B] hover:text-[#10174D]"
+                ? "bg-white text-slate-900 shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             OD Portal
+          </button>
+
+          <button
+            onClick={onOpenChat}
+            className="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer text-slate-600 hover:text-slate-900 hover:bg-white/60"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+            <span>AI Co-Pilot</span>
           </button>
         </div>
       </div>
 
       {/* Right Actions & Milind Profile Badge */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
         
-        {/* AI Co-Pilot Chat Launch Button */}
-        <button
-          onClick={onOpenChat}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] border border-[#DCE3F9] text-xs font-bold transition active:scale-95 cursor-pointer shadow-xs"
-          title="Open AI Co-Pilot Chatbot"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#5964FE]" />
-          <span className="hidden sm:inline">AI Co-Pilot</span>
-        </button>
-
-        {/* Judges Demo Tour Button */}
+        {/* Judges Demo Tour Button (Warm Amber Accent as in screenshot) */}
         <button
           onClick={onStartDemoTour}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-90 text-white font-bold text-xs uppercase tracking-wider shadow-sm shadow-[#5964FE]/20 transition active:scale-95 cursor-pointer"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#C27803] hover:bg-[#A16207] text-white font-extrabold text-xs uppercase tracking-wider shadow-sm shadow-amber-900/20 transition active:scale-95 cursor-pointer"
         >
           <PlayCircle className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Judges Demo Tour</span>
@@ -137,10 +135,10 @@ export default function MedixTopBar({
         {/* Local Storage Files Button */}
         <button
           onClick={onOpenLocalStorageFiles}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#EEF2FE] border border-[#DCE3F9] text-xs font-bold text-[#10174D] shadow-xs transition active:scale-95 cursor-pointer"
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 shadow-xs transition active:scale-95 cursor-pointer"
           title="View files downloaded and stored in local storage"
         >
-          <HardDrive className="w-3.5 h-3.5 text-[#5964FE]" />
+          <HardDrive className="w-3.5 h-3.5 text-slate-600" />
           <span className="hidden lg:inline">Local Storage Files</span>
         </button>
 

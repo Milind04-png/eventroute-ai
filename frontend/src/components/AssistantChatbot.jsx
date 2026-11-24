@@ -115,11 +115,11 @@ export default function AssistantChatbot({
 
   return (
     <>
-      {/* Floating Toggle Button */}
+      {/* Floating Toggle Button (Warm Amber Accent as in screenshot) */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white font-bold text-xs shadow-2xl shadow-[#5964FE]/35 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#C27803] hover:bg-[#A16207] text-white font-bold text-xs shadow-2xl shadow-amber-900/30 hover:scale-105 active:scale-95 transition-all cursor-pointer"
         >
           <Sparkles className="w-4 h-4 animate-pulse" />
           <span>Ask EventRoute AI</span>
@@ -129,13 +129,13 @@ export default function AssistantChatbot({
 
       {/* Floating Chat Modal (Styled identically to Neural Universe AI Chatbot card) */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[95%] sm:w-[460px] h-[600px] max-h-[85vh] bg-white/95 backdrop-blur-2xl border border-[#E2E7FA] rounded-3xl shadow-[0_25px_60px_rgba(89,100,254,0.18)] flex flex-col overflow-hidden text-[#10174D]">
+        <div className="fixed bottom-6 right-6 z-50 w-[95%] sm:w-[460px] h-[600px] max-h-[85vh] bg-white/95 backdrop-blur-2xl border border-[#E2E7FA] rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.18)] flex flex-col overflow-hidden text-[#10174D]">
           
           {/* Header */}
           <div className="flex items-center justify-between p-4 bg-white/90 border-b border-[#F0F3FD]">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-2xl bg-[#DFE3FF] text-[#434EEB] flex items-center justify-center shadow-xs">
-                <Sparkles className="w-4 h-4 text-[#5964FE]" />
+              <div className="w-9 h-9 rounded-2xl bg-slate-100 text-slate-800 flex items-center justify-center shadow-xs">
+                <Sparkles className="w-4 h-4 text-indigo-600" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
@@ -161,29 +161,29 @@ export default function AssistantChatbot({
             </div>
           </div>
 
-          {/* Quick Suggested Prompt Chips (Matching the exact pills in screenshot) */}
+          {/* Quick Suggested Prompt Chips */}
           <div className="p-2.5 bg-[#F8FAFF] border-b border-[#F0F3FD] flex items-center gap-1.5 overflow-x-auto text-[11px] whitespace-nowrap">
             <button
               onClick={() => handleSendMessage("Tell me about Naman Khatri and our DTC hackathon squad")}
-              className="px-2.5 py-1 rounded-xl bg-[#DFE3FF] hover:bg-[#D5DBFE] text-[#434EEB] border border-[#C7D2FE] transition shrink-0 font-bold shadow-xs cursor-pointer"
+              className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 transition shrink-0 font-bold shadow-xs cursor-pointer"
             >
               🤝 Naman Khatri (DTC)
             </button>
             <button
               onClick={() => handleSendMessage("Find me an AI hackathon this weekend that won't clash with my exams")}
-              className="px-2.5 py-1 rounded-xl bg-white hover:bg-[#DFE3FF] text-[#434EEB] border border-[#DCE3F9] transition shrink-0 font-medium shadow-xs cursor-pointer"
+              className="px-2.5 py-1 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition shrink-0 font-medium shadow-xs cursor-pointer"
             >
               🎯 No-clash AI Hackathon
             </button>
             <button
               onClick={() => handleSendMessage("What skills do I need to prepare for HackAI Pune?")}
-              className="px-2.5 py-1 rounded-xl bg-white hover:bg-[#DFE3FF] text-[#525A8B] border border-[#DCE3F9] transition shrink-0 font-medium shadow-xs cursor-pointer"
+              className="px-2.5 py-1 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition shrink-0 font-medium shadow-xs cursor-pointer"
             >
               📚 Check Skill Gap
             </button>
             <button
               onClick={() => handleSendMessage("Generate my college OD leave letter")}
-              className="px-2.5 py-1 rounded-xl bg-white hover:bg-[#DFE3FF] text-[#434EEB] border border-[#DCE3F9] transition shrink-0 font-medium shadow-xs cursor-pointer"
+              className="px-2.5 py-1 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition shrink-0 font-medium shadow-xs cursor-pointer"
             >
               📄 Draft OD Letter
             </button>
@@ -197,7 +197,7 @@ export default function AssistantChatbot({
                 {/* Message Bubble */}
                 <div className={`p-3.5 rounded-2xl max-w-[90%] leading-relaxed ${
                   m.role === "user" 
-                    ? "bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white rounded-br-none shadow-md shadow-[#5964FE]/20" 
+                    ? "bg-[#0F172A] text-white rounded-br-none shadow-md shadow-slate-900/20" 
                     : "bg-white text-[#10174D] border border-[#E2E7FA] shadow-xs rounded-bl-none"
                 }`}>
                   <p className="whitespace-pre-line">{m.text}</p>
@@ -262,7 +262,7 @@ export default function AssistantChatbot({
             <button
               onClick={() => handleSendMessage()}
               disabled={loading || !inputText.trim()}
-              className="w-10 h-10 rounded-2xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 disabled:opacity-40 text-white flex items-center justify-center transition shadow-md shadow-[#5964FE]/25 cursor-pointer"
+              className="w-10 h-10 rounded-2xl bg-[#0F172A] hover:bg-[#1E293B] disabled:opacity-40 text-white flex items-center justify-center transition shadow-md shadow-slate-900/20 cursor-pointer"
             >
               <Send className="w-4 h-4" />
             </button>

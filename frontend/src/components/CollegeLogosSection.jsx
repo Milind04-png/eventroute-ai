@@ -330,10 +330,10 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
         <div>
           <div className="flex items-center gap-2.5 flex-wrap">
             <h2 className="font-display font-extrabold text-xl text-[#10174D] flex items-center gap-2">
-              <Building2 className="w-5 h-5 text-[#5964FE]" />
+              <Building2 className="w-5 h-5 text-slate-800" />
               Verified Partner Colleges & Institutional Crests
             </h2>
-            <span className="text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#DFE3FF] text-[#434EEB] border border-[#C7D2FE]">
+            <span className="text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-[#1E293B] text-white border border-slate-700">
               {COLLEGES_DATA.length} Verified Institutions
             </span>
           </div>
@@ -348,11 +348,11 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
             onClick={() => setSelectedCategory("ggsipu")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
               selectedCategory === "ggsipu"
-                ? "bg-[#5964FE] text-white shadow-md shadow-[#5964FE]/20"
-                : "bg-white/80 hover:bg-[#EEF2FE] text-[#525A8B] border border-[#E2E7FA]"
+                ? "bg-[#1E293B] text-white shadow-sm border border-slate-800"
+                : "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200"
             }`}
           >
-            <School className="w-3.5 h-3.5" />
+            <School className="w-3.5 h-3.5 text-slate-400" />
             <span>GGSIPU Campuses ({ggsipuCount})</span>
           </button>
 
@@ -360,8 +360,8 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
             onClick={() => setSelectedCategory("all")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               selectedCategory === "all"
-                ? "bg-[#5964FE] text-white shadow-md shadow-[#5964FE]/20"
-                : "bg-white/80 hover:bg-[#EEF2FE] text-[#525A8B] border border-[#E2E7FA]"
+                ? "bg-[#1E293B] text-white shadow-sm border border-slate-800"
+                : "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200"
             }`}
           >
             <span>All Campuses ({COLLEGES_DATA.length})</span>
@@ -371,8 +371,8 @@ export default function CollegeLogosSection({ onSelectCollege, activeCollegeFilt
             onClick={() => setSelectedCategory("flagship")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               selectedCategory === "flagship"
-                ? "bg-[#5964FE] text-white shadow-md shadow-[#5964FE]/20"
-                : "bg-white/80 hover:bg-[#EEF2FE] text-[#525A8B] border border-[#E2E7FA]"
+                ? "bg-[#1E293B] text-white shadow-sm border border-slate-800"
+                : "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200"
             }`}
           >
             <span>National Flagships ({flagshipCount})</span>

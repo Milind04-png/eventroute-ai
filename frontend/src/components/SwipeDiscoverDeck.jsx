@@ -70,7 +70,7 @@ function SwipeCard({
     [-180, 0, 180],
     [
       "0 24px 60px rgba(244, 63, 94, 0.22)",
-      "0 20px 50px rgba(89, 100, 254, 0.08)",
+      "0 10px 30px -10px rgba(15, 23, 42, 0.12)",
       "0 24px 60px rgba(16, 185, 129, 0.22)"
     ]
   );
@@ -105,7 +105,7 @@ function SwipeCard({
         scale: isTop ? scale : 1 - index * 0.04,
         zIndex: 30 - index,
         borderColor: isTop ? cardBorderColor : "#E2E7FA",
-        boxShadow: isTop ? cardShadow : "0 10px 30px rgba(89,100,254,0.04)",
+        boxShadow: isTop ? cardShadow : "0 10px 30px -10px rgba(15, 23, 42, 0.12)",
         touchAction: "none"
       }}
       drag={isTop}
@@ -439,7 +439,7 @@ export default function SwipeDiscoverDeck({
           <button
             onClick={() => setActiveFilter("all")}
             className={`px-3 py-1 rounded-xl transition cursor-pointer ${
-              activeFilter === "all" ? "bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
+              activeFilter === "all" ? "bg-[#1E293B] text-white shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             All
@@ -447,7 +447,7 @@ export default function SwipeDiscoverDeck({
           <button
             onClick={() => setActiveFilter("ai")}
             className={`px-3 py-1 rounded-xl transition cursor-pointer ${
-              activeFilter === "ai" ? "bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
+              activeFilter === "ai" ? "bg-[#1E293B] text-white shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             AI Focus
@@ -455,7 +455,7 @@ export default function SwipeDiscoverDeck({
           <button
             onClick={() => setActiveFilter("no_clash")}
             className={`px-3 py-1 rounded-xl transition cursor-pointer ${
-              activeFilter === "no_clash" ? "bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
+              activeFilter === "no_clash" ? "bg-[#1E293B] text-white shadow-xs" : "text-[#525A8B] hover:text-[#10174D]"
             }`}
           >
             No Clashes
@@ -527,7 +527,7 @@ export default function SwipeDiscoverDeck({
               <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
                 <button
                   onClick={onResetDeck}
-                  className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 text-white font-bold text-xs flex items-center gap-2 shadow-md shadow-[#5964FE]/20 transition active:scale-95 cursor-pointer"
+                  className="px-6 py-2.5 rounded-2xl bg-[#0F172A] hover:bg-[#1E293B] text-white font-bold text-xs flex items-center gap-2 shadow-md shadow-slate-900/20 transition active:scale-95 cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>Reshuffle Deck</span>
@@ -584,7 +584,7 @@ export default function SwipeDiscoverDeck({
             <button
               type="button"
               onClick={() => currentEvent && handleSwipe("right", currentEvent)}
-              className="group flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-3 px-3 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 text-white shadow-md shadow-[#5964FE]/25 transition-all active:scale-95 cursor-pointer font-bold text-xs"
+              className="group flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-3 px-3 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white shadow-md shadow-slate-900/25 transition-all active:scale-95 cursor-pointer font-bold text-xs"
               title="Swipe Right to Shortlist (or press → Arrow)"
             >
               <span className="hidden sm:inline">Swipe Right:</span>

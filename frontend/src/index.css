@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
+:root {
+  /* ============================================================ */
+  /* EventRoute AI Theme Variables (Premium Desaturated Palette)   */
+  /* ============================================================ */
+  --bg-sidebar: #0B0F19;
+  --bg-page: #EEF2FE;
+  --text-main: #10174D;
+  --text-muted: #525A8B;
+
+  /* Primary Action Buttons (Authoritative Midnight / Slate) */
+  --btn-primary-bg: #0F172A;
+  --btn-primary-hover: #1E293B;
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.25);
+
+  /* Standout / Demo Accent (Warm Ochre / Amber) */
+  --accent-standout-bg: #C27803;
+  --accent-standout-hover: #A16207;
+  --accent-standout-text: #FFFFFF;
+  --accent-standout-shadow: 0 4px 14px 0 rgba(194, 120, 3, 0.25);
+
+  /* Secondary Filter Pills (Dark Charcoal) */
+  --pill-active-bg: #1E293B;
+  --pill-active-text: #FFFFFF;
+  --pill-active-border: #334155;
+
+  /* Physical Card Elevation Drop Shadow */
+  --card-elevation-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.12);
+  --card-elevation-border: rgba(226, 232, 240, 0.9);
+}
+
 @layer base {
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

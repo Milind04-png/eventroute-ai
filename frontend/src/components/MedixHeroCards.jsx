@@ -97,7 +97,7 @@ function EmbeddedSwipeCard({
         opacity: 0,
         transition: { duration: 0.28, ease: "easeOut" }
       })}
-      className={`absolute inset-0 rounded-2xl bg-white border-2 shadow-md p-5 flex flex-col justify-between overflow-hidden select-none touch-none ${
+      className={`absolute inset-0 rounded-2xl bg-white border border-slate-200/90 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.12)] p-5 flex flex-col justify-between overflow-hidden select-none touch-none ${
         isTop ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
       }`}
     >
@@ -144,8 +144,8 @@ function EmbeddedSwipeCard({
       <div>
         {isTop && (
           <div className="flex items-center justify-between gap-1 mb-1.5">
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#10174D]/80 text-white flex items-center gap-1 shadow-xs">
-              <Hand className="w-2.5 h-2.5 text-[#7B73FE]" /> Drag or flick
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1E293B] text-white flex items-center gap-1 shadow-xs">
+              <Hand className="w-2.5 h-2.5 text-slate-300" /> Drag or flick
             </span>
             <span className="text-[10px] font-bold text-slate-500">
               {event.city} • {event.format}
@@ -154,7 +154,7 @@ function EmbeddedSwipeCard({
         )}
 
         <div className="flex items-center justify-between gap-2 mb-1">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-[#5964FE]">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
             {event.organizer}
           </span>
           <span className="text-xs font-black text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-300 flex items-center gap-1 shadow-xs">
@@ -173,7 +173,7 @@ function EmbeddedSwipeCard({
         {/* Tags */}
         <div className="flex flex-wrap gap-1 mt-2">
           {(event.tags || []).slice(0, 3).map((t, idx) => (
-            <span key={idx} className="text-[10px] font-semibold px-2 py-0.5 rounded bg-[#F8FAFF] text-[#525A8B] border border-[#DCE3F9]">
+            <span key={idx} className="text-[10px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200/80">
               #{t}
             </span>
           ))}
@@ -191,9 +191,9 @@ function EmbeddedSwipeCard({
             e.stopPropagation();
             onOpenSkillGap(event.id);
           }}
-          className="text-[#434EEB] font-bold hover:underline flex items-center gap-1 cursor-pointer bg-[#DFE3FF] px-2.5 py-1 rounded-lg border border-[#C7D2FE]"
+          className="text-slate-800 font-bold hover:underline flex items-center gap-1 cursor-pointer bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg border border-slate-200"
         >
-          <Zap className="w-3 h-3 fill-[#5964FE]" />
+          <Zap className="w-3 h-3 fill-slate-700 text-slate-700" />
           <span>Skill Gap</span>
         </button>
       </div>
@@ -246,13 +246,13 @@ export default function MedixHeroCards({
           <div>
             {/* Top Tag Row */}
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2 text-[#434EEB] font-bold text-xs uppercase tracking-wider">
-                <div className="w-6 h-6 rounded-lg bg-[#DFE3FF] flex items-center justify-center">
-                  <FileText className="w-3.5 h-3.5 text-[#434EEB]" />
+              <div className="flex items-center gap-2 text-slate-800 font-bold text-xs uppercase tracking-wider">
+                <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center">
+                  <FileText className="w-3.5 h-3.5 text-slate-700" />
                 </div>
                 <span>ON-DUTY (OD) LEAVE AUTOMATION</span>
               </div>
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#EEF2FE] text-[#434EEB] border border-[#DCE3F9]">
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#0F172A] text-white">
                 Official Format
               </span>
             </div>
@@ -283,9 +283,9 @@ export default function MedixHeroCards({
           <div className="text-center py-3 bg-[#F8FAFF] rounded-2xl border border-[#DCE3F9] p-4">
             <button
               onClick={onTriggerOD}
-              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 active:scale-95 text-white font-bold text-xs tracking-wide shadow-md shadow-[#5964FE]/25 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-[#0F172A] hover:bg-[#1E293B] active:scale-95 text-white font-bold text-xs tracking-wide shadow-md shadow-slate-900/25 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
             >
-              <FileText className="w-4 h-4" />
+              <FileText className="w-4 h-4 text-indigo-400" />
               <span>Generate Official OD Letter</span>
             </button>
 
@@ -302,15 +302,15 @@ export default function MedixHeroCards({
         {/* CARD 2: AI OPPORTUNITY DISCOVER (PURE SWIPE GESTURE TOOL) */}
         <div className="rounded-3xl p-6 sm:p-7 bg-white/95 backdrop-blur-xl border border-[#E2E7FA] shadow-[0_12px_36px_rgba(89,100,254,0.05)] flex flex-col justify-between relative overflow-hidden">
           
-          {/* Subtle soft periwinkle gradient halo */}
-          <div className="absolute top-0 right-0 w-56 h-56 bg-[#5964FE]/5 rounded-full blur-3xl pointer-events-none"></div>
+          {/* Subtle soft halo */}
+          <div className="absolute top-0 right-0 w-56 h-56 bg-slate-900/5 rounded-full blur-3xl pointer-events-none"></div>
 
           <div>
             {/* Top Header Row */}
             <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2 text-[#434EEB] font-bold text-xs uppercase tracking-wider">
-                <div className="w-6 h-6 rounded-lg bg-[#DFE3FF] flex items-center justify-center">
-                  <Flame className="w-3.5 h-3.5 text-[#5964FE] fill-[#5964FE]" />
+              <div className="flex items-center gap-2 text-slate-800 font-bold text-xs uppercase tracking-wider">
+                <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center">
+                  <Flame className="w-3.5 h-3.5 text-indigo-600 fill-indigo-600" />
                 </div>
                 <span>AI SWIPE DISCOVER</span>
               </div>
@@ -319,9 +319,9 @@ export default function MedixHeroCards({
                 <button
                   type="button"
                   onClick={() => setActiveTab("swipe")}
-                  className="flex items-center gap-1 text-[11px] font-bold text-[#434EEB] hover:text-[#313bc9] bg-[#EEF2FE] hover:bg-[#DFE3FF] px-2.5 py-1 rounded-xl border border-[#DCE3F9] transition cursor-pointer"
+                  className="flex items-center gap-1 text-[11px] font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 px-2.5 py-1 rounded-xl border border-slate-200 transition cursor-pointer shadow-xs"
                 >
-                  <Maximize2 className="w-3 h-3" />
+                  <Maximize2 className="w-3 h-3 text-slate-500" />
                   <span>Full Deck</span>
                 </button>
               )}
@@ -332,7 +332,7 @@ export default function MedixHeroCards({
               <h2 className="font-display font-extrabold text-2xl text-[#10174D]">
                 Swipe-to-Discover AI
               </h2>
-              <span className="text-[10px] font-bold text-[#434EEB] bg-[#DFE3FF] px-2.5 py-0.5 rounded-full border border-[#C7D2FE]">
+              <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
                 {availableDeck.length} cards
               </span>
             </div>
@@ -362,12 +362,12 @@ export default function MedixHeroCards({
                     ))
                   ) : (
                     <div className="w-full h-full rounded-2xl bg-[#F8FAFF] border border-[#DCE3F9] flex flex-col items-center justify-center p-4 text-center">
-                      <Sparkles className="w-8 h-8 text-[#5964FE] mb-1" />
+                      <Sparkles className="w-8 h-8 text-slate-700 mb-1" />
                       <p className="font-bold text-xs text-[#10174D]">Deck Reviewed!</p>
                       <p className="text-[11px] text-[#525A8B] mt-0.5">All opportunities checked.</p>
                       <button
                         onClick={onResetDeck}
-                        className="mt-2.5 px-4 py-1.5 bg-gradient-to-r from-[#5964FE] to-[#7B73FE] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer"
+                        className="mt-2.5 px-4 py-1.5 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer"
                       >
                         Reshuffle Deck
                       </button>
@@ -382,9 +382,9 @@ export default function MedixHeroCards({
                   type="button"
                   onClick={() => currentCard && handleSwipeCard("left", currentCard)}
                   title="Swipe Left to Skip"
-                  className="flex-1 py-2 px-2.5 rounded-xl bg-slate-50 hover:bg-rose-50 border border-slate-200 hover:border-rose-300 text-slate-700 hover:text-rose-600 font-bold text-xs flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow-xs"
+                  className="flex-1 py-2 px-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow-xs"
                 >
-                  <span className="text-rose-500 font-black">←</span>
+                  <span className="text-slate-400 font-normal">−</span>
                   <span>Skip</span>
                 </button>
 
@@ -393,7 +393,7 @@ export default function MedixHeroCards({
                   onClick={onUndoSwipe}
                   disabled={!swipeHistory || swipeHistory.length === 0}
                   title="Undo last swipe"
-                  className="w-8 h-8 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#525A8B] flex items-center justify-center transition disabled:opacity-30 cursor-pointer border border-[#DCE3F9]"
+                  className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition disabled:opacity-30 cursor-pointer border border-slate-200/80"
                 >
                   <Undo2 className="w-3.5 h-3.5" />
                 </button>
@@ -402,9 +402,9 @@ export default function MedixHeroCards({
                   type="button"
                   onClick={() => currentCard && handleSwipeCard("up", currentCard)}
                   title="Swipe Up for Skill Gap"
-                  className="py-2 px-2.5 rounded-xl bg-[#EEF2FE] hover:bg-[#DFE3FF] text-[#434EEB] border border-[#DCE3F9] font-bold text-xs flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow-xs"
+                  className="py-2 px-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80 font-bold text-xs flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow-xs"
                 >
-                  <Zap className="w-3.5 h-3.5 fill-[#5964FE] text-[#5964FE]" />
+                  <Zap className="w-3.5 h-3.5 fill-slate-700 text-slate-700" />
                   <span>Gap</span>
                 </button>
 
@@ -412,7 +412,7 @@ export default function MedixHeroCards({
                   type="button"
                   onClick={() => currentCard && handleSwipeCard("right", currentCard)}
                   title="Swipe Right to Shortlist"
-                  className="flex-1 py-2 px-2.5 rounded-xl bg-gradient-to-r from-[#5964FE] to-[#7B73FE] hover:opacity-95 text-white font-bold text-xs flex items-center justify-center gap-1 shadow-md shadow-[#5964FE]/25 transition active:scale-95 cursor-pointer"
+                  className="flex-1 py-2 px-2.5 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white font-bold text-xs flex items-center justify-center gap-1 shadow-md shadow-slate-900/20 transition active:scale-95 cursor-pointer"
                 >
                   <span>Shortlist</span>
                   <span className="font-black">→</span>
@@ -425,12 +425,12 @@ export default function MedixHeroCards({
           {/* Bottom Action / Status Row */}
           <div className="pt-3 border-t border-[#F0F3FD] mt-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-[11px] font-bold text-[#434EEB] flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5 text-[#5964FE]" />
+              <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1">
+                <Sparkles className="w-3.5 h-3.5 text-slate-800" />
                 <span>Instant vector re-ranking active</span>
               </span>
               <span className="text-[11px] text-[#525A8B]">
-                Shortlisted: <strong className="text-[#434EEB]">{(shortlist || []).length}</strong>
+                Shortlisted: <strong className="text-slate-900 font-bold">{(shortlist || []).length}</strong>
               </span>
             </div>
           </div>
